@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact RL Audits</title>
-<meta name="description" content="Contact RL Audits for a private audit report across growth, reputation, app stores, or IT operations.">
+<title>Contact RLAudits</title>
+<meta name="description" content="Contact RLAudits for a private audit report across growth, reputation, app stores, or IT operations.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
@@ -37,6 +37,9 @@
   textarea { min-height:132px; resize:vertical; }
   button { border:0; padding:15px 24px; background:var(--gold); color:var(--navy); font-size:13px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; cursor:pointer; }
   button:hover { background:var(--gold-soft); }
+  .hp-field { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+  .form-alert { display:none; margin-bottom:16px; padding:12px 14px; background:#FFF4E1; border:1px solid var(--gold-soft); color:var(--ink); font-size:13px; line-height:1.5; }
+  .form-alert.is-visible { display:block; }
   .direct { margin-top:18px; padding-top:16px; border-top:1px solid var(--rule); font-size:13px; color:var(--ink2); line-height:1.6; }
   .direct a { color:var(--navy); font-weight:800; text-decoration:underline; text-underline-offset:3px; }
   .site-footer { background:var(--navy-deep); padding:28px 48px; display:flex; justify-content:space-between; align-items:center; gap:24px; }
@@ -49,7 +52,7 @@
 </head>
 <body>
 <nav class="site-nav">
-  <a href="/" class="nav-brand"><div class="nav-gem"></div><span class="nav-name">RL Audits</span></a>
+  <a href="/" class="nav-brand"><div class="nav-gem"></div><span class="nav-name">RLAudits</span></a>
   <div class="nav-links">
     <a href="/">Home</a>
     <a href="/revenue-audit/">Revenue Audit</a>
@@ -62,17 +65,18 @@
 <main class="hero">
   <div class="hero-inner">
     <section>
-      <div class="eyebrow">Contact RL Audits</div>
+      <div class="eyebrow">Contact RLAudits</div>
       <h1>Send the situation. Get the right next step.</h1>
       <p class="sub">Use this form instead of relying on a mail app being installed on your device. Those links break constantly. This one does actual work.</p>
     </section>
     <section class="panel" aria-label="Contact form">
       <div class="panel-title">Email RLAudits</div>
       <p class="panel-copy">Include the business, app, or support mess you want diagnosed. Plain language is preferred. Vague consultant fog will be quietly ignored.</p>
-      <form action="https://formsubmit.co/seth@rlaudits.com" method="POST">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://rlaudits.com/contact/thanks.html">
+      <div id="form-alert" class="form-alert" role="alert">The form did not go through. Check the required fields and try again, or email seth@rlaudits.com directly.</div>
+      <form action="https://api.rlaudits.com/api/contact" method="POST">
+        <label class="hp-field" aria-hidden="true" tabindex="-1">Website
+          <input type="text" name="website" autocomplete="off" tabindex="-1">
+        </label>
         <label>Your name
           <input name="name" autocomplete="name" required>
         </label>
@@ -80,7 +84,7 @@
           <input type="email" name="email" autocomplete="email" required>
         </label>
         <label>Subject
-          <input id="subject" name="subject" value="RL Audits Inquiry" required>
+          <input id="subject" name="subject" value="RLAudits Inquiry" required>
         </label>
         <label>What do you need audited?
           <select name="audit_type">
@@ -95,13 +99,13 @@
         </label>
         <button type="submit">Send message</button>
       </form>
-      <p class="direct">If the form misbehaves, email directly: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=seth@rlaudits.com&su=RL%20Audits%20Inquiry" target="_blank" rel="noopener">seth@rlaudits.com</a></p>
+      <p class="direct">If the form misbehaves, email directly: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=seth@rlaudits.com&su=RLAudits%20Inquiry" target="_blank" rel="noopener">seth@rlaudits.com</a></p>
     </section>
   </div>
 </main>
 
 <footer class="site-footer">
-  <div class="footer-name">RL Audits</div>
+  <div class="footer-name">RLAudits</div>
   <div class="footer-links">
     <a href="/revenue-audit/">Revenue Audit</a>
     <a href="/it-ops-audit/">IT Ops Audit</a>
@@ -113,6 +117,7 @@
   const params = new URLSearchParams(window.location.search);
   const subject = params.get('subject');
   if (subject) document.getElementById('subject').value = subject;
+  if (params.has('error')) document.getElementById('form-alert').classList.add('is-visible');
 </script>
 </body>
 </html>

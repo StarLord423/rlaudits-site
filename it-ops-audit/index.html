@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IT Ops Audit — RL Audits</title>
+<title>IT Ops Audit — RLAudits</title>
 <meta name="description" content="Turn messy tickets, tech notes, and repeat support issues into clean documentation, SOPs, KB recommendations, and a 30-day IT cleanup plan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,6 +115,9 @@
   .boundary-box { margin-top: 16px; padding: 16px; background: var(--cream); border: 1px solid var(--rule); }
   .boundary-box strong { color: var(--ink); }
   .form-note { font-size: 12.5px; color: var(--ink2); line-height: 1.55; }
+  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .form-alert { display: none; padding: 12px 14px; background: #FFF4E1; border: 1px solid var(--gold-soft); color: var(--ink); font-size: 13px; line-height: 1.5; }
+  .form-alert.is-visible { display: block; }
   .form-submit { border: 0; padding: 15px 24px; background: var(--gold); color: var(--navy); font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
   .form-submit:hover { background: var(--gold-soft); }
 
@@ -149,7 +152,7 @@
 </head>
 <body>
 <nav class="site-nav">
-  <a href="/" class="nav-brand"><div class="nav-gem"></div><span class="nav-name">RL Audits</span></a>
+  <a href="/" class="nav-brand"><div class="nav-gem"></div><span class="nav-name">RLAudits</span></a>
   <div class="nav-links">
     <a href="/">Home</a>
     <a href="/revenue-audit/">Revenue Audit</a>
@@ -165,7 +168,7 @@
     <div>
       <div class="eyebrow">IT operations cleanup audit</div>
       <h1 class="hero-h1">Turn messy tickets and tech notes into <em>clean documentation.</em></h1>
-      <p class="hero-sub">RL Audits reviews sanitized support tickets, repeat issue lists, and rough internal notes, then delivers a practical IT cleanup plan your team can use in 30 days.</p>
+      <p class="hero-sub">RLAudits reviews sanitized support tickets, repeat issue lists, and rough internal notes, then delivers a practical IT cleanup plan your team can use in 30 days.</p>
       <div class="hero-actions">
         <a class="btn" href="#intake">Request IT Ops Audit — $497</a>
         <a class="btn-secondary" href="#deliverables">See deliverables</a>
@@ -243,7 +246,7 @@
   <div class="sec-inner">
     <div class="sec-eyebrow">Request intake</div>
     <h2 class="sec-h2">Send the safe version of the mess.</h2>
-    <p class="sec-sub">Use this form to explain the team, tools, repeat pain, and available materials. Do not upload anything here. After review, RL Audits will reply with the safest next step for sending sanitized files.</p>
+    <p class="sec-sub">Use this form to explain the team, tools, repeat pain, and available materials. Do not upload anything here. After review, RLAudits will reply with the safest next step for sending sanitized files.</p>
     <div class="intake-wrap">
       <div class="intake-panel">
         <h3>What to include</h3>
@@ -260,11 +263,11 @@
           <p><strong>Data rule:</strong> send sanitized/public materials only. No passwords. No PHI. No credentials. No API keys or tokens. No private customer or patient data. No secrets in screenshots. If it would make your compliance person sweat, remove it.</p>
         </div>
       </div>
-      <form class="intake-panel intake-form" action="https://formsubmit.co/seth@rlaudits.com" method="POST">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="IT Ops Audit Intake Request">
-        <input type="hidden" name="_next" value="https://rlaudits.com/it-ops-audit/thank-you.html">
+      <form class="intake-panel intake-form" action="https://api.rlaudits.com/api/it-ops-intake" method="POST">
+        <div id="form-alert" class="form-alert" role="alert">The intake did not go through. Check the required fields and try again, or email seth@rlaudits.com directly.</div>
+        <label class="hp-field" aria-hidden="true" tabindex="-1">Website
+          <input type="text" name="website" autocomplete="off" tabindex="-1">
+        </label>
         <label>Your name
           <input name="name" autocomplete="name" required>
         </label>
@@ -311,7 +314,7 @@
             <option>I confirm materials will be sanitized before review</option>
           </select>
         </label>
-        <p class="form-note">This static form sends intake details only. RL Audits will review the request first and tell you how to send sanitized files if the audit is a fit.</p>
+        <p class="form-note">This static form sends intake details only. RLAudits will review the request first and tell you how to send sanitized files if the audit is a fit.</p>
         <button class="form-submit" type="submit">Send IT Ops intake</button>
       </form>
     </div>
@@ -359,7 +362,7 @@
 </section>
 
 <footer class="site-footer">
-  <div class="footer-brand"><div class="footer-gem"></div><span class="footer-name">RL Audits</span></div>
+  <div class="footer-brand"><div class="footer-gem"></div><span class="footer-name">RLAudits</span></div>
   <div class="footer-links">
     <a href="/">Home</a>
     <a href="/revenue-audit/">Revenue Audit</a>
@@ -368,5 +371,9 @@
     <a href="/contact/">seth@rlaudits.com</a>
   </div>
 </footer>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('error')) document.getElementById('form-alert').classList.add('is-visible');
+</script>
 </body>
 </html>
