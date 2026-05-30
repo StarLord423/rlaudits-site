@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intake Received | RL Audits</title>
+  <meta name="description" content="App Store Growth Brief intake received.">
+  <style>
+    :root {
+      --paper: #fbf5e6;
+      --ink: #12120f;
+      --muted: #5d584f;
+      --white: #fffdf6;
+      --yellow: #f4cc3f;
+      --green-soft: #dfeee1;
+      --shadow: #12120f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: Bahnschrift, "Aptos", "Segoe UI", Verdana, sans-serif;
+      background:
+        linear-gradient(rgba(18, 18, 15, .045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 18, 15, .045) 1px, transparent 1px),
+        var(--paper);
+      background-size: 28px 28px;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+
+    main {
+      width: min(760px, 100%);
+      border: 3px solid var(--ink);
+      background: var(--white);
+      box-shadow: 12px 12px 0 var(--shadow);
+      padding: clamp(28px, 6vw, 56px);
+    }
+
+    .tag {
+      display: inline-flex;
+      border: 2px solid var(--ink);
+      padding: 7px 10px;
+      background: var(--green-soft);
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 950;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      max-width: 680px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(42px, 9vw, 74px);
+      line-height: .92;
+      letter-spacing: 0;
+    }
+
+    p {
+      max-width: 610px;
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.45;
+      font-weight: 750;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      margin-top: 12px;
+      padding: 12px 18px;
+      border: 3px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+      box-shadow: 6px 6px 0 var(--yellow);
+      font-weight: 950;
+      text-transform: uppercase;
+      font-size: 13px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="tag">Request received</div>
+    <h1>We got the pilot request.</h1>
+    <p>RL Audits will review the app target and reply if the $49 pilot slot fits the public evidence available.</p>
+    <p>Standard $79 orders go through secure checkout immediately after intake; pilot slots stay manual so we can keep them limited.</p>
+    <a class="button" href="/app-store-growth-brief/">Back to brief page</a>
+  </main>
+</body>
+</html>

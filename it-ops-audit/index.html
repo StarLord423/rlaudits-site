@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Ops Audit — RL Audits</title>
+<meta name="description" content="Turn messy tickets, tech notes, and repeat support issues into clean documentation, SOPs, KB recommendations, and a 30-day IT cleanup plan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0E1F3A; --navy-deep: #091428;
+    --gold: #B68A3E; --gold-soft: #D4B074;
+    --paper: #FBFAF6; --cream: #F7F4ED; --rule: #DCD6C6;
+    --ink: #0E1F3A; --ink2: #3C4A63; --ink3: #7B8597;
+    --good: #3F7A4B;
+    --sans: "Manrope", -apple-system, sans-serif;
+    --serif: "Source Serif 4", Georgia, serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); }
+  a { color: inherit; text-decoration: none; }
+
+  .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(14,31,58,.96); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,.08); padding: 0 48px; min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .nav-brand { display: flex; align-items: center; gap: 10px; }
+  .nav-gem { width: 18px; height: 18px; border: 1.5px solid var(--gold); transform: rotate(45deg); position: relative; flex-shrink: 0; }
+  .nav-gem::after { content: ''; position: absolute; inset: 4px; background: var(--gold); }
+  .nav-name { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.85); }
+  .nav-links { display: flex; align-items: center; gap: 22px; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.58); }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold-soft); }
+  .nav-cta { display: inline-flex; align-items: center; padding: 9px 18px; background: var(--gold); color: var(--navy); font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+
+  .hero { background: var(--navy); color: #fff; padding: 148px 48px 84px; position: relative; overflow: hidden; min-height: 92vh; display: flex; align-items: center; }
+  .hero-texture { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px); background-size: 48px 48px; opacity: .04; }
+  .hero-inner { position: relative; max-width: 1120px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 440px; gap: 64px; align-items: center; }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 18px; }
+  .hero-h1 { font-family: var(--serif); font-size: clamp(42px, 6vw, 64px); line-height: 1.03; font-weight: 500; letter-spacing: -.03em; margin-bottom: 24px; }
+  .hero-h1 em { font-style: normal; color: var(--gold-soft); }
+  .hero-sub { font-size: 17px; line-height: 1.65; color: rgba(255,255,255,.74); margin-bottom: 34px; max-width: 650px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn, .btn-secondary { display: inline-flex; align-items: center; padding: 15px 24px; font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; transition: transform .15s, background .15s; }
+  .btn { background: var(--gold); color: var(--navy); }
+  .btn-secondary { border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.82); }
+  .btn:hover, .btn-secondary:hover { transform: translateY(-1px); }
+  .hero-note { margin-top: 14px; font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,.38); letter-spacing: .12em; text-transform: uppercase; }
+
+  .dash { background: var(--paper); border: 1px solid rgba(255,255,255,.12); box-shadow: 0 32px 80px rgba(0,0,0,.4); overflow: hidden; }
+  .dash-head { background: var(--navy-deep); color: #fff; padding: 22px 24px; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .dash-label { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 8px; }
+  .dash-title { font-family: var(--serif); font-size: 27px; line-height: 1.1; }
+  .dash-body { padding: 22px; color: var(--ink); }
+  .kpis { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid var(--rule); margin-bottom: 18px; }
+  .kpi { padding: 14px; border-right: 1px solid var(--rule); background: #fff; }
+  .kpi:last-child { border-right: 0; }
+  .kpi-val { font-family: var(--serif); font-size: 34px; color: var(--gold); line-height: 1; margin-bottom: 5px; }
+  .kpi-label { font-size: 11px; color: var(--ink2); line-height: 1.25; font-weight: 700; }
+  .fix { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--rule); }
+  .fix:last-child { border-bottom: 0; }
+  .fix-num { width: 26px; height: 26px; border-radius: 50%; background: var(--navy); color: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 9px; font-weight: 800; }
+  .fix-title { font-weight: 800; font-size: 13px; }
+  .fix-sub { font-size: 12px; color: var(--ink2); margin-top: 2px; }
+  .fix-tag { font-family: var(--mono); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: var(--good); white-space: nowrap; }
+
+  .stats-strip { background: var(--navy-deep); display: grid; grid-template-columns: repeat(3,1fr); }
+  .stat-cell { padding: 30px 32px; border-right: 1px solid rgba(255,255,255,.08); }
+  .stat-cell:last-child { border-right: 0; }
+  .stat-val { font-family: var(--serif); font-size: 38px; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+  .stat-lbl { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+
+  .section { padding: 96px 48px; }
+  .cream { background: var(--cream); }
+  .paper { background: var(--paper); }
+  .sec-inner { max-width: 1120px; margin: 0 auto; }
+  .sec-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .sec-h2 { font-family: var(--serif); font-size: clamp(34px,4vw,48px); line-height: 1.08; font-weight: 500; letter-spacing: -.02em; margin-bottom: 14px; }
+  .sec-sub { font-size: 15px; color: var(--ink2); line-height: 1.65; max-width: 700px; margin-bottom: 46px; }
+  .grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+  .grid.two { grid-template-columns: repeat(2,1fr); }
+  .card { background: #fff; border: 1px solid var(--rule); border-top: 4px solid var(--gold); padding: 28px 26px; }
+  .card-label { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .card-title { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+  .card-body { font-size: 13.5px; color: var(--ink2); line-height: 1.6; }
+  .step-num { font-family: var(--serif); font-size: 58px; color: var(--rule); line-height: 1; margin-bottom: 16px; }
+
+  .pricing-section { padding: 96px 48px; background: var(--navy); color: #fff; position: relative; overflow: hidden; }
+  .pricing-texture { position: absolute; inset: 0; background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px); background-size: 48px 48px; opacity: .03; pointer-events: none; }
+  .pricing-inner { position: relative; max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; }
+  .pricing-h2 { font-family: var(--serif); font-size: clamp(34px,4vw,46px); line-height: 1.1; font-weight: 500; margin-bottom: 16px; }
+  .pricing-sub { font-size: 15px; color: rgba(255,255,255,.68); line-height: 1.65; max-width: 620px; }
+  .pricing-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); padding: 34px 32px; }
+  .pricing-intro { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 12px; }
+  .pricing-num { font-family: var(--serif); font-size: 64px; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+  .pricing-period { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,.38); letter-spacing: .1em; margin-bottom: 24px; }
+  .pricing-items { list-style: none; margin-bottom: 28px; }
+  .pricing-items li { display: grid; grid-template-columns: 16px 1fr; gap: 10px; font-size: 13.5px; color: rgba(255,255,255,.8); margin-bottom: 10px; line-height: 1.4; }
+  .pricing-items li span:first-child { color: var(--gold); }
+  .pricing-cta { display: block; text-align: center; padding: 14px 24px; background: var(--gold); color: var(--navy); font-size: 13.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+  .pricing-note { font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.28); text-align: center; margin-top: 10px; }
+
+  .intake-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
+  .intake-panel { background: #fff; border: 1px solid var(--rule); border-top: 4px solid var(--gold); padding: 28px 26px; }
+  .intake-panel h3 { font-size: 18px; margin-bottom: 10px; }
+  .intake-panel p, .intake-panel li { font-size: 13.5px; color: var(--ink2); line-height: 1.6; }
+  .intake-list { margin: 14px 0 0 18px; }
+  .intake-form { display: grid; gap: 13px; }
+  .intake-form label { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3); }
+  .intake-form input, .intake-form textarea, .intake-form select { width: 100%; margin-top: 6px; padding: 12px; border: 1px solid var(--rule); background: #fff; color: var(--ink); font: 14px var(--sans); }
+  .intake-form textarea { min-height: 104px; resize: vertical; }
+  .check-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 9px 14px; margin: 6px 0 4px; }
+  .check-grid label { display: flex; gap: 8px; align-items: flex-start; font-family: var(--sans); font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--ink2); line-height: 1.35; }
+  .check-grid input { width: auto; margin: 3px 0 0; }
+  .boundary-box { margin-top: 16px; padding: 16px; background: var(--cream); border: 1px solid var(--rule); }
+  .boundary-box strong { color: var(--ink); }
+  .form-note { font-size: 12.5px; color: var(--ink2); line-height: 1.55; }
+  .form-submit { border: 0; padding: 15px 24px; background: var(--gold); color: var(--navy); font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
+  .form-submit:hover { background: var(--gold-soft); }
+
+  .faq { display: grid; gap: 12px; }
+  details { background: #fff; border: 1px solid var(--rule); padding: 20px 22px; }
+  summary { cursor: pointer; font-weight: 800; font-size: 15px; }
+  details p { margin-top: 12px; color: var(--ink2); line-height: 1.55; font-size: 14px; }
+
+  .site-footer { background: var(--navy-deep); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,.06); gap: 24px; }
+  .footer-brand { display: flex; align-items: center; gap: 8px; }
+  .footer-gem { width: 12px; height: 12px; border: 1px solid var(--gold); transform: rotate(45deg); position: relative; flex-shrink: 0; }
+  .footer-gem::after { content: ''; position: absolute; inset: 3px; background: var(--gold); }
+  .footer-name { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+  .footer-links { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: flex-end; font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+  .footer-links a { color: rgba(255,255,255,.4); }
+  .footer-links a:hover { color: var(--gold-soft); }
+
+  @media (max-width: 980px) {
+    .site-nav { position: static; padding: 16px 24px; flex-direction: column; align-items: flex-start; }
+    .nav-links { flex-wrap: wrap; gap: 14px; }
+    .hero-inner, .pricing-inner { grid-template-columns: 1fr; }
+    .grid, .grid.two, .stats-strip, .intake-wrap, .check-grid { grid-template-columns: 1fr; }
+    .hero, .section, .pricing-section, .site-footer { padding-left: 24px; padding-right: 24px; }
+    .hero { padding-top: 72px; min-height: auto; }
+    .kpis { grid-template-columns: 1fr; }
+    .kpi { border-right: 0; border-bottom: 1px solid var(--rule); }
+    .fix { grid-template-columns: 34px 1fr; }
+    .fix-tag { grid-column: 2; }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="/" class="nav-brand"><div class="nav-gem"></div><span class="nav-name">RL Audits</span></a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/revenue-audit/">Revenue Audit</a>
+    <a class="active" href="/it-ops-audit/">IT Ops Audit</a>
+    <a href="/app-store-growth-brief/">App Store Brief</a>
+  </div>
+  <a href="#intake" class="nav-cta">Request audit</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-texture"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">IT operations cleanup audit</div>
+      <h1 class="hero-h1">Turn messy tickets and tech notes into <em>clean documentation.</em></h1>
+      <p class="hero-sub">RL Audits reviews sanitized support tickets, repeat issue lists, and rough internal notes, then delivers a practical IT cleanup plan your team can use in 30 days.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#intake">Request IT Ops Audit — $497</a>
+        <a class="btn-secondary" href="#deliverables">See deliverables</a>
+      </div>
+      <div class="hero-note">Sanitized data only · No credentials required · 30-day cleanup plan</div>
+    </div>
+    <aside class="dash">
+      <div class="dash-head">
+        <div class="dash-label">Private briefing · Sample IT team</div>
+        <div class="dash-title">Repeat support pain. Missing runbooks. Fixable.</div>
+      </div>
+      <div class="dash-body">
+        <div class="kpis">
+          <div class="kpi"><div class="kpi-val">31%</div><div class="kpi-label">Tickets tied to repeat issues</div></div>
+          <div class="kpi"><div class="kpi-val">12</div><div class="kpi-label">Missing or weak KB articles</div></div>
+          <div class="kpi"><div class="kpi-val">3</div><div class="kpi-label">Priority SOPs to clean up first</div></div>
+        </div>
+        <div class="fix"><div class="fix-num">01</div><div><div class="fix-title">Password reset loops</div><div class="fix-sub">Convert repeated one-off fixes into a technician-ready checklist.</div></div><div class="fix-tag">KB needed</div></div>
+        <div class="fix"><div class="fix-num">02</div><div><div class="fix-title">Printer escalation drift</div><div class="fix-sub">Standardize first-response steps before tickets bounce between techs.</div></div><div class="fix-tag">SOP gap</div></div>
+        <div class="fix"><div class="fix-num">03</div><div><div class="fix-title">New-hire setup misses</div><div class="fix-sub">Turn tribal knowledge into owner, timing, and verification steps.</div></div><div class="fix-tag">Workflow</div></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="stat-cell"><div class="stat-val">5-10</div><div class="stat-lbl">KB recommendations</div></div>
+  <div class="stat-cell"><div class="stat-val">3</div><div class="stat-lbl">Cleaned-up SOPs/runbooks</div></div>
+  <div class="stat-cell"><div class="stat-val">30d</div><div class="stat-lbl">Cleanup plan included</div></div>
+</div>
+
+<section id="deliverables" class="section cream">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">The deliverable</div>
+    <h2 class="sec-h2">This is what you receive.</h2>
+    <p class="sec-sub">A short, usable operating report with documents your team can put to work. Not a giant consulting binder. Binders are where useful work goes to die.</p>
+    <div class="grid">
+      <div class="card"><div class="card-label">Inventory</div><div class="card-title">Procedure inventory</div><div class="card-body">Your support procedures, runbooks, and recurring issue categories organized by work type, evidence status, and documentation gap.</div></div>
+      <div class="card"><div class="card-label">Rubric</div><div class="card-title">Scored documentation review</div><div class="card-body">A practical scorecard for owner, review date, ordered steps, verification, escalation triggers, handoff payload, and knowledge-loop quality.</div></div>
+      <div class="card"><div class="card-label">Findings</div><div class="card-title">Ranked operational fixes</div><div class="card-body">The highest-cost documentation and handoff problems ranked by severity, evidence, business cost, and effort to fix.</div></div>
+      <div class="card"><div class="card-label">KB roadmap</div><div class="card-title">5-10 article recommendations</div><div class="card-body">A ranked knowledge-base roadmap based on repeat pain, fix variance, and technician time lost — not alphabetical busywork.</div></div>
+      <div class="card"><div class="card-label">Worked article</div><div class="card-title">One worked KB article</div><div class="card-body">One priority article written out with audience, scope, owner fields, ordered steps, verification, escalation triggers, and handoff notes.</div></div>
+      <div class="card"><div class="card-label">30 days</div><div class="card-title">30-day action plan</div><div class="card-body">A week-by-week plan for assigning owners, publishing the first KB wave, reducing handoff waste, and closing the documentation loop.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section paper">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">Who it is for</div>
+    <h2 class="sec-h2">Small teams with real support pain.</h2>
+    <p class="sec-sub">Best for teams where the same problems keep coming back and too much knowledge lives in one person’s head.</p>
+    <div class="grid two">
+      <div class="card"><div class="card-label">Internal IT</div><div class="card-title">Small IT teams</div><div class="card-body">Teams that keep solving the same issues but have no clean KB, SOPs, or repeat-issue reporting.</div></div>
+      <div class="card"><div class="card-label">Providers</div><div class="card-title">MSPs</div><div class="card-body">Providers that need cleaner client documentation, better handoffs, and evidence of recurring support patterns.</div></div>
+      <div class="card"><div class="card-label">Healthcare-adjacent</div><div class="card-title">Clinics and dental offices</div><div class="card-body">Offices with devices, users, software, access requests, and too much process knowledge stuck in one employee’s head.</div></div>
+      <div class="card"><div class="card-label">Operations</div><div class="card-title">Growing local businesses</div><div class="card-body">Teams where support issues interrupt operations, onboarding is inconsistent, and nobody owns documentation.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section cream">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">How it works</div>
+    <h2 class="sec-h2">Sanitized inputs. Practical analysis. Clean deliverables.</h2>
+    <div class="grid">
+      <div class="card"><div class="step-num">01</div><div class="card-title">You send safe material</div><div class="card-body">Sanitized ticket exports, rough tech notes, onboarding steps, repeat issue lists, or screenshots with private data removed.</div></div>
+      <div class="card"><div class="step-num">02</div><div class="card-title">We find the patterns</div><div class="card-body">We group issues, identify documentation gaps, flag repeat causes, and choose the SOPs or KB articles with the highest payoff.</div></div>
+      <div class="card"><div class="step-num">03</div><div class="card-title">You get the cleanup pack</div><div class="card-body">Your report includes trends, cleaned-up documents, a gap list, and a 30-day execution plan.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="intake" class="section paper">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">Request intake</div>
+    <h2 class="sec-h2">Send the safe version of the mess.</h2>
+    <p class="sec-sub">Use this form to explain the team, tools, repeat pain, and available materials. Do not upload anything here. After review, RL Audits will reply with the safest next step for sending sanitized files.</p>
+    <div class="intake-wrap">
+      <div class="intake-panel">
+        <h3>What to include</h3>
+        <p>Plain answers are enough. The useful intake covers:</p>
+        <ul class="intake-list">
+          <li>Company, team size, employee/device count, locations, and remote or hybrid support.</li>
+          <li>Ticketing system, KB/wiki, device management, identity/email platform, and remote support tools.</li>
+          <li>Current pain: repeat tickets, slow handoffs, undocumented fixes, onboarding misses, access confusion, or stale KB articles.</li>
+          <li>Top recurring ticket types with rough frequency if known.</li>
+          <li>Available sanitized materials: ticket samples, SOPs, escalation process, onboarding/offboarding checklists, access process, or KB examples.</li>
+          <li>What would make the audit useful: fewer repeats, cleaner escalation, better checklists, first KB articles, or training material.</li>
+        </ul>
+        <div class="boundary-box">
+          <p><strong>Data rule:</strong> send sanitized/public materials only. No passwords. No PHI. No credentials. No API keys or tokens. No private customer or patient data. No secrets in screenshots. If it would make your compliance person sweat, remove it.</p>
+        </div>
+      </div>
+      <form class="intake-panel intake-form" action="https://formsubmit.co/seth@rlaudits.com" method="POST">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="IT Ops Audit Intake Request">
+        <input type="hidden" name="_next" value="https://rlaudits.com/it-ops-audit/thank-you.html">
+        <label>Your name
+          <input name="name" autocomplete="name" required>
+        </label>
+        <label>Work email
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>Company / organization
+          <input name="company" autocomplete="organization" required>
+        </label>
+        <label>Team and environment snapshot
+          <textarea name="environment_snapshot" placeholder="IT team size, employee/device count, locations, remote/hybrid users, and industry." required></textarea>
+        </label>
+        <label>Tools in use
+          <textarea name="tools_in_use" placeholder="Ticket system, KB/wiki, device management, identity/email platform, and remote support tools."></textarea>
+        </label>
+        <div>
+          <label>Current pain</label>
+          <div class="check-grid" aria-label="Current pain options">
+            <label><input type="checkbox" name="pain_repeat_tickets" value="yes"> Repeat tickets</label>
+            <label><input type="checkbox" name="pain_slow_handoffs" value="yes"> Slow handoffs/escalations</label>
+            <label><input type="checkbox" name="pain_undocumented_fixes" value="yes"> Undocumented fixes</label>
+            <label><input type="checkbox" name="pain_one_person_knows" value="yes"> One person knows too much</label>
+            <label><input type="checkbox" name="pain_onboarding" value="yes"> Onboarding/offboarding misses</label>
+            <label><input type="checkbox" name="pain_access_requests" value="yes"> Access request confusion</label>
+            <label><input type="checkbox" name="pain_stale_kb" value="yes"> Old or untrusted KB</label>
+            <label><input type="checkbox" name="pain_training" value="yes"> Hard to train new techs</label>
+          </div>
+        </div>
+        <label>Biggest support pain
+          <textarea name="biggest_pain" placeholder="Briefly describe what keeps coming back or slowing the team down." required></textarea>
+        </label>
+        <label>Recurring ticket types
+          <textarea name="recurring_ticket_types" placeholder="VPN, password resets, printers, onboarding, access requests, device setup, etc. Rough frequency is helpful but not required."></textarea>
+        </label>
+        <label>Available sanitized materials
+          <textarea name="available_sanitized_materials" placeholder="10-50 sanitized tickets, rough SOPs, escalation process, onboarding checklist, access process, KB examples, or 'not available'."></textarea>
+        </label>
+        <label>What would make this useful?
+          <textarea name="success_definition" placeholder="Fewer repeat tickets, cleaner handoffs, better onboarding checklist, first KB articles, technician training material, etc."></textarea>
+        </label>
+        <label>Sanitization confirmation
+          <select name="sanitization_confirmation" required>
+            <option value="">Choose one</option>
+            <option>I confirm materials will be sanitized before review</option>
+          </select>
+        </label>
+        <p class="form-note">This static form sends intake details only. RL Audits will review the request first and tell you how to send sanitized files if the audit is a fit.</p>
+        <button class="form-submit" type="submit">Send IT Ops intake</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="pricing-section" id="pricing">
+  <div class="pricing-texture"></div>
+  <div class="pricing-inner">
+    <div>
+      <div class="eyebrow">Pricing</div>
+      <h2 class="pricing-h2">One cleanup audit. One flat rate.</h2>
+      <p class="pricing-sub">Best for a small team that wants to find repeat problems, clean up documentation, and stop wasting technician time on preventable confusion.</p>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-intro">Starter package</div>
+      <div class="pricing-num">$497</div>
+      <div class="pricing-period">one-time · IT Ops Audit</div>
+      <ul class="pricing-items">
+        <li><span>✓</span><span>Review of sanitized tickets, tech notes, or issue lists</span></li>
+        <li><span>✓</span><span>Recurring issue summary</span></li>
+        <li><span>✓</span><span>5-10 recommended KB articles</span></li>
+        <li><span>✓</span><span>3 polished SOPs or runbooks</span></li>
+        <li><span>✓</span><span>Documentation gap list</span></li>
+        <li><span>✓</span><span>30-day IT cleanup plan</span></li>
+        <li><span>✓</span><span>Optional 30-minute debrief call</span></li>
+      </ul>
+      <a href="#intake" class="pricing-cta">Request audit</a>
+      <div class="pricing-note">Email seth@rlaudits.com to get started</div>
+    </div>
+  </div>
+</section>
+
+<section class="section paper">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">Data boundaries</div>
+    <h2 class="sec-h2">Questions before sending data.</h2>
+    <div class="faq">
+      <details open><summary>Do you need admin access?</summary><p>No. The starter audit uses sanitized exports, notes, and process details. No passwords, no remote access, no private credentials.</p></details>
+      <details><summary>What should be removed before sending material?</summary><p>Remove names, patient/customer information, passwords, medical details, account numbers, and anything your organization would not want in an outside review.</p></details>
+      <details><summary>Is this a security compliance audit?</summary><p>No. This is an operations and documentation audit. It can help organize evidence and procedures, but it does not certify HIPAA, SOC 2, PCI, or anything else with expensive acronyms.</p></details>
+      <details><summary>What if we only have messy notes?</summary><p>That is acceptable. Messy notes are often where the useful truth lives. We turn them into structured procedures and a cleanup plan.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-brand"><div class="footer-gem"></div><span class="footer-name">RL Audits</span></div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/revenue-audit/">Revenue Audit</a>
+    <a href="/app-store-growth-brief/">App Store Brief</a>
+    <a href="/it-ops-audit/#intake">IT Ops Intake</a>
+    <a href="/contact/">seth@rlaudits.com</a>
+  </div>
+</footer>
+</body>
+</html>

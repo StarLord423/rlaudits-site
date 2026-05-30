@@ -1,0 +1,530 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Planner Sample App Store Growth Brief</title>
+  <style>
+    :root {
+      --paper: #f6efd9;
+      --ink: #11110f;
+      --muted: #5c574b;
+      --line: #11110f;
+      --yellow: #ffd84d;
+      --green: #2f8f5b;
+      --green-bg: #dcefdc;
+      --orange: #d76b24;
+      --orange-bg: #f7dcc8;
+      --white: #fffaf0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #25231d;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      letter-spacing: 0;
+    }
+    .deck { width: 11in; margin: 0 auto; }
+    .page {
+      width: 11in;
+      height: 8.5in;
+      padding: .42in;
+      background:
+        linear-gradient(rgba(17,17,15,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17,17,15,.045) 1px, transparent 1px),
+        var(--paper);
+      background-size: .28in .28in;
+      page-break-after: always;
+      position: relative;
+      overflow: hidden;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 54px;
+      line-height: .93;
+      max-width: 8.8in;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 38px;
+      line-height: .98;
+      max-width: 8.6in;
+      letter-spacing: 0;
+    }
+    h3 {
+      font-size: 13px;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      letter-spacing: 0;
+    }
+    .kicker {
+      display: inline-block;
+      background: var(--yellow);
+      border: 2px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      padding: 7px 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+    .subhead {
+      font-size: 18px;
+      line-height: 1.32;
+      max-width: 7.7in;
+      color: var(--muted);
+      margin-top: 18px;
+      font-weight: 700;
+    }
+    .grid { display: grid; gap: 16px; }
+    .two { grid-template-columns: 1fr 1fr; }
+    .three { grid-template-columns: repeat(3, 1fr); }
+    .four { grid-template-columns: repeat(4, 1fr); }
+    .card {
+      background: var(--white);
+      border: 2px solid var(--ink);
+      box-shadow: 7px 7px 0 var(--ink);
+      padding: 14px;
+    }
+    .soft { box-shadow: 4px 4px 0 var(--ink); }
+    .metric {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .metric-label { font-size: 12px; text-transform: uppercase; font-weight: 800; margin-top: 6px; }
+    .note { font-size: 12px; line-height: 1.28; color: var(--muted); }
+    .body { font-size: 15px; line-height: 1.32; }
+    .small { font-size: 11px; line-height: 1.26; color: var(--muted); }
+    .tight { font-size: 13px; line-height: 1.25; }
+    .label {
+      display: inline-block;
+      border: 2px solid var(--ink);
+      background: var(--paper);
+      padding: 4px 7px;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin: 0 4px 5px 0;
+    }
+    .strip {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+      border: 2px solid var(--ink);
+      background: var(--ink);
+      margin-top: .22in;
+    }
+    .strip > div {
+      flex: 1;
+      background: var(--white);
+      padding: 9px 10px;
+      font-size: 11px;
+      line-height: 1.22;
+      font-weight: 800;
+    }
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .checkitem {
+      border: 2px solid var(--ink);
+      background: var(--white);
+      padding: 10px;
+      min-height: .72in;
+      box-shadow: 4px 4px 0 var(--ink);
+      font-size: 12px;
+      line-height: 1.25;
+    }
+    .matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .matrix .card { min-height: 1.15in; }
+    .row {
+      display: grid;
+      grid-template-columns: 1.35in 1fr 1fr;
+      border-top: 2px solid var(--ink);
+      font-size: 12px;
+    }
+    .row > div { padding: 9px 8px; border-right: 2px solid var(--ink); }
+    .row > div:last-child { border-right: 0; }
+    .headrow { background: var(--ink); color: var(--paper); font-weight: 800; text-transform: uppercase; }
+    .pill {
+      display: inline-block;
+      border: 2px solid var(--ink);
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-right: 5px;
+      background: var(--yellow);
+    }
+    .green { color: var(--green); }
+    .orange { color: var(--orange); }
+    .green-bg { background: var(--green-bg); }
+    .orange-bg { background: var(--orange-bg); }
+    .bar {
+      height: 12px;
+      border: 2px solid var(--ink);
+      background: var(--paper);
+      margin: 7px 0 8px;
+    }
+    .bar > span { display: block; height: 100%; background: var(--green); }
+    .bar.orange > span { background: var(--orange); }
+    .footer {
+      position: absolute;
+      left: .42in;
+      right: .42in;
+      bottom: .25in;
+      border-top: 2px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      padding-top: 8px;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .stamp {
+      position: absolute;
+      right: .5in;
+      top: .5in;
+      border: 3px solid var(--ink);
+      background: var(--yellow);
+      transform: rotate(2deg);
+      padding: 12px;
+      box-shadow: 7px 7px 0 var(--ink);
+      font-weight: 900;
+      text-align: center;
+      width: 1.55in;
+    }
+    .wide-stamp { width: 2.1in; font-size: 14px; }
+    ul { margin: 8px 0 0 18px; padding: 0; }
+    li { margin: 5px 0; }
+    @page { size: 11in 8.5in; margin: 0; }
+    @media print {
+      body { background: transparent; }
+      .deck { width: 11in; margin: 0; }
+      .page { break-after: page; }
+    }
+  </style>
+</head>
+<body>
+<main class="deck">
+  <section class="page">
+    <div class="stamp wide-stamp">READY TO SELL<br>AS A $79<br>CROSS-STORE BRIEF</div>
+    <div class="kicker">Cross-store growth brief</div>
+    <h1>Planner sample app has Apple-side premium trust. Android needs Pro clarity and sync reassurance.</h1>
+      <p class="subhead">Public evidence points to a practical store-page job: keep the visual-planner promise, then make Google Play explain free vs Pro, cross-device sync, and support paths before buyers hit friction.</p>
+    <div class="grid four" style="margin-top:.42in;">
+      <div class="card orange-bg"><div class="metric">7/10</div><div class="metric-label">Severity score</div><p class="note">Pro clarity and Android trust friction.</p></div>
+      <div class="card green-bg"><div class="metric">4.8</div><div class="metric-label">Apple proof</div><p class="note">160K ratings and Editors' Choice evidence on the public listing.</p></div>
+      <div class="card green-bg"><div class="metric">1M+</div><div class="metric-label">Play reach</div><p class="note">Google Play shows broad Android reach and visible in-app purchases.</p></div>
+      <div class="card orange-bg"><div class="metric">3</div><div class="metric-label">Exact fixes</div><p class="note">Pro table, sync support, release-note trust.</p></div>
+    </div>
+    <div class="card" style="margin-top:.24in;">
+      <h3>Recommended 30-day move</h3>
+        <p class="body"><strong>Rewrite Google Play around a clear Free / Trial / Pro table, add Android sync support language, and make release notes answer the exact public review objections.</strong> This is not a broad metadata rewrite; it is a cross-store trust cleanup for a product that already has demand.</p>
+    </div>
+    <div class="strip">
+      <div>Source confidence: Apple public listing</div>
+      <div>Google Play public listing</div>
+      <div>Public review signals</div>
+      <div>Competitor public listings</div>
+    </div>
+    <div class="footer"><span>Planner Sample App Store Growth Brief</span><span>Public evidence only</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">What the client gets</div>
+    <h2>A $79-$99 ASO diagnostic deliverable with copy fixes, reply templates, release notes, and a 30-day store-surface plan.</h2>
+      <p class="subhead">The brief packages public-store evidence into exact copy, reply, positioning, and 30-day execution assets. Sample uses anonymized and/or mock public-evidence data to demonstrate report structure. It is not a client case study and does not claim private analytics, App Store Connect, Google Play Console, paid ASO data, or guaranteed outcomes.</p>
+    <div class="checklist" style="margin-top:.3in;">
+      <div class="checkitem"><strong>Listing copy fixes</strong><br>Google Play opening paragraph plus Free / Trial / Pro table.</div>
+      <div class="checkitem"><strong>Review reply templates</strong><br>Sync, Pro confusion, and reminder expectation responses.</div>
+      <div class="checkitem"><strong>Release-note rewrite</strong><br>Plain-language note tied to calendar connection, sync, and reminder trust.</div>
+      <div class="checkitem"><strong>Cross-store trust gap</strong><br>Apple proof versus Android friction with source labels.</div>
+      <div class="checkitem"><strong>Competitor positioning</strong><br>Win on calmer visual planning, not broad feature bloat.</div>
+      <div class="checkitem"><strong>30-day action plan</strong><br>Week-by-week changes and re-check cadence.</div>
+    </div>
+    <div class="grid two" style="margin-top:.28in;">
+      <div class="card green-bg">
+        <h3>Agency use case</h3>
+        <p class="body">Sell this as a client teardown, quarterly retention touchpoint, or pre-roadmap diagnostic. The agency can hand the client exact copy blocks, reply templates, and a prioritized store-work plan without needing console access.</p>
+      </div>
+      <div class="card">
+        <h3>Boundary</h3>
+        <p class="body">The deliverable uses public app-store evidence only. It does not promise ranking, installs, revenue, rating, conversion, or sentiment lift; it shows what to change, why, where, and what to re-check.</p>
+      </div>
+    </div>
+    <div class="footer"><span>Question answered: paid ASO deliverable</span><span>Ready to sell as a $79 cross-store brief</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Buyer question 1</div>
+    <h2>Apple rating proof plus Play monetization friction support a paid ASO teardown.</h2>
+    <p class="subhead">The sample profile has both stores, visible monetization, large public review volume, and a store-specific Google Play copy problem a small app team or agency can act on.</p>
+    <div class="grid two" style="margin-top:.35in;">
+      <div class="card">
+        <h3>Apple evidence module</h3>
+        <p class="body"><strong class="green">ANONYMIZED PUBLIC LISTING FACT:</strong> 4.8 rating, 160K ratings, editorial badge, iPhone/iPad/Mac/Watch support, visible Pro prices, and positive reviews around planning, inbox capture, energy planning, Mac workflow, and one-time purchase preference.</p>
+      </div>
+      <div class="card">
+        <h3>Google Play evidence module</h3>
+        <p class="body"><strong class="orange">ANONYMIZED PUBLIC REVIEW THEME:</strong> 4.4 rating, 25K+ public reviews, 1M+ downloads, in-app purchases, Android sync complaints, and reviews showing confusion about what is free versus Pro.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:.22in;">
+      <h3>Recommended action</h3>
+      <p class="body">Position the brief as a paid ASO teardown of cross-store readiness: Apple proves demand and paid trust; Google Play shows the upgrade and reliability questions that need clearer short-description copy, replies, and release notes.</p>
+    </div>
+    <div class="strip">
+      <div>Apple claim confidence: public listing</div>
+      <div>Play claim confidence: public listing</div>
+      <div>Review themes: user-reported, not verified defects</div>
+    </div>
+    <div class="footer"><span>Question answered: buyer value</span><span>Boundary: no conversion-lift guarantee</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Hybrid ASO diagnostic scorecard</div>
+    <h2>The ASO scorecard ties public evidence to the exact Play surfaces that need the first fixes.</h2>
+        <p class="small" style="max-width:8.4in;margin-top:.12in;font-weight:800;">Scores are buyer triage labels from public evidence confidence plus store-surface impact. Inputs exclude private analytics, official rank tracking, install data, revenue data, conversion data, rating forecasts, and sentiment guarantees.</p>
+    <div class="grid two" style="margin-top:.18in;">
+      <div class="card">
+        <h3>Severity score table</h3>
+        <div class="row headrow"><div>Score</div><div>Public evidence reason</div><div>30-day priority</div></div>
+        <div class="row"><div><strong>Revenue/Conversion Risk: 7/10</strong></div><div>ANONYMIZED FACT: Google Play has visible IAP plus public Free / Trial / Pro confusion.</div><div>Week 1: add Free / Trial / Pro table.</div></div>
+        <div class="row"><div><strong>Trust/Support Risk: 8/10</strong></div><div>ANONYMIZED PUBLIC REVIEW THEME: Android sync and reminder expectations repeat.</div><div>Week 2: publish sync FAQ and route replies.</div></div>
+        <div class="row"><div><strong>Competitive Gap: 6/10</strong></div><div>ANONYMIZED COMPETITOR CONTRAST: rivals own planning, routines, time-blocking, or native calendar jobs.</div><div>Week 3: defend calmer visual planning.</div></div>
+      </div>
+      <div class="grid">
+        <div class="card green-bg">
+          <h3>Observed fact plus buyer impact</h3>
+          <p class="tight">ANONYMIZED PUBLIC LISTING FACT: Apple shows strong premium proof while Google Play shows lower rating, Android reach, and Pro confusion. Buyer impact: the product can look proven on Apple but riskier on Android before a visitor understands the paid boundary.</p>
+        </div>
+        <div class="card">
+          <h3>Exact fix plus source confidence</h3>
+          <p class="tight">Before publishing, verify this against current product behavior. If verified, add this Google Play opening structure: <strong>"Start free. Test Pro with a trial. Upgrade only if recurring tasks, AI planning, calendar/reminder integrations, rescheduling tools, and custom notifications fit your workflow."</strong> Source confidence: public Apple listing, Google Play listing, public review signal, and anonymized competitor contrast.</p>
+        </div>
+        <div class="card orange-bg">
+          <h3>Priority rule</h3>
+          <p class="tight">The 30-day plan follows the score order: Pro clarity first, Android sync/support trust second, release-note trust third, review-theme re-check fourth.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>Question answered: scorecard standard</span><span>ASO-comparable structure, evidence receipts, no outcome claim</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Buyer question 2</div>
+    <h2>Apple store proof is stronger than Google Play's Pro and sync trust surfaces.</h2>
+    <div class="card" style="margin-top:.28in; padding:0;">
+      <div class="row headrow"><div>Area</div><div>Apple App Store</div><div>Google Play</div></div>
+      <div class="row"><div><strong>Trust proof</strong></div><div>Editors' Choice, 4.8 rating, 160K ratings.</div><div>1M+ downloads, but lower 4.4 rating and Android-specific complaints.</div></div>
+      <div class="row"><div><strong>Paid surface</strong></div><div>Monthly, yearly, and lifetime Pro prices are visible.</div><div>Reviews suggest users do not always understand free, trial, and Pro boundaries.</div></div>
+      <div class="row"><div><strong>Platform surface</strong></div><div>Apple ecosystem breadth is a strength: iPhone, iPad, Mac, Watch.</div><div>Android-to-Mac sync expectations need clearer support and release-note language.</div></div>
+      <div class="row"><div><strong>Release notes</strong></div><div>Planning reminders and What's New dialog.</div><div>External calendar connection is visible, but reviews ask for trust around sync and reminders.</div></div>
+    </div>
+    <div class="grid three" style="margin-top:.22in;">
+      <div class="card soft"><h3>Score</h3><div class="metric">7/10</div><p class="note">Cross-store readiness</p></div>
+      <div class="card soft"><h3>Priority</h3><div class="metric orange">1</div><p class="note">Android Pro clarity</p></div>
+      <div class="card soft"><h3>Action type</h3><div class="metric">Copy</div><p class="note">Listing, reply, release note</p></div>
+    </div>
+    <div class="strip">
+      <div>Supported by: Apple public listing</div>
+      <div>Supported by: Google Play public listing</div>
+      <div>Supported by: public review signal</div>
+      <div>Not supported: private conversion analytics</div>
+    </div>
+    <div class="footer"><span>Question answered: store gap</span><span>Counts observed 2026-05-27</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Buyer question 3</div>
+    <h2>Google Play short description and first paragraph need Free / Trial / Pro clarity before feature depth.</h2>
+    <p class="subhead">The Android listing needs to make the business model feel fair before users discover limits inside the product.</p>
+    <div class="grid two" style="margin-top:.32in;">
+      <div class="card orange-bg">
+        <h3>Observed friction</h3>
+        <ul class="body">
+          <li>Public reviews describe the free experience as too limited.</li>
+          <li>Reminder and repeated-task expectations are not clear enough before use.</li>
+          <li>Developer replies clarify trial and Pro rules after the negative review has already happened.</li>
+        </ul>
+      </div>
+      <div class="card green-bg">
+        <h3>Rewrite module</h3>
+        <p class="body"><strong>Add a Free / Trial / Pro table:</strong> Free daily timeline, inbox, basic planning, reminders. Trial: test Pro workflow before deciding. Pro: recurring tasks, AI planning, calendar/reminder integrations, rescheduling tools, custom notifications.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:.24in;">
+      <h3>Recommended action</h3>
+      <p class="body">Before publishing, verify this against current product behavior. If verified, publish this exact wording in the Google Play opening paragraph: <strong>"Start with a free visual day planner, test Pro with a trial, then upgrade only if recurring tasks, AI planning, calendar/reminder integrations, rescheduling tools, and custom notifications fit your workflow."</strong></p>
+    </div>
+    <div class="grid two" style="margin-top:.22in;">
+      <div class="card soft"><h3>Where to change</h3><p class="tight">Google Play short description/opening paragraph, first 500 characters of the long description, and support FAQ link near Pro/trial language.</p></div>
+      <div class="card soft"><h3>Source confidence</h3><p class="tight"><span class="label">Google Play public listing</span><span class="label">Public review signal</span><span class="label">Apple IAP public listing</span></p></div>
+    </div>
+    <div class="footer"><span>Question answered: listing copy</span><span>Yellow is emphasis, not score</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Buyer question 4</div>
+    <h2>Google Play review replies should convert sync, Pro, and reminder complaints into support-path proof.</h2>
+    <div class="grid three" style="margin-top:.35in;">
+      <div class="card">
+        <h3>Sync complaint</h3>
+        <p class="body">Template: Thanks for reporting this Android-to-Mac sync issue. Please send app version, device model, and account state to support so we can inspect the sync path. Keep both apps updated while we troubleshoot.</p>
+      </div>
+      <div class="card">
+        <h3>Pro confusion</h3>
+        <p class="body">Template: The planner sample app can be started for free. Pro unlocks advanced planning tools such as recurring tasks, AI planning, and custom notification workflows. A trial is available so you can test fit first.</p>
+      </div>
+      <div class="card">
+        <h3>Reminder concern</h3>
+        <p class="body">Template: Basic reminders and custom notification behavior are different. We are making this clearer in the app and listing; support can help check your settings and platform permissions.</p>
+      </div>
+    </div>
+    <div class="card orange-bg" style="margin-top:.24in;">
+      <h3>Recommended action</h3>
+      <p class="body">Reply templates should clarify boundaries without blaming the user. Each response needs a support path, one concrete next step, and no promise that a reported issue is universally fixed unless the team can verify it.</p>
+    </div>
+    <div class="strip">
+      <div>Where to change: Google Play review replies</div>
+      <div>Support/sync FAQ: link one canonical path</div>
+      <div>Source confidence: public review signal</div>
+    </div>
+    <div class="footer"><span>Question answered: replies</span><span>User reports are not verified defects</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Buyer question 5</div>
+    <h2>Short description, screenshot 1, and What's New should answer Pro, sync, and reminder objections first.</h2>
+    <p class="subhead">The snippet test checks whether public surfaces answer Pro, sync, and reminder objections before the user has to read reviews. It is not a keyword-rank claim.</p>
+    <div class="grid two" style="margin-top:.22in;">
+      <div class="card">
+        <h3>Metadata diff table</h3>
+        <div class="row headrow"><div>Surface</div><div>Observed public pattern</div><div>Exact fix</div></div>
+        <div class="row"><div><strong>Short description</strong></div><div>ANONYMIZED FACT: visual-planner benefit appears before Free / Trial / Pro boundaries.</div><div>Add "start free, test Pro, then upgrade only if advanced planning fits."</div></div>
+        <div class="row"><div><strong>Screenshot 1</strong></div><div>ANONYMIZED CREATIVE OBSERVATION: premium workflow proof is clearer than Android sync reassurance.</div><div>Show timeline plus sync/support cue in first two images.</div></div>
+        <div class="row"><div><strong>What's New</strong></div><div>ANONYMIZED FACT: release notes mention shipped work more than user-facing trust repair.</div><div>Name calendar connection clarity, Android setup checks, and support path.</div></div>
+      </div>
+      <div class="grid">
+        <div class="card green-bg">
+          <h3>Keyword opportunity snapshot</h3>
+          <p class="body">MOCK POINT-IN-TIME SAMPLE: visual planner, daily planner, routine planner, calendar tasks, ADHD planner. Use as copy coverage checks only; no live search-rank source was used.</p>
+        </div>
+        <div class="card orange-bg">
+          <h3>Severity score basis</h3>
+          <p class="body">7/10 severity comes from public evidence confidence plus buyer impact: large Android reach, visible paid upgrade path, repeated review themes, and fixes that can be made on store/support surfaces.</p>
+        </div>
+        <div class="card">
+          <h3>Release notes rewrite</h3>
+          <p class="body">Before publishing, verify this against current product behavior. If verified, publish: <strong>"This update makes calendar connection status easier to understand and adds clearer Android setup checks for sync and reminders. If something still looks off, Support can inspect app version and device path."</strong></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>Supported by: public listing, public reviews, mock snippet test boundary</span><span>Where to change: Google Play metadata, screenshots, release notes</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Buyer question 6</div>
+    <h2>Competitor listings leave room for a calmer visual-planner ASO position if Android copy stays specific.</h2>
+    <div class="grid two" style="margin-top:.3in;">
+      <div class="card">
+        <h3>Position to defend</h3>
+        <p class="body">The planner sample app is the premium visual planner for people who need a calmer way to turn calendars, tasks, routines, and habits into one timeline.</p>
+        <div class="bar"><span style="width:88%"></span></div>
+        <p class="note">Strongest moat: visual timeline plus Apple ecosystem trust.</p>
+      </div>
+      <div class="card">
+        <h3>Pressure to resist</h3>
+        <p class="body">Avoid chasing every habit, AI, or calendar suite claim. Competitors can own broad feature depth; the planner sample app should own planning clarity and lower overwhelm.</p>
+        <div class="bar orange"><span style="width:62%"></span></div>
+        <p class="note">Risk: Android copy reads like a generic productivity app.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:.22in;">
+      <h3>Competitor note</h3>
+      <p class="body">ANONYMIZED COMPETITOR CONTRAST: competitor A leads with neurodivergent planning, competitor B leads with broad routines and analytics, competitor C leads with time-blocking simplicity, and native calendar tools compete on zero switching cost. The planner sample app should counter with one clear App Store and Play listing claim: a visual timeline that makes daily planning feel manageable.</p>
+    </div>
+    <div class="matrix" style="margin-top:.2in;">
+      <div class="card soft green-bg"><h3>Claim to amplify</h3><p class="tight">Calmer daily planning for people who turn tasks, calendars, routines, and habits into one visual timeline.</p></div>
+      <div class="card soft orange-bg"><h3>Claim to avoid</h3><p class="tight">Avoid broad clinical outcomes, guaranteed productivity gains, or superiority over every calendar/habit tool.</p></div>
+    </div>
+    <div class="footer"><span>Question answered: position</span><span>No "best app" claim</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Buyer question 7</div>
+    <h2>Run the 30-day ASO sequence: Play Pro table, sync FAQ, release-note rewrite, then review-theme re-check.</h2>
+    <div class="grid four" style="margin-top:.32in;">
+      <div class="card"><h3>Week 1</h3><p class="body">Add Free / Trial / Pro table to Google Play and web support copy.</p><p class="small">Owner: listing copy.</p></div>
+      <div class="card"><h3>Week 2</h3><p class="body">Publish Android sync FAQ and route Play replies to one support path.</p><p class="small">Owner: support/reputation.</p></div>
+      <div class="card"><h3>Week 3</h3><p class="body">Rewrite release notes to name user-facing fixes, not only shipped features.</p><p class="small">Owner: release comms.</p></div>
+      <div class="card"><h3>Week 4</h3><p class="body">Re-check Play reviews for Pro confusion, sync, and reminder themes.</p><p class="small">Owner: growth/reputation.</p></div>
+    </div>
+    <div class="card green-bg" style="margin-top:.24in;">
+      <h3>Success check</h3>
+      <p class="body">Look for fewer new public reviews about paywall confusion, clearer developer replies, and less repeated sync-support confusion. Boundary: ranking, install, revenue, rating, and sentiment outcomes require separate evidence.</p>
+    </div>
+    <div class="card" style="margin-top:.2in;">
+      <h3>Release-note rewrite</h3>
+      <p class="body">Before publishing, verify this against current product behavior. If verified, publish this exact wording: <strong>"This update improves calendar-connection clarity and makes Android setup easier to troubleshoot. If sync or reminder behavior looks off, open Support with your app version and device so we can check the exact path."</strong></p>
+    </div>
+    <div class="strip">
+      <div>Where to change: Google Play What's New</div>
+      <div>Also update: support/sync FAQ</div>
+      <div>Re-check: public review themes after 30 days</div>
+    </div>
+    <div class="footer"><span>Question answered: action plan</span><span>Evidence-backed recommendations only</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Source boundaries</div>
+    <h2>Source confidence covers public listings, ratings, reviews, IAP, update notes, and competitor surfaces only.</h2>
+    <div class="grid two" style="margin-top:.32in;">
+      <div class="card">
+        <h3>Used</h3>
+        <ul class="body">
+          <li>Apple App Store public listing.</li>
+          <li>Apple public rating, IAP, review, and editorial signals visible on listing pages.</li>
+          <li>Google Play public listing, data safety, rating, downloads, review, and developer-response signals.</li>
+          <li>Public competitor listings for positioning.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Not used</h3>
+        <ul class="body">
+          <li>No App Store Connect or Google Play Console access.</li>
+          <li>No paid Apify actors.</li>
+          <li>No private analytics, outreach, account creation, or production scraping.</li>
+        <li>No guaranteed ranking, install, revenue, rating, or sentiment claims.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="margin-top:.22in;">
+      <h3>Delivery note</h3>
+      <p class="body">For a live client brief, refresh counts and screenshot panels immediately before delivery. Public review themes should remain source-labeled and framed as user-reported signals, not verified product defects.</p>
+    </div>
+    <div class="strip">
+      <div>Supported claims: listing fields, ratings, downloads, IAP, update notes</div>
+      <div>Unsupported claims: screenshots not manually inspected in this polish pass</div>
+      <div>Commercial claim: sell as $79-$99 brief, not outcome guarantee</div>
+    </div>
+    <div class="footer"><span>Planner Sample Growth Brief</span><span>Prepared 2026-05-27</span></div>
+  </section>
+</main>
+</body>
+</html>
+

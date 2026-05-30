@@ -1,0 +1,800 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>App Store Growth Brief - Grocery List Sample App</title>
+  <style>
+    :root {
+      --paper: #fbf7ec;
+      --paper-deep: #f1eadb;
+      --ink: #141412;
+      --soft-ink: #34342d;
+      --muted: #6f6b5f;
+      --line: #151512;
+      --thin: #ded4c1;
+      --yellow: #f2c94c;
+      --yellow-soft: #fff2bf;
+      --green: #248047;
+      --green-soft: #e3f1e5;
+      --orange: #db7615;
+      --orange-soft: #fae4c8;
+      --white: #fffdf6;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      background: #d8d1c2;
+      color: var(--ink);
+      font-family: Bahnschrift, "Aptos", "Segoe UI", Verdana, sans-serif;
+      line-height: 1.24;
+    }
+
+    .slide {
+      position: relative;
+      width: 11in;
+      height: 8.5in;
+      margin: 22px auto;
+      padding: 0.42in 0.45in;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(20,20,18,0.045) 0 1px, transparent 1px 100%),
+        linear-gradient(180deg, rgba(20,20,18,0.035) 0 1px, transparent 1px 100%),
+        var(--paper);
+      background-size: 0.31in 0.31in;
+      box-shadow: 0 22px 55px rgba(20, 20, 18, 0.24);
+      break-after: page;
+      page-break-after: always;
+    }
+
+    .slide:last-child { break-after: auto; page-break-after: auto; }
+
+    .slash {
+      position: absolute;
+      right: -1.35in;
+      top: -0.8in;
+      width: 3.1in;
+      height: 4.2in;
+      background: var(--yellow);
+      transform: rotate(16deg);
+      transform-origin: center;
+      z-index: 0;
+    }
+
+    .slide > *:not(.slash) { position: relative; z-index: 1; }
+
+    .kicker {
+      margin: 0 0 0.08in;
+      font: 900 10px/1 Bahnschrift, "Segoe UI", sans-serif;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    h1, h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: -0.035em;
+      color: var(--ink);
+    }
+
+    h1 {
+      max-width: 5.3in;
+      font-size: 54px;
+      line-height: 0.88;
+    }
+
+    h2 {
+      font-size: 36px;
+      line-height: 0.94;
+    }
+
+    h3 {
+      margin: 0 0 0.09in;
+      color: var(--soft-ink);
+      font: 900 17px/1.05 Bahnschrift, "Segoe UI", sans-serif;
+    }
+
+    p { margin: 0; }
+
+    .subhead {
+      max-width: 5.7in;
+      margin-top: 0.14in;
+      font: 800 20px/1.15 Bahnschrift, "Segoe UI", sans-serif;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.25in;
+      align-items: flex-start;
+      margin-bottom: 0.24in;
+      padding-bottom: 0.12in;
+      border-bottom: 3px solid var(--line);
+    }
+
+    .page {
+      color: var(--muted);
+      font: 900 10px/1 Bahnschrift, "Segoe UI", sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .cover-grid {
+      display: grid;
+      grid-template-columns: 5.72in 4.05in;
+      gap: 0.34in;
+      margin-top: 0.5in;
+      align-items: start;
+    }
+
+    .verdict {
+      padding: 0.22in;
+      color: #fff;
+      background: var(--ink);
+      box-shadow: 7px 7px 0 var(--yellow);
+    }
+
+    .verdict span,
+    .label {
+      display: block;
+      margin-bottom: 0.07in;
+      color: inherit;
+      font: 900 10px/1 Bahnschrift, "Segoe UI", sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .verdict strong {
+      display: block;
+      font: 900 27px/1.02 Bahnschrift, "Segoe UI", sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    .card-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.12in;
+      margin-top: 0.56in;
+    }
+
+    .card {
+      min-height: 0.86in;
+      padding: 0.14in;
+      border: 2px solid var(--line);
+      background: var(--white);
+      box-shadow: 5px 5px 0 var(--line);
+    }
+
+    .card strong {
+      display: block;
+      margin-top: 0.03in;
+      font: 900 26px/0.98 Bahnschrift, "Segoe UI", sans-serif;
+      letter-spacing: -0.03em;
+    }
+
+    .green { color: var(--green) !important; }
+    .orange { color: var(--orange) !important; }
+    .yellow { color: var(--yellow) !important; }
+
+    .panel {
+      padding: 0.18in;
+      border: 2px solid var(--line);
+      background: rgba(255,253,246,0.92);
+    }
+
+    .panel.shadow { box-shadow: 6px 6px 0 var(--line); }
+    .panel.yellow { background: var(--yellow-soft); color: var(--ink) !important; }
+    .panel.yellow * { color: var(--ink) !important; }
+    .panel.yellow .label,
+    .panel.yellow .mini-title { color: var(--muted) !important; }
+    .panel.green-bg { background: var(--green-soft); }
+    .panel.orange-bg { background: var(--orange-soft); }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: 4.76in 4.76in;
+      gap: 0.24in;
+      align-items: stretch;
+    }
+
+    .metric-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.12in;
+      margin-top: 0.2in;
+    }
+
+    .big-num {
+      display: block;
+      font: 900 47px/0.9 Bahnschrift, "Segoe UI", sans-serif;
+      letter-spacing: -0.05em;
+    }
+
+    .bar-list {
+      display: grid;
+      gap: 0.08in;
+    }
+
+    .bar {
+      display: grid;
+      grid-template-columns: 1.35in 1fr 0.58in;
+      align-items: center;
+      gap: 0.1in;
+      font-size: 12px;
+    }
+
+    .bar .track {
+      height: 0.13in;
+      border: 1px solid var(--thin);
+      background: #ece5d7;
+    }
+
+    .fill {
+      height: 100%;
+      background: var(--orange);
+    }
+
+    .fill.good { background: var(--green); }
+    .fill.neutral { background: var(--ink); }
+
+    .legend {
+      display: flex;
+      gap: 0.16in;
+      margin: 0.08in 0 0.18in;
+      color: var(--muted);
+      font: 900 10px/1 Bahnschrift, "Segoe UI", sans-serif;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .legend i {
+      display: inline-block;
+      width: 0.12in;
+      height: 0.12in;
+      margin-right: 0.04in;
+      vertical-align: -1px;
+    }
+
+    .orange-chip { background: var(--orange); }
+    .green-chip { background: var(--green); }
+    .black-chip { background: var(--ink); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      font-size: 12px;
+    }
+
+    th, td {
+      border: 2px solid var(--line);
+      padding: 0.09in 0.11in;
+      vertical-align: top;
+    }
+
+    th {
+      color: #fff;
+      background: var(--ink);
+      font: 900 10px/1 Bahnschrift, "Segoe UI", sans-serif;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      text-align: left;
+    }
+
+    td strong {
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .three {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.15in;
+    }
+
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.18in;
+    }
+
+    .four {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.13in;
+    }
+
+    .stack {
+      display: grid;
+      gap: 0.14in;
+    }
+
+    ul, ol {
+      margin: 0.08in 0 0 0.18in;
+      padding: 0;
+    }
+
+    li { margin: 0.045in 0; }
+
+    .callout {
+      padding: 0.18in;
+      border: 2px solid var(--line);
+      background: var(--yellow);
+      box-shadow: 6px 6px 0 var(--line);
+      font: 900 18px/1.12 Bahnschrift, "Segoe UI", sans-serif;
+    }
+
+    .mini-title {
+      margin-bottom: 0.08in;
+      color: var(--muted);
+      font: 900 10px/1 Bahnschrift, "Segoe UI", sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .route-card {
+      min-height: 1.15in;
+      padding: 0.15in;
+      border: 2px solid var(--line);
+      background: var(--white);
+      box-shadow: 5px 5px 0 var(--line);
+    }
+
+    .route-card .num {
+      display: block;
+      margin-bottom: 0.06in;
+      font: 900 13px/1 Bahnschrift, "Segoe UI", sans-serif;
+    }
+
+    .route-card strong {
+      display: block;
+      margin-bottom: 0.06in;
+      font: 900 17px/1.04 Bahnschrift, "Segoe UI", sans-serif;
+    }
+
+    .quote {
+      padding: 0.16in;
+      border-left: 0.09in solid var(--orange);
+      background: var(--orange-soft);
+      font: 900 18px/1.13 Bahnschrift, "Segoe UI", sans-serif;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.08in;
+      margin-top: 0.18in;
+    }
+
+    .flow div {
+      min-height: 0.78in;
+      padding: 0.1in;
+      border: 2px solid var(--line);
+      background: var(--white);
+      font: 900 12px/1.06 Bahnschrift, "Segoe UI", sans-serif;
+    }
+
+    .source {
+      color: var(--muted);
+      font-size: 11px;
+      word-break: break-word;
+    }
+
+    .bottom-strip {
+      position: absolute;
+      left: 0.45in;
+      right: 0.45in;
+      bottom: 0.38in;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr 1fr;
+      gap: 0.12in;
+      z-index: 1;
+    }
+
+    .slide > .bottom-strip {
+      position: absolute;
+    }
+
+    .bottom-strip div {
+      min-height: 0.68in;
+      padding: 0.12in;
+      border: 2px solid var(--line);
+      background: rgba(255,253,246,0.9);
+      font-size: 12px;
+    }
+
+    .bottom-strip strong {
+      display: block;
+      margin-bottom: 0.04in;
+      font: 900 13px/1.02 Bahnschrift, "Segoe UI", sans-serif;
+    }
+
+    a { color: var(--ink); text-decoration-thickness: 1px; }
+
+    @page { size: Letter landscape; margin: 0; }
+
+    @media print {
+      body { background: #fff; }
+      .slide {
+        width: 11in;
+        height: 8.5in;
+        margin: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="slide">
+    <div class="slash"></div>
+    <p class="kicker">BidScope Labs / App Store Growth Brief</p>
+    <h1>Grocery sample ASO diagnostic</h1>
+    <p class="subhead">Public App Store evidence says the next ASO pass should clarify the opening metadata, screenshot order, support path, and release-note proof before adding more feature claims.</p>
+
+    <div class="cover-grid">
+      <div class="stack">
+        <div class="verdict">
+          <span>Verdict</span>
+          <strong>Healthy App Store rating base. Review themes make sharing, reliability, and setup trust the next metadata job.</strong>
+        </div>
+        <div class="four">
+          <div class="route-card"><span class="num orange">1</span><strong>Rewrite first paragraph</strong><p class="note">Lead with the grocery-list job.</p></div>
+          <div class="route-card"><span class="num orange">2</span><strong>Repair review trust</strong><p class="note">Name fixes in release notes and replies.</p></div>
+          <div class="route-card"><span class="num green">3</span><strong>Reorder screenshot proof</strong><p class="note">Show depth after the core workflow.</p></div>
+          <div class="route-card"><span class="num">4</span><strong>Keep ASO claims narrow</strong><p class="note">No ranking or rating promises.</p></div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="panel shadow yellow">
+          <span class="label">Prepared</span>
+          <strong style="font-size:24px;">May 27, 2026</strong>
+          <p class="note" style="margin-top:0.1in;">Sample uses anonymized and/or mock public-evidence data to demonstrate report structure. It is not a client case study and does not claim private analytics, App Store Connect, Google Play Console, paid ASO data, or guaranteed outcomes.</p>
+        </div>
+        <div class="three">
+          <div class="card"><span class="label">Severity</span><strong class="orange">7/10</strong><p class="note">Trust and setup friction.</p></div>
+          <div class="card"><span class="label">Evidence</span><strong>Public</strong><p class="note">Reviews, listing, competitors.</p></div>
+          <div class="card"><span class="label">Fix path</span><strong class="green">No-code</strong><p class="note">Copy, replies, release notes.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-strip">
+      <div><strong>Buyer takeaway</strong>This is a public-evidence teardown with observed facts, boundaries, and exact edits.</div>
+      <div><strong>Best use</strong>Hand it to a founder before the next listing or release-note edit.</div>
+      <div><strong>Sample boundary</strong>Public evidence only; no private analytics or account access.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="topbar">
+      <div><p class="kicker">01 / Public evidence dashboard</p><h2>4.52 App Store rating is saleable, but sharing and crash review themes should lead the metadata and release-note pass.</h2></div>
+      <div class="page">Page 02</div>
+    </div>
+    <div class="dashboard">
+      <div class="panel shadow">
+        <h3>Review theme pressure</h3>
+        <div class="legend">
+          <span><i class="orange-chip"></i>Friction</span>
+          <span><i class="green-chip"></i>Strength</span>
+          <span><i class="black-chip"></i>Structure</span>
+        </div>
+        <div class="bar-list">
+          <div class="bar"><span>Sharing setup</span><div class="track"><div class="fill" style="width:92%"></div></div><strong>High</strong></div>
+          <div class="bar"><span>Lag/crash trust</span><div class="track"><div class="fill" style="width:92%"></div></div><strong>High</strong></div>
+          <div class="bar"><span>Data/list trust</span><div class="track"><div class="fill" style="width:78%"></div></div><strong>Med+</strong></div>
+          <div class="bar"><span>Setup complexity</span><div class="track"><div class="fill neutral" style="width:72%"></div></div><strong>Med+</strong></div>
+          <div class="bar"><span>Power-user love</span><div class="track"><div class="fill good" style="width:92%"></div></div><strong>High</strong></div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="three">
+          <div class="card"><span class="label">Public rating</span><strong>4.52</strong><p class="note">Strong enough for App Store proof.</p></div>
+          <div class="card"><span class="label">Ratings count</span><strong>4,681</strong><p class="note">Enough public signal to audit.</p></div>
+          <div class="card"><span class="label">Risk shape</span><strong class="orange">Trust</strong><p class="note">Not a feature shortage.</p></div>
+        </div>
+        <div class="callout">The ASO risk is not lack of value. It is pre-install doubt that setup, sharing, or reliability will waste the buyer's time.</div>
+      </div>
+    </div>
+    <div class="three" style="margin-top:0.22in;">
+      <div class="panel green-bg"><h3>Listing strength</h3><p>Public praise supports grocery speed, inventory, aisle sorting, recipes, meal planning, Apple Watch, Siri, and multi-store use.</p></div>
+      <div class="panel orange-bg"><h3>Review friction cluster</h3><p>Recent public reviews cluster around sharing setup, lag/crashes, deleted-list fear, support access, pricing expectations, and complexity.</p></div>
+      <div class="panel yellow"><h3>Metadata action</h3><p>Lead the App Store description and screenshots with setup, sharing, and recovery confidence before deeper feature inventory.</p></div>
+    </div>
+    <div class="bottom-strip">
+      <div><strong>The ASO read</strong>The rating base earns trust; the listing has to reduce setup and reliability anxiety.</div>
+      <div><strong>Color rule</strong>Orange marks friction; green marks strength; black marks structure.</div>
+      <div><strong>Next action</strong>Turn review pressure into release-note and screenshot decisions.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="topbar">
+      <div><p class="kicker">02 / Hybrid ASO diagnostic scorecard</p><h2>Trust/support risk scores highest, so no-code ASO fixes should start with metadata, replies, and release notes.</h2></div>
+      <div class="page">Page 03</div>
+    </div>
+    <div class="dashboard">
+      <div class="panel shadow">
+        <h3>ASO severity score</h3>
+        <span class="big-num orange">7<span style="font-size:25px;">/10</span></span>
+        <p>The score is a buyer-priority triage label based on public evidence confidence plus impact, not private conversion, ranking, revenue, install, rating, or sentiment data.</p>
+        <div class="bar-list" style="margin-top:0.18in;">
+          <div class="bar"><span>Revenue/Conversion Risk</span><div class="track"><div class="fill" style="width:70%"></div></div><strong>7/10</strong></div>
+          <div class="bar"><span>Trust/Support Risk</span><div class="track"><div class="fill" style="width:80%"></div></div><strong>8/10</strong></div>
+          <div class="bar"><span>Competitive Gap</span><div class="track"><div class="fill neutral" style="width:60%"></div></div><strong>6/10</strong></div>
+          <div class="bar"><span>Execution Ease</span><div class="track"><div class="fill good" style="width:90%"></div></div><strong>9/10</strong></div>
+          <div class="bar"><span>Evidence Confidence</span><div class="track"><div class="fill good" style="width:80%"></div></div><strong>8/10</strong></div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="panel shadow green-bg">
+          <h3>First ASO priority</h3>
+          <span class="big-num green">No-code<span style="font-size:25px;"> first</span></span>
+          <p>The recommended path starts with metadata, screenshots, public replies, support links, and release notes because the public evidence points to trust and sequence leaks, not a missing product category.</p>
+        </div>
+        <table>
+          <thead><tr><th>Rhythm</th><th>Grocery sample application</th></tr></thead>
+          <tbody>
+            <tr><td>Observed fact</td><td>ANONYMIZED REVIEW THEME: sharing, lag/crash, deleted-list fear, support, and complexity appear in recent public reviews.</td></tr>
+            <tr><td>Buyer impact</td><td>New visitors may like the feature depth but hesitate if setup, sharing, or recovery looks risky.</td></tr>
+            <tr><td>Exact fix</td><td>Lead the first paragraph with grocery list -> store/aisle -> household sharing, then move depth after the core workflow.</td></tr>
+            <tr><td>Competitor contrast</td><td>Shared-list competitors make household use easier to understand; pantry competitors make inventory scope clearer.</td></tr>
+            <tr><td>Source confidence + 30-day action</td><td>Apple public listing, review feed, and competitor pages; rewrite metadata in week 1, replies/release notes in week 2, screenshot order in week 3, re-check reviews in week 4.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="bottom-strip">
+      <div><strong>First surface</strong>Repair trust and clarify setup before adding louder feature promises.</div>
+      <div><strong>Why it sells</strong>The buyer sees the score, evidence receipt, exact fix, and action order on one page.</div>
+      <div><strong>Boundary</strong>This is an ASO-comparable diagnostic, not rank tracking or outcome prediction.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="topbar">
+      <div><p class="kicker">03 / Review theme read</p><h2>Recent low-star review themes identify the release-note, reply, and support-link surfaces to fix first.</h2></div>
+      <div class="page">Page 04</div>
+    </div>
+    <div class="two">
+      <table>
+        <thead><tr><th>Theme</th><th>Public signal</th><th>Listing implication</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Reliability</strong></td><td>ANONYMIZED REVIEW THEME: recent low-star public reviews mention lag, crashes, app not opening, deleted lists, or iOS permission friction.</td><td>Use release notes and replies to show reliability ownership.</td></tr>
+          <tr><td><strong>Sharing + sync</strong></td><td>ANONYMIZED REVIEW THEME: reviews mention sharing not working as expected and family or multi-device learning curve.</td><td>Put sharing setup and expectations in plain language.</td></tr>
+          <tr><td><strong>Complexity</strong></td><td>ANONYMIZED REVIEW THEME: reviews describe the app as powerful, intimidating, or hard to understand.</td><td>Add "best for" and "how it works" structure.</td></tr>
+          <tr><td><strong>Pricing/support</strong></td><td>ANONYMIZED REVIEW THEME: some reviews object to subscription/trial expectations or hard-to-find support.</td><td>Make free vs paid expectations and support paths easier to find.</td></tr>
+        </tbody>
+      </table>
+      <div class="stack">
+        <div class="quote">Use public replies and release notes to name what changed, show where to get help, and make the first setup path obvious.</div>
+        <div class="three">
+          <div class="panel orange-bg"><span class="label">Risk</span><strong>Recent trust complaints</strong></div>
+          <div class="panel green-bg"><span class="label">Asset</span><strong>Power-user praise</strong></div>
+          <div class="panel yellow"><span class="label">Fix</span><strong>Sharper public sequence</strong></div>
+        </div>
+        <div class="panel">
+          <h3>Safe interpretation</h3>
+          <p>Review comments are user-reported signals, not verified product diagnostics. This brief recommends public-facing trust repair, not private bug conclusions.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-strip">
+      <div><strong>Most urgent theme</strong>Reliability and sharing confusion should be treated as conversion objections.</div>
+      <div><strong>Source restraint</strong>Read reviews as user-reported ASO/reputation signals, not verified bugs or private diagnostics.</div>
+      <div><strong>Paid-brief value</strong>The client gets a prioritized public response plan.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="topbar">
+      <div><p class="kicker">04 / Competitor pressure</p><h2>Competitor listings own simple sharing or pantry depth; this App Store page needs a clearer grocery-list entry point.</h2></div>
+      <div class="page">Page 05</div>
+    </div>
+    <div class="two">
+      <table>
+        <thead><tr><th>Competitor</th><th>Public strength</th><th>Sample app gap to close</th></tr></thead>
+        <tbody>
+          <tr><td>Competitor A: shared-list leader</td><td>ANONYMIZED CONTRAST: leads with family/couple sync, trusted grocery list and recipe box, high public rating base.</td><td>Show a crisper household-sharing proof point.</td></tr>
+          <tr><td>Competitor B: simple checklist</td><td>ANONYMIZED CONTRAST: promises a simple shared grocery/checklist utility.</td><td>Explain why deeper workflow beats a simpler checklist.</td></tr>
+          <tr><td>Competitor C: pantry inventory</td><td>ANONYMIZED CONTRAST: foregrounds inventory, barcode scanner, expiration reminders, smart lists.</td><td>Separate inventory value from the main grocery-list promise.</td></tr>
+          <tr><td>Competitor D: connected pantry</td><td>ANONYMIZED CONTRAST: emphasizes digital pantry, store connections, recipe matching.</td><td>Keep connected-grocery automation secondary unless that is the workflow.</td></tr>
+          <tr><td>Competitor E: meal planning</td><td>ANONYMIZED CONTRAST: leads with meal planning, recipes, generated lists, aisle organization.</td><td>Borrow workflow clarity: plan meals, generate list, shop by aisle.</td></tr>
+        </tbody>
+      </table>
+      <div class="stack">
+        <div class="panel shadow">
+          <h3>Position the sample app here</h3>
+          <p><strong>Deeper than a checklist. Clearer than a pantry suite.</strong></p>
+          <p class="note" style="margin-top:0.08in;">This gives the sample app a lane without pretending it is the simplest app in the category.</p>
+        </div>
+        <div class="four">
+          <div class="route-card"><span class="num">A</span><strong>Simple list apps</strong><p class="note">Easy to understand.</p></div>
+          <div class="route-card"><span class="num green">B</span><strong>Sample app</strong><p class="note">Deep workflow, needs cleaner entry.</p></div>
+          <div class="route-card"><span class="num">C</span><strong>Pantry tools</strong><p class="note">Inventory-first listing.</p></div>
+          <div class="route-card"><span class="num">D</span><strong>Meal planners</strong><p class="note">Planning-first listing.</p></div>
+        </div>
+        <div class="callout">The public page should make depth feel organized, not intimidating.</div>
+      </div>
+    </div>
+    <div class="bottom-strip">
+      <div><strong>Winning lane</strong>Deeper than a checklist. Clearer than a pantry suite.</div>
+      <div><strong>Copy direction</strong>Start with the list, then show sharing, then reveal depth.</div>
+      <div><strong>ASO restraint</strong>Compete on first-screen clarity instead of trying to out-feature every competitor.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="topbar">
+      <div><p class="kicker">05 / Listing rewrite</p><h2>Rewrite the App Store opening around list, aisle, and household sharing before pantry and recipe depth.</h2></div>
+      <div class="page">Page 06</div>
+    </div>
+    <div class="dashboard">
+      <div class="stack">
+        <div class="panel shadow yellow">
+          <h3>Recommended opening line</h3>
+          <p style="font-size:24px;font-weight:900;">Build a grocery list, organize it by store and aisle, and keep the household on the same plan.</p>
+        </div>
+        <div class="panel">
+          <h3>Why this works</h3>
+          <p>It anchors the app in the core grocery job before adding recipes, inventory, Apple Watch, Siri, and multi-store workflows.</p>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="three">
+          <div class="card"><span class="label">Subtitle 1</span><strong style="font-size:17px;">Shared lists, pantry, recipes</strong></div>
+          <div class="card"><span class="label">Subtitle 2</span><strong style="font-size:17px;">Lists by aisle</strong></div>
+          <div class="card"><span class="label">Subtitle 3</span><strong style="font-size:17px;">Plan, share, shop faster</strong></div>
+        </div>
+        <div class="panel orange-bg">
+          <h3>Weak opening pattern</h3>
+          <p>A feature inventory, category-wide ranking language, or anything that makes sharing sound effortless if recent reviews suggest setup friction.</p>
+        </div>
+      </div>
+    </div>
+    <div class="flow">
+      <div><span class="mini-title">1</span>Grocery list job</div>
+      <div><span class="mini-title">2</span>Household sharing path</div>
+      <div><span class="mini-title">3</span>Aisle/store organization</div>
+      <div><span class="mini-title">4</span>Pantry as extra value</div>
+      <div><span class="mini-title">5</span>Recipes after workflow</div>
+      <div><span class="mini-title">6</span>Watch/Siri confidence</div>
+    </div>
+    <div class="bottom-strip">
+      <div><strong>First sentence job</strong>Make a visitor understand who this is for in five seconds.</div>
+      <div><strong>Screenshot job</strong>Prove the workflow order, not the total feature list.</div>
+      <div><strong>Support job</strong>Make setup and recovery paths visible enough to calm doubt.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="topbar">
+      <div><p class="kicker">06 / Store snippet test</p><h2>Subtitle, screenshots, and release notes should answer shopper, household, and recovery questions before reviews do.</h2></div>
+      <div class="page">Page 07</div>
+    </div>
+    <div class="dashboard">
+      <div class="panel shadow">
+        <h3>Metadata diff table</h3>
+        <table>
+          <thead><tr><th>Surface</th><th>Current public pattern</th><th>Exact fix</th></tr></thead>
+          <tbody>
+            <tr><td>Opening sentence</td><td>ANONYMIZED FACT: feature-heavy before the grocery job is fully clear.</td><td>Lead with list, store, aisle, household.</td></tr>
+            <tr><td>Screenshot 1</td><td>ANONYMIZED FACT: workflow proof appears after broader capability proof.</td><td>Show "build list -> sort by aisle -> share" first.</td></tr>
+            <tr><td>Release notes</td><td>ANONYMIZED FACT: fix language is not tied to the review themes buyers see.</td><td>Name sharing setup, restore path, and support prompt changes.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="stack">
+        <div class="panel green-bg">
+          <h3>Keyword opportunity snapshot</h3>
+          <p>MOCK POINT-IN-TIME SAMPLE: grocery list, shared grocery list, pantry list, aisle organizer, meal plan list. Use these as copy coverage checks, not rank claims.</p>
+        </div>
+        <div class="panel orange-bg">
+          <h3>Creative surface audit</h3>
+          <p>ANONYMIZED SCREENSHOT OBSERVATION: if the first image shows feature depth before the basic shopping path, move household sharing and aisle organization into the first two frames.</p>
+        </div>
+        <div class="panel yellow">
+          <h3>Public visibility snapshot</h3>
+          <p>MOCK SAMPLE ONLY: no live rank source used. Treat visibility as a landing-page demonstration module, not evidence of current search position.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-strip">
+      <div><strong>Severity basis</strong>Orange risk is evidence confidence plus buyer-impact severity, not private analytics.</div>
+      <div><strong>Where to change</strong>App Store subtitle, opening paragraph, screenshots 1-3, release notes.</div>
+      <div><strong>Verification boundary</strong>Before publishing, verify every copy line against current product behavior.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="topbar">
+      <div><p class="kicker">07 / Trust repair cycle</p><h2>Turn reliability and sharing review themes into reply templates, support links, and specific release notes.</h2></div>
+      <div class="page">Page 08</div>
+    </div>
+    <div class="two">
+      <div class="panel shadow">
+        <h3>7-day moves</h3>
+        <ol>
+          <li>Audit support links for sharing, sync, restore, premium, and crash reports.</li>
+          <li>Draft public reply templates for lag, crashing, deletion, sharing, and support access.</li>
+          <li>Prepare release-note language that names real fixes specifically: "This release includes sharing setup fixes, restore-path cleanup, and clearer support prompts for lists that do not sync as expected."</li>
+          <li>Reorder the description around list, share, shop, inventory, and recipes.</li>
+          <li>Add a short "best for" section to reduce mismatch with simple-list users.</li>
+        </ol>
+      </div>
+      <div class="panel shadow">
+        <h3>30-day checks</h3>
+        <ol>
+          <li>Confirm screenshot 1 immediately explains the grocery-list job.</li>
+          <li>Move sharing into screenshot 2 or 3 if household use remains central.</li>
+          <li>Keep pantry and recipes visible, but after the core shopping workflow.</li>
+          <li>Re-check public review feed after 7 and 30 days.</li>
+          <li>Track whether new low-star reviews repeat the same themes.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:0.22in;">Safe reply template: "Thanks for flagging this. We have a sharing setup guide and support can inspect the exact list state. Please send app version, device, and whether the list was shared by invite link or household account."</div>
+    <div class="three" style="margin-top:0.2in;">
+      <div class="panel orange-bg"><h3>Reply boundary</h3><p>Review replies should not request deletion or altered ratings.</p></div>
+      <div class="panel green-bg"><h3>Update request rule</h3><p>Ask for updates only when a real fix solves the issue.</p></div>
+      <div class="panel"><h3>Store-page outcome</h3><p>New visitors see a team that responds clearly and fixes visible problems.</p></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="topbar">
+      <div><p class="kicker">08 / Scope and source boundaries</p><h2>Source confidence is public App Store evidence only, so ASO actions stop at metadata, screenshots, replies, and release notes.</h2></div>
+      <div class="page">Page 09</div>
+    </div>
+    <div class="three">
+      <div class="panel shadow green-bg">
+        <h3>Used</h3>
+        <ul>
+          <li>Sample app public App Store page</li>
+          <li>Apple public lookup metadata</li>
+          <li>Apple public review feed</li>
+          <li>Five public competitor App Store pages</li>
+        </ul>
+      </div>
+      <div class="panel shadow orange-bg">
+        <h3>Not used</h3>
+        <ul>
+          <li>No App Store Connect</li>
+          <li>No Google Play Console</li>
+          <li>No private analytics or private reviews</li>
+          <li>No paid Apify actors, accounts, or production scraping</li>
+        </ul>
+      </div>
+      <div class="panel shadow yellow">
+        <h3>Outcome boundaries</h3>
+        <ul>
+          <li>No ranking guarantees</li>
+          <li>No install or revenue promises</li>
+          <li>No rating or sentiment promises</li>
+          <li>No bug diagnosis from reviews alone</li>
+        </ul>
+      </div>
+    </div>
+    <div class="two" style="margin-top:0.22in;">
+      <div class="panel">
+        <h3>Source links</h3>
+        <p class="source"><strong>Target:</strong> anonymized public grocery-list app; identifying store URL removed from public sample.</p>
+        <p class="source"><strong>Metadata:</strong> anonymized Apple public lookup metadata captured May 27, 2026; raw app ID withheld from public sample.</p>
+        <p class="source"><strong>Reviews:</strong> anonymized Apple public review feed captured May 27, 2026; raw review URL withheld from public sample.</p>
+      </div>
+      <div class="panel">
+        <h3>Final decision</h3>
+        <p style="font-size:21px;font-weight:900;">Public-scope verdict: Apple public metadata, rating base, review themes, and anonymized competitor contrasts are enough to diagnose listing copy, review replies, release-note wording, and positioning. Cross-store trust gap is excluded here because this anonymized sample does not use a useful Google Play counterpart.</p>
+        <p class="source" style="margin-top:0.09in;"><strong>Six-module boundary:</strong> listing copy fixes, review reply templates, competitor positioning, 30-day plan, and source confidence are included. Cross-store trust gap is replaced by an Apple-only evidence boundary because this public sample does not use a useful Google Play counterpart.</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
+

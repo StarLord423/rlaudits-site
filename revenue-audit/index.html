@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Business Revenue Audit — RL Audits</title>
+<meta name="description" content="A private revenue audit for small local businesses. Find review, reputation, website, booking, and competitor gaps that cost trust and sales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0E1F3A; --navy-deep: #091428;
+    --gold: #B68A3E; --gold-soft: #D4B074;
+    --paper: #FBFAF6; --cream: #F7F4ED; --rule: #DCD6C6;
+    --ink: #0E1F3A; --ink2: #3C4A63; --ink3: #7B8597;
+    --good: #3F7A4B;
+    --sans: "Manrope", -apple-system, sans-serif;
+    --serif: "Source Serif 4", Georgia, serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); }
+
+  /* NAV */
+  .site-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--navy); border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 0 48px; height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-gem { width: 18px; height: 18px; border: 1.5px solid var(--gold); transform: rotate(45deg); position: relative; flex-shrink: 0; }
+  .nav-gem::after { content: ''; position: absolute; inset: 4px; background: var(--gold); }
+  .nav-name { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.85); }
+  .nav-links { display: flex; align-items: center; gap: 22px; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.58); }
+  .nav-links a { color: rgba(255,255,255,.58); text-decoration: none; }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold-soft); }
+  .nav-cta { display: inline-flex; align-items: center; padding: 8px 18px; background: var(--gold); color: var(--navy); font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; transition: background .15s; }
+  .nav-cta:hover { background: var(--gold-soft); }
+
+  /* HERO */
+  .hero { background: var(--navy); color: #fff; padding: 140px 48px 80px; position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; }
+  .hero-texture { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px); background-size: 48px 48px; opacity: 0.04; }
+  .hero-inner { position: relative; max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; }
+  .hero-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 20px; }
+  .hero-h1 { font-family: var(--serif); font-size: 52px; line-height: 1.04; font-weight: 500; letter-spacing: -0.025em; margin-bottom: 24px; }
+  .hero-h1 em { font-style: normal; color: var(--gold-soft); }
+  .hero-sub { font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.75); margin-bottom: 36px; max-width: 560px; }
+  .hero-cta { display: inline-flex; align-items: center; padding: 16px 28px; background: var(--gold); color: var(--navy); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; transition: background .15s, transform .15s; }
+  .hero-cta:hover { background: var(--gold-soft); transform: translateY(-1px); }
+  .hero-cta-note { margin-top: 12px; font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.38); letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* DASHBOARD MOCKUP */
+  .dash-mockup { background: var(--paper); border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 32px 80px rgba(0,0,0,0.4); overflow: hidden; display: grid; grid-template-columns: 190px 1fr; height: 460px; }
+  .dash-sidebar { background: var(--navy); display: flex; flex-direction: column; position: relative; overflow: hidden; border-right: 1px solid rgba(255,255,255,0.08); }
+  .dash-sb-texture { position: absolute; inset: 0; background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px); background-size: 24px 24px; opacity: 0.03; pointer-events: none; }
+  .dash-sb-inner { position: relative; }
+  .dash-sb-brand { padding: 18px 16px 14px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 10px; }
+  .dash-sb-gem { width: 13px; height: 13px; border: 1.5px solid var(--gold); transform: rotate(45deg); position: relative; display: inline-block; margin-bottom: 9px; }
+  .dash-sb-gem::after { content: ''; position: absolute; inset: 3px; background: var(--gold); }
+  .dash-sb-client { font-family: var(--serif); font-size: 12px; color: #fff; font-weight: 500; }
+  .dash-sb-market { font-family: var(--mono); font-size: 7.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-top: 2px; }
+  .dash-score-block { padding: 10px 16px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 6px; }
+  .dash-score-lbl { font-family: var(--mono); font-size: 7px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px; }
+  .dash-score-num { font-family: var(--serif); font-size: 38px; color: var(--gold); font-weight: 500; line-height: 1; letter-spacing: -0.03em; }
+  .dash-score-bar { height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; margin-top: 7px; }
+  .dash-score-fill { height: 100%; width: 72%; background: var(--gold); border-radius: 1px; }
+  .dash-nav-item { padding: 7px 16px; font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); display: flex; align-items: center; gap: 7px; position: relative; }
+  .dash-nav-item.is-active { color: #fff; background: rgba(182,138,62,0.1); font-weight: 600; }
+  .dash-nav-item.is-active::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--gold); }
+  .dash-nav-num { font-size: 7.5px; color: rgba(255,255,255,0.28); width: 14px; }
+  .dash-nav-item.is-active .dash-nav-num { color: var(--gold-soft); }
+
+  .dash-main { overflow: hidden; display: flex; flex-direction: column; }
+  .dash-hero-strip { background: var(--navy); padding: 16px 20px 0; flex-shrink: 0; position: relative; overflow: hidden; }
+  .dash-hero-texture { position: absolute; inset: 0; background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px); background-size: 36px 36px; opacity: 0.04; pointer-events: none; }
+  .dash-hero-rel { position: relative; }
+  .dash-hero-lbl { font-family: var(--mono); font-size: 7px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 5px; }
+  .dash-hero-h1 { font-family: var(--serif); font-size: 16px; color: #fff; font-weight: 500; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .dash-hero-sub { font-size: 9.5px; color: rgba(255,255,255,0.62); line-height: 1.5; margin-bottom: 12px; max-width: 320px; }
+  .dash-kpi-strip { display: grid; grid-template-columns: repeat(4,1fr); background: rgba(255,255,255,0.04); border-top: 1px solid rgba(255,255,255,0.1); }
+  .dash-kpi { padding: 8px 10px; border-right: 1px solid rgba(255,255,255,0.08); }
+  .dash-kpi:last-child { border-right: none; }
+  .dash-kpi-val { font-family: var(--serif); font-size: 16px; color: #fff; font-weight: 500; letter-spacing: -0.02em; line-height: 1; }
+  .dash-kpi-lbl { font-size: 8px; color: rgba(255,255,255,0.5); margin-top: 3px; line-height: 1.3; }
+
+  .dash-body { padding: 14px 20px; flex: 1; overflow: hidden; background: var(--paper); }
+  .dash-sec-lbl { font-family: var(--mono); font-size: 7.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+  .dash-sec-h2 { font-family: var(--sans); font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .dash-fix { display: grid; grid-template-columns: 32px 1fr 72px; border: 1px solid var(--rule); margin-bottom: 5px; }
+  .dash-fix-rank { display: flex; align-items: center; justify-content: center; background: var(--cream); border-right: 1px solid var(--rule); }
+  .dash-fix-circle { width: 20px; height: 20px; border-radius: 50%; background: var(--navy); color: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 7.5px; font-weight: 700; }
+  .dash-fix-body { padding: 7px 9px; }
+  .dash-fix-title { font-size: 9.5px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+  .dash-fix-sub { font-size: 8px; color: var(--ink2); line-height: 1.4; }
+  .dash-fix-right { display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 7px 9px; border-left: 1px solid var(--rule); background: #fff; }
+  .dash-fix-dollar { font-family: var(--serif); font-size: 12px; color: var(--good); font-weight: 500; }
+  .dash-fix-badge { font-family: var(--mono); font-size: 6.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--good); margin-top: 2px; }
+
+  /* STATS STRIP */
+  .stats-strip { background: var(--navy-deep); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); display: grid; grid-template-columns: repeat(3,1fr); }
+  .stat-cell { padding: 28px 32px; border-right: 1px solid rgba(255,255,255,0.08); }
+  .stat-cell:last-child { border-right: none; }
+  .stat-val { font-family: var(--serif); font-size: 38px; color: var(--gold); font-weight: 500; letter-spacing: -0.02em; line-height: 1; margin-bottom: 6px; }
+  .stat-lbl { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+
+  /* WHAT YOU GET */
+  .what-section { padding: 96px 48px; background: var(--cream); }
+  .sec-inner { max-width: 1100px; margin: 0 auto; }
+  .sec-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .sec-h2 { font-family: var(--serif); font-size: 40px; line-height: 1.1; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 12px; }
+  .sec-sub { font-size: 15px; color: var(--ink2); line-height: 1.6; max-width: 600px; margin-bottom: 48px; }
+  .what-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .what-card { padding: 26px 24px; background: #fff; border: 1px solid var(--rule); border-top: 3px solid var(--gold); }
+  .what-card-lbl { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .what-card-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .what-card-body { font-size: 13px; color: var(--ink2); line-height: 1.6; }
+
+  /* HOW IT WORKS */
+  .how-section { padding: 96px 48px; background: var(--paper); }
+  .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; margin-top: 48px; }
+  .step-card { padding: 32px 28px; background: #fff; border: 1px solid var(--rule); }
+  .step-num { font-family: var(--serif); font-size: 60px; color: var(--rule); font-weight: 500; line-height: 1; letter-spacing: -0.04em; margin-bottom: 16px; }
+  .step-title { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .step-body { font-size: 13.5px; color: var(--ink2); line-height: 1.6; }
+
+  /* PRICING */
+  .pricing-section { padding: 96px 48px; background: var(--navy); color: #fff; position: relative; overflow: hidden; }
+  .pricing-texture { position: absolute; inset: 0; background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px); background-size: 48px 48px; opacity: 0.03; pointer-events: none; }
+  .pricing-inner { position: relative; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 400px; gap: 64px; align-items: center; }
+  .pricing-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 12px; }
+  .pricing-h2 { font-family: var(--serif); font-size: 40px; line-height: 1.1; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .pricing-sub { font-size: 15px; color: rgba(255,255,255,0.68); line-height: 1.6; }
+  .pricing-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); padding: 36px 32px; }
+  .pricing-intro { font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 12px; }
+  .pricing-num { font-family: var(--serif); font-size: 64px; color: var(--gold); font-weight: 500; line-height: 1; letter-spacing: -0.04em; margin-bottom: 4px; }
+  .pricing-period { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.38); letter-spacing: 0.1em; margin-bottom: 24px; }
+  .pricing-items { list-style: none; margin-bottom: 28px; }
+  .pricing-items li { display: grid; grid-template-columns: 16px 1fr; gap: 10px; font-size: 13.5px; color: rgba(255,255,255,0.8); margin-bottom: 10px; line-height: 1.4; }
+  .pricing-items li span:first-child { color: var(--gold); }
+  .pricing-cta { display: block; text-align: center; padding: 14px 24px; background: var(--gold); color: var(--navy); font-size: 13.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; transition: background .15s; }
+  .pricing-cta:hover { background: var(--gold-soft); }
+  .pricing-note { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.28); text-align: center; margin-top: 10px; }
+
+  /* FOOTER */
+  .site-footer { background: var(--navy-deep); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); }
+  .footer-brand { display: flex; align-items: center; gap: 8px; }
+  .footer-gem { width: 12px; height: 12px; border: 1px solid var(--gold); transform: rotate(45deg); position: relative; flex-shrink: 0; }
+  .footer-gem::after { content: ''; position: absolute; inset: 3px; background: var(--gold); }
+  .footer-name { font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .footer-links { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: flex-end; font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  .footer-links a:hover { color: var(--gold-soft); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-inner, .pricing-inner { grid-template-columns: 1fr; }
+    .dash-mockup-wrap { display: none; }
+    .what-grid, .steps-grid { grid-template-columns: 1fr; }
+    .stats-strip { grid-template-columns: 1fr; }
+    .stat-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .site-nav, .hero, .what-section, .how-section, .pricing-section, .site-footer { padding-left: 24px; padding-right: 24px; }
+    .hero { padding-top: 100px; padding-bottom: 60px; }
+    .hero-h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="/" class="nav-brand">
+    <div class="nav-gem"></div>
+    <span class="nav-name">RL Audits</span>
+  </a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a class="active" href="/revenue-audit/">Revenue Audit</a>
+    <a href="/it-ops-audit/">IT Ops Audit</a>
+    <a href="/app-store-growth-brief/">App Store Brief</a>
+  </div>
+  <a href="/contact/?subject=Audit%20Request" class="nav-cta">Get your audit</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-texture"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Small local business revenue audit</div>
+      <h1 class="hero-h1">Find the leaks costing your local business <em>calls, bookings, and trust.</em></h1>
+      <p class="hero-sub">A private boardroom-grade audit built from public reviews, competitor positioning, website friction, and customer-facing trust signals. Delivered with a ranked 30-day fix plan.</p>
+      <a href="/contact/?subject=Audit%20Request" class="hero-cta">Get your audit — $297</a>
+      <div class="hero-cta-note">Introductory rate &nbsp;·&nbsp; 5-day delivery &nbsp;·&nbsp; includes debrief call</div>
+    </div>
+    <div class="dash-mockup-wrap">
+      <div class="dash-mockup">
+        <div class="dash-sidebar">
+          <div class="dash-sb-texture"></div>
+          <div class="dash-sb-inner">
+            <div class="dash-sb-brand">
+              <div class="dash-sb-gem"></div>
+              <div class="dash-sb-client">Sample Local Business</div>
+              <div class="dash-sb-market">Chattanooga, TN</div>
+            </div>
+            <div class="dash-score-block">
+              <div class="dash-score-lbl">Composite score</div>
+              <div class="dash-score-num">72</div>
+              <div class="dash-score-bar"><div class="dash-score-fill"></div></div>
+            </div>
+            <div class="dash-nav-item is-active"><span class="dash-nav-num">01</span>Position</div>
+            <div class="dash-nav-item"><span class="dash-nav-num">02</span>Revenue levers</div>
+            <div class="dash-nav-item"><span class="dash-nav-num">03</span>Sentiment</div>
+            <div class="dash-nav-item"><span class="dash-nav-num">04</span>Competitive</div>
+            <div class="dash-nav-item"><span class="dash-nav-num">05</span>Fixes</div>
+            <div class="dash-nav-item"><span class="dash-nav-num">06</span>30-day plan</div>
+          </div>
+        </div>
+        <div class="dash-main">
+          <div class="dash-hero-strip">
+            <div class="dash-hero-texture"></div>
+            <div class="dash-hero-rel">
+              <div class="dash-hero-lbl">Private briefing &nbsp;·&nbsp; Sample local business &nbsp;·&nbsp; Chattanooga, TN</div>
+              <div class="dash-hero-h1">Reputation is strong.<br>The revenue path needs work.</div>
+              <div class="dash-hero-sub">Strong trust signals — but website friction and inconsistent contact paths are likely costing calls and bookings.</div>
+            </div>
+            <div class="dash-kpi-strip">
+              <div class="dash-kpi"><div class="dash-kpi-val">4.9★</div><div class="dash-kpi-lbl">Avg rating</div></div>
+              <div class="dash-kpi"><div class="dash-kpi-val">510</div><div class="dash-kpi-lbl">Reviews analyzed</div></div>
+              <div class="dash-kpi"><div class="dash-kpi-val">5</div><div class="dash-kpi-lbl">Competitors mapped</div></div>
+              <div class="dash-kpi"><div class="dash-kpi-val">30d</div><div class="dash-kpi-lbl">Action plan</div></div>
+            </div>
+          </div>
+          <div class="dash-body">
+            <div class="dash-sec-lbl">§ 05 · Recommended fixes</div>
+            <div class="dash-sec-h2">Prioritized moves, ordered by revenue impact</div>
+            <div class="dash-fix">
+              <div class="dash-fix-rank"><div class="dash-fix-circle">01</div></div>
+              <div class="dash-fix-body"><div class="dash-fix-title">Fix the contact handoff</div><div class="dash-fix-sub">Make the next step obvious: call, book, request quote, or send details.</div></div>
+              <div class="dash-fix-right"><div class="dash-fix-dollar">High</div><div class="dash-fix-badge">Quick win</div></div>
+            </div>
+            <div class="dash-fix">
+              <div class="dash-fix-rank"><div class="dash-fix-circle">02</div></div>
+              <div class="dash-fix-body"><div class="dash-fix-title">Align hours across all profiles</div><div class="dash-fix-sub">Google, Yelp, website, and directories show different Friday hours</div></div>
+              <div class="dash-fix-right"><div class="dash-fix-dollar">+$32K</div><div class="dash-fix-badge">Quick win</div></div>
+            </div>
+            <div class="dash-fix">
+              <div class="dash-fix-rank"><div class="dash-fix-circle">03</div></div>
+              <div class="dash-fix-body"><div class="dash-fix-title">Build a first-time customer page</div><div class="dash-fix-sub">Explain process, pricing expectations, proof, and what happens after contact.</div></div>
+              <div class="dash-fix-right"><div class="dash-fix-dollar">Med</div><div class="dash-fix-badge">Quick win</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-cell">
+    <div class="stat-val">500+</div>
+    <div class="stat-lbl">Reviews analyzed per audit</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-val">3–5</div>
+    <div class="stat-lbl">Competitors mapped per market</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-val">30d</div>
+    <div class="stat-lbl">Action plan included</div>
+  </div>
+</div>
+
+<!-- WHAT YOU GET -->
+<section class="what-section" id="what">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">The deliverable</div>
+    <h2 class="sec-h2">This is what you receive.</h2>
+    <p class="sec-sub">A private, boardroom-grade report built from public reviews, website friction, trust signals, and local competitors. Not a spreadsheet. Not a slide deck. A ranked action plan your team can actually use.</p>
+    <div class="what-grid">
+      <div class="what-card">
+        <div class="what-card-lbl">Position snapshot</div>
+        <div class="what-card-title">Where you actually stand</div>
+        <div class="what-card-body">Four pillars scored 0–100 against your local benchmark. Radar chart plus scorecard with trend indicators.</div>
+      </div>
+      <div class="what-card">
+        <div class="what-card-lbl">Revenue leak map</div>
+        <div class="what-card-title">Where the funnel breaks</div>
+        <div class="what-card-body">Five-stage path from discovery to call, booking, quote request, or repeat visit. Every leak pinned to a specific ranked fix.</div>
+      </div>
+      <div class="what-card">
+        <div class="what-card-lbl">Competitive analysis</div>
+        <div class="what-card-title">How you compare locally</div>
+        <div class="what-card-body">3–5 direct competitors mapped by positioning, service mix, and trust signals. What they do well and what to take.</div>
+      </div>
+      <div class="what-card">
+        <div class="what-card-lbl">Ranked fixes</div>
+        <div class="what-card-title">Prioritized by revenue impact</div>
+        <div class="what-card-body">Each fix has a why, a how, and an impact priority. Ordered from highest to lowest value so you know exactly where to start.</div>
+      </div>
+      <div class="what-card">
+        <div class="what-card-lbl">30-day action plan</div>
+        <div class="what-card-title">A month, broken into workstreams</div>
+        <div class="what-card-body">Four parallel workstreams mapped across four weeks. Color-coded and sequenced so your team can execute immediately.</div>
+      </div>
+      <div class="what-card">
+        <div class="what-card-lbl">45-min debrief call</div>
+        <div class="what-card-title">Walk through it together</div>
+        <div class="what-card-body">We review every finding live, answer your questions, and help you prioritize where to put your energy first.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">How it works</div>
+    <h2 class="sec-h2">Three steps. Five days.</h2>
+    <p class="sec-sub">No intake forms. No lengthy onboarding. Send us your business name and we handle the rest.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-title">You book the audit</div>
+        <div class="step-body">Email us your business name and city. We confirm within one business day and get to work. No calls required to start.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-title">We build your report</div>
+        <div class="step-body">We analyze your public reviews, map 3–5 local competitors, and score your booking path. All public sources — no account access needed.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-title">You get the debrief</div>
+        <div class="step-body">Your private boardroom report lands in your inbox. A 45-minute call walks you through every finding and the 30-day plan.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-texture"></div>
+  <div class="pricing-inner">
+    <div>
+      <div class="pricing-eyebrow">Pricing</div>
+      <h2 class="pricing-h2">One audit. One flat rate. No retainer required.</h2>
+      <p class="pricing-sub">A small local business does not need another vague marketing retainer. It needs the visible leaks ranked by what to fix first. One report. One price. No ongoing commitment.</p>
+    </div>
+    <div>
+      <div class="pricing-card">
+        <div class="pricing-intro">Introductory rate</div>
+        <div class="pricing-num">$297</div>
+        <div class="pricing-period">one-time &nbsp;·&nbsp; delivered in 5 business days</div>
+        <ul class="pricing-items">
+          <li><span>✓</span><span>Full boardroom dashboard report</span></li>
+          <li><span>✓</span><span>4-pillar scored position snapshot</span></li>
+          <li><span>✓</span><span>Revenue leak map across 5 funnel stages</span></li>
+          <li><span>✓</span><span>3–5 competitor analysis &amp; positioning map</span></li>
+          <li><span>✓</span><span>Ranked fixes by urgency and likely business impact</span></li>
+          <li><span>✓</span><span>30-day action plan</span></li>
+          <li><span>✓</span><span>45-minute debrief call</span></li>
+        </ul>
+        <a href="/contact/?subject=Audit%20Request%20%E2%80%94%20%24297" class="pricing-cta">Get your audit</a>
+        <div class="pricing-note">Email seth@rlaudits.com to get started</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-brand">
+    <div class="footer-gem"></div>
+    <span class="footer-name">RL Audits</span>
+  </div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/app-store-growth-brief/">App Store Growth Brief</a>
+    <a href="/it-ops-audit/">IT Ops Audit</a>
+    <a href="/contact/">seth@rlaudits.com</a>
+  </div>
+</footer>
+
+</body>
+</html>

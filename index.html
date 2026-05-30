@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RL Audits — Growth, Reputation, and Operations Audits</title>
+<meta name="description" content="Private audit reports for growth, reputation, and operations. RL Audits turns evidence into ranked fix plans your team can act on in 30 days.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0E1F3A; --navy-deep: #091428;
+    --gold: #B68A3E; --gold-soft: #D4B074;
+    --paper: #FBFAF6; --cream: #F7F4ED; --rule: #DCD6C6;
+    --ink: #0E1F3A; --ink2: #3C4A63; --ink3: #7B8597;
+    --good: #3F7A4B; --warn: #A95E2B;
+    --sans: "Manrope", -apple-system, sans-serif;
+    --serif: "Source Serif 4", Georgia, serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); }
+  a { color: inherit; text-decoration: none; }
+
+  .site-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(14,31,58,.96); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 0 48px; min-height: 58px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 10px; }
+  .nav-gem { width: 18px; height: 18px; border: 1.5px solid var(--gold); transform: rotate(45deg); position: relative; flex-shrink: 0; }
+  .nav-gem::after { content: ''; position: absolute; inset: 4px; background: var(--gold); }
+  .nav-name { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.85); }
+  .nav-links { display: flex; align-items: center; gap: 22px; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.58); }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold-soft); }
+  .nav-cta { display: inline-flex; align-items: center; padding: 9px 18px; background: var(--gold); color: var(--navy); font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+  .nav-cta:hover { background: var(--gold-soft); }
+
+  .hero { background: var(--navy); color: #fff; padding: 148px 48px 84px; position: relative; overflow: hidden; min-height: 88vh; display: flex; align-items: center; }
+  .hero-texture { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px); background-size: 48px 48px; opacity: 0.04; }
+  .hero-inner { position: relative; max-width: 1120px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 430px; gap: 64px; align-items: center; }
+  .hero-eyebrow, .sec-eyebrow, .pricing-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 18px; }
+  .hero-h1 { font-family: var(--serif); font-size: clamp(42px, 6vw, 68px); line-height: 1.02; font-weight: 500; letter-spacing: -0.03em; margin-bottom: 24px; max-width: 760px; }
+  .hero-h1 em { font-style: normal; color: var(--gold-soft); }
+  .hero-sub { font-size: 17px; line-height: 1.65; color: rgba(255,255,255,0.74); margin-bottom: 36px; max-width: 650px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .hero-cta, .hero-cta-secondary { display: inline-flex; align-items: center; padding: 15px 24px; font-size: 13px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; transition: background .15s, transform .15s; }
+  .hero-cta { background: var(--gold); color: var(--navy); }
+  .hero-cta-secondary { border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.82); }
+  .hero-cta:hover, .hero-cta-secondary:hover { transform: translateY(-1px); }
+  .hero-cta:hover { background: var(--gold-soft); }
+  .hero-cta-note { margin-top: 14px; font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.38); letter-spacing: .12em; text-transform: uppercase; }
+
+  .brief-card { background: var(--paper); border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 32px 80px rgba(0,0,0,0.4); overflow: hidden; }
+  .brief-head { background: var(--navy-deep); padding: 22px 24px; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .brief-label { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 8px; }
+  .brief-title { font-family: var(--serif); font-size: 28px; line-height: 1.1; color: #fff; }
+  .brief-body { padding: 22px; color: var(--ink); }
+  .brief-score { display: grid; grid-template-columns: 92px 1fr; gap: 18px; align-items: center; padding-bottom: 18px; border-bottom: 1px solid var(--rule); margin-bottom: 18px; }
+  .score-num { font-family: var(--serif); font-size: 66px; color: var(--gold); line-height: .9; }
+  .score-copy { font-size: 13px; line-height: 1.5; color: var(--ink2); }
+  .finding { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--rule); }
+  .finding:last-child { border-bottom: 0; }
+  .finding-num { width: 26px; height: 26px; border-radius: 50%; background: var(--navy); color: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 9px; font-weight: 800; }
+  .finding-title { font-weight: 800; font-size: 13px; }
+  .finding-sub { font-size: 12px; color: var(--ink2); margin-top: 2px; }
+  .finding-tag { font-family: var(--mono); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: var(--good); white-space: nowrap; }
+  .brief-card { transition: box-shadow .25s ease; }
+  .brief-label, .brief-title, .score-num, .score-copy, .finding-title, .finding-sub, .finding-tag { transition: opacity .28s ease; }
+  .brief-card.is-changing .brief-label,
+  .brief-card.is-changing .brief-title,
+  .brief-card.is-changing .score-num,
+  .brief-card.is-changing .score-copy,
+  .brief-card.is-changing .finding-title,
+  .brief-card.is-changing .finding-sub,
+  .brief-card.is-changing .finding-tag { opacity: 0; }
+  .brief-dots { display: flex; justify-content: center; gap: 8px; padding: 0 0 18px; }
+  .brief-dot { width: 22px; height: 22px; border: 0; background: transparent; opacity: .7; cursor: pointer; display: grid; place-items: center; padding: 0; }
+  .brief-dot::before { content: ''; width: 7px; height: 7px; border-radius: 999px; border: 1px solid var(--gold); background: transparent; transition: background .28s ease, opacity .28s ease, transform .18s ease; }
+  .brief-dot:hover::before, .brief-dot:focus-visible::before { transform: scale(1.25); }
+  .brief-dot:focus-visible { outline: 1px solid var(--gold-soft); outline-offset: 2px; }
+  .brief-dot.is-active { opacity: 1; }
+  .brief-dot.is-active::before { background: var(--gold); }
+  @media (prefers-reduced-motion: reduce) { .brief-label, .brief-title, .score-num, .score-copy, .finding-title, .finding-sub, .finding-tag, .brief-dot::before { transition: none; } }
+
+  .stats-strip { background: var(--navy-deep); border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06); display: grid; grid-template-columns: repeat(3,1fr); }
+  .stat-cell { padding: 30px 32px; border-right: 1px solid rgba(255,255,255,.08); }
+  .stat-cell:last-child { border-right: 0; }
+  .stat-val { font-family: var(--serif); font-size: 38px; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+  .stat-lbl { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+
+  .section { padding: 96px 48px; }
+  .cream { background: var(--cream); }
+  .paper { background: var(--paper); }
+  .sec-inner { max-width: 1120px; margin: 0 auto; }
+  .sec-eyebrow { color: var(--gold); margin-bottom: 12px; }
+  .sec-h2 { font-family: var(--serif); font-size: clamp(34px, 4vw, 48px); line-height: 1.08; font-weight: 500; letter-spacing: -.02em; margin-bottom: 14px; }
+  .sec-sub { font-size: 15px; color: var(--ink2); line-height: 1.65; max-width: 700px; margin-bottom: 46px; }
+  .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+  .service-card { background: #fff; border: 1px solid var(--rule); border-top: 4px solid var(--gold); padding: 28px 26px; display: flex; flex-direction: column; min-height: 360px; }
+  .service-num { font-family: var(--mono); font-size: 10px; color: var(--gold); letter-spacing: .16em; text-transform: uppercase; margin-bottom: 14px; }
+  .service-title { font-size: 20px; font-weight: 800; margin-bottom: 10px; color: var(--ink); }
+  .service-for { font-family: var(--mono); font-size: 9px; letter-spacing: .13em; text-transform: uppercase; color: var(--ink3); margin-bottom: 15px; }
+  .service-body { font-size: 14px; line-height: 1.62; color: var(--ink2); margin-bottom: 22px; }
+  .service-list { list-style: none; margin-bottom: 24px; }
+  .service-list li { display: grid; grid-template-columns: 15px 1fr; gap: 8px; font-size: 13px; color: var(--ink2); line-height: 1.4; margin-bottom: 9px; }
+  .service-list li span:first-child { color: var(--gold); }
+  .service-cta { margin-top: auto; display: inline-flex; width: fit-content; padding: 11px 16px; background: var(--navy); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+  .service-cta:hover { background: var(--navy-deep); }
+
+  .process-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+  .step-card { background: #fff; border: 1px solid var(--rule); padding: 30px 28px; }
+  .step-num { font-family: var(--serif); font-size: 58px; color: var(--rule); line-height: 1; margin-bottom: 16px; }
+  .step-title { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+  .step-body { font-size: 13.5px; color: var(--ink2); line-height: 1.6; }
+
+  .pricing-section { padding: 96px 48px; background: var(--navy); color: #fff; position: relative; overflow: hidden; }
+  .pricing-texture { position: absolute; inset: 0; background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px); background-size: 48px 48px; opacity: .03; pointer-events: none; }
+  .pricing-inner { position: relative; max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; }
+  .pricing-h2 { font-family: var(--serif); font-size: clamp(34px, 4vw, 46px); line-height: 1.1; font-weight: 500; margin-bottom: 16px; }
+  .pricing-sub { font-size: 15px; color: rgba(255,255,255,.68); line-height: 1.65; max-width: 620px; }
+  .contact-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); padding: 34px 32px; }
+  .contact-title { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+  .contact-copy { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.72); margin-bottom: 22px; }
+  .pricing-cta { display: block; text-align: center; padding: 14px 24px; background: var(--gold); color: var(--navy); font-size: 13.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+  .pricing-note { font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.28); text-align: center; margin-top: 10px; }
+
+  .site-footer { background: var(--navy-deep); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,.06); gap: 24px; }
+  .footer-brand { display: flex; align-items: center; gap: 8px; }
+  .footer-gem { width: 12px; height: 12px; border: 1px solid var(--gold); transform: rotate(45deg); position: relative; flex-shrink: 0; }
+  .footer-gem::after { content: ''; position: absolute; inset: 3px; background: var(--gold); }
+  .footer-name { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+  .footer-links { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: flex-end; font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+  .footer-links a { color: rgba(255,255,255,.4); }
+  .footer-links a:hover { color: var(--gold-soft); }
+
+  @media (max-width: 980px) {
+    .site-nav { position: static; padding: 16px 24px; flex-direction: column; align-items: flex-start; }
+    .nav-links { flex-wrap: wrap; gap: 14px; }
+    .hero-inner, .pricing-inner { grid-template-columns: 1fr; }
+    .services-grid, .process-grid, .stats-strip { grid-template-columns: 1fr; }
+    .brief-card { max-width: 520px; }
+    .hero, .section, .pricing-section, .site-footer { padding-left: 24px; padding-right: 24px; }
+    .hero { padding-top: 72px; min-height: auto; }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="/" class="nav-brand">
+    <div class="nav-gem"></div>
+    <span class="nav-name">RL Audits</span>
+  </a>
+  <div class="nav-links">
+    <a class="active" href="/">Home</a>
+    <a href="/revenue-audit/">Revenue Audit</a>
+    <a href="/it-ops-audit/">IT Ops Audit</a>
+    <a href="/app-store-growth-brief/">App Store Brief</a>
+  </div>
+  <a href="/contact/?subject=RL%20Audits%20Inquiry" class="nav-cta">Contact</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-texture"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Private audit reports</div>
+      <h1 class="hero-h1">Find the leaks in <em>growth, reputation, and operations.</em></h1>
+      <p class="hero-sub">RL Audits turns public evidence, customer feedback, app listings, and sanitized support data into ranked fix plans your team can act on in 30 days.</p>
+      <div class="hero-actions">
+        <a href="#services" class="hero-cta">View audit services</a>
+        <a href="/contact/?subject=RL%20Audits%20Inquiry" class="hero-cta-secondary">Start a conversation</a>
+      </div>
+      <div class="hero-cta-note">Evidence first · Ranked fixes · Practical 30-day plans</div>
+    </div>
+    <div class="brief-card" id="rotating-brief-card" aria-label="RL Audits rotating sample briefing card">
+      <div class="brief-head">
+        <div class="brief-label" id="brief-label">Private briefing · Local business</div>
+        <div class="brief-title" id="brief-title">Good reputation. Weak booking path. Fixable revenue leaks.</div>
+      </div>
+      <div class="brief-body">
+        <div class="brief-score">
+          <div class="score-num" id="brief-score">74</div>
+          <div class="score-copy" id="brief-score-copy">Composite audit score across public trust signals, conversion friction, and fix readiness.</div>
+        </div>
+        <div class="finding">
+          <div class="finding-num">01</div>
+          <div><div class="finding-title" id="brief-finding-1-title">Reviews show strong trust</div><div class="finding-sub" id="brief-finding-1-sub">But the website does not turn that trust into action.</div></div>
+          <div class="finding-tag" id="brief-finding-1-tag">Growth</div>
+        </div>
+        <div class="finding">
+          <div class="finding-num">02</div>
+          <div><div class="finding-title" id="brief-finding-2-title">Competitors answer faster</div><div class="finding-sub" id="brief-finding-2-sub">Visible response and booking friction costs calls.</div></div>
+          <div class="finding-tag" id="brief-finding-2-tag">Conversion</div>
+        </div>
+        <div class="finding">
+          <div class="finding-num">03</div>
+          <div><div class="finding-title" id="brief-finding-3-title">30-day fix plan included</div><div class="finding-sub" id="brief-finding-3-sub">Ranked changes before new ad spend.</div></div>
+          <div class="finding-tag" id="brief-finding-3-tag">Action</div>
+        </div>
+      </div>
+      <div class="brief-dots" aria-label="Choose sample briefing">
+        <button class="brief-dot is-active" type="button" data-brief-index="0" aria-label="Show local business revenue example" aria-current="true"></button>
+        <button class="brief-dot" type="button" data-brief-index="1" aria-label="Show IT operations example" aria-current="false"></button>
+        <button class="brief-dot" type="button" data-brief-index="2" aria-label="Show app store growth example" aria-current="false"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="stat-cell"><div class="stat-val">3</div><div class="stat-lbl">Audit product lanes</div></div>
+  <div class="stat-cell"><div class="stat-val">30d</div><div class="stat-lbl">Action plans included</div></div>
+  <div class="stat-cell"><div class="stat-val">0</div><div class="stat-lbl">Credential access required by default</div></div>
+</div>
+
+<section class="section cream" id="services">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">Audit services</div>
+    <h2 class="sec-h2">Pick the audit that matches the leak.</h2>
+    <p class="sec-sub">Each product has a narrow input, a clear deliverable, and a practical fix plan. No giant discovery process. No consulting fog. We are not building a monument to paperwork.</p>
+    <div class="services-grid">
+      <article class="service-card">
+        <div class="service-num">01 · Revenue</div>
+        <h3 class="service-title">Revenue Audit</h3>
+        <div class="service-for">For med spas, clinics, and local businesses</div>
+        <p class="service-body">Find the review, reputation, website, booking, and local competitor gaps that are costing trust and revenue.</p>
+        <ul class="service-list">
+          <li><span>✓</span><span>Google review and sentiment signals</span></li>
+          <li><span>✓</span><span>Competitor positioning map</span></li>
+          <li><span>✓</span><span>Booking path and trust friction</span></li>
+          <li><span>✓</span><span>Ranked 30-day fix plan</span></li>
+        </ul>
+        <a class="service-cta" href="/revenue-audit/">View Revenue Audit</a>
+      </article>
+
+      <article class="service-card">
+        <div class="service-num">02 · Operations</div>
+        <h3 class="service-title">IT Ops Audit</h3>
+        <div class="service-for">For small IT teams, MSPs, clinics, and growing businesses</div>
+        <p class="service-body">Turn messy tickets, tech notes, and repeat support issues into clean KB articles, SOPs, and an execution plan.</p>
+        <ul class="service-list">
+          <li><span>✓</span><span>Recurring issue summary</span></li>
+          <li><span>✓</span><span>5-10 KB recommendations</span></li>
+          <li><span>✓</span><span>3 cleaned-up SOPs/runbooks</span></li>
+          <li><span>✓</span><span>Documentation gap list</span></li>
+        </ul>
+        <a class="service-cta" href="/it-ops-audit/">View IT Ops Audit</a>
+      </article>
+
+      <article class="service-card">
+        <div class="service-num">03 · App stores</div>
+        <h3 class="service-title">App Store Growth Brief</h3>
+        <div class="service-for">For agencies and small app teams</div>
+        <p class="service-body">Use public App Store and Google Play evidence to improve listing copy, review replies, positioning, and release-note priorities.</p>
+        <ul class="service-list">
+          <li><span>✓</span><span>Store listing fixes</span></li>
+          <li><span>✓</span><span>Review theme analysis</span></li>
+          <li><span>✓</span><span>Competitor gaps</span></li>
+          <li><span>✓</span><span>30-day update sequence</span></li>
+        </ul>
+        <a class="service-cta" href="/app-store-growth-brief/">View App Store Brief</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section paper">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">How RL Audits works</div>
+    <h2 class="sec-h2">Evidence in. Ranked fixes out.</h2>
+    <p class="sec-sub">The inputs change by audit type. The method stays the same: inspect the evidence, find the repeatable patterns, and turn them into a fix plan.</p>
+    <div class="process-grid">
+      <div class="step-card"><div class="step-num">01</div><div class="step-title">Send the target</div><div class="step-body">Business name, app URL, public profiles, or sanitized support material. No credential access required by default.</div></div>
+      <div class="step-card"><div class="step-num">02</div><div class="step-title">We build the report</div><div class="step-body">Reviews, competitors, listing signals, tickets, and notes are converted into patterns, gaps, and ranked opportunities.</div></div>
+      <div class="step-card"><div class="step-num">03</div><div class="step-title">You get the plan</div><div class="step-body">A private report with prioritized fixes, clear boundaries, and a 30-day action sequence your team can execute.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing-section">
+  <div class="pricing-texture"></div>
+  <div class="pricing-inner">
+    <div>
+      <div class="pricing-eyebrow">Start here</div>
+      <h2 class="pricing-h2">Not sure which audit fits? Send the situation.</h2>
+      <p class="pricing-sub">A short email is enough. Tell us what is messy: reviews, website conversion, app listings, support tickets, or internal documentation. We will point you to the right audit or tell you it is not a fit. Both are useful.</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-title">Contact RL Audits</div>
+      <p class="contact-copy">Include the business/app name, city or market, and the main problem you want diagnosed. Keep it plain. Fancy language is how weak ideas hide.</p>
+      <a href="/contact/?subject=RL%20Audits%20Inquiry" class="pricing-cta">Email seth@rlaudits.com</a>
+      <div class="pricing-note">Private reports · Practical fixes · Clear boundaries</div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-brand"><div class="footer-gem"></div><span class="footer-name">RL Audits</span></div>
+  <div class="footer-links">
+    <a href="/revenue-audit/">Revenue Audit</a>
+    <a href="/it-ops-audit/">IT Ops Audit</a>
+    <a href="/app-store-growth-brief/">App Store Brief</a>
+    <a href="/contact/">seth@rlaudits.com</a>
+  </div>
+</footer>
+<script>
+(function () {
+  const examples = [
+    {
+      label: 'Private briefing · Local business',
+      title: 'Good reputation. Weak booking path. Fixable revenue leaks.',
+      score: '74',
+      scoreCopy: 'Composite audit score across public trust signals, conversion friction, and fix readiness.',
+      findings: [
+        ['Reviews show strong trust', 'But the website does not turn that trust into action.', 'Growth'],
+        ['Competitors answer faster', 'Visible response and booking friction costs calls.', 'Conversion'],
+        ['30-day fix plan included', 'Ranked changes before new ad spend.', 'Action']
+      ]
+    },
+    {
+      label: 'Private briefing · IT team',
+      title: 'Repeat tickets. Missing runbooks. Cleaner operations ahead.',
+      score: '68',
+      scoreCopy: 'Composite audit score across repeat issues, documentation gaps, and cleanup priority.',
+      findings: [
+        ['Repeat issues are visible', 'Technicians are solving the same problems twice.', 'Ops'],
+        ['KB gaps slow resolution', 'Documentation needs owner, steps, and verification.', 'Docs'],
+        ['First fixes are obvious', 'Start with the highest-repeat workflows.', 'Action']
+      ]
+    },
+    {
+      label: 'Private briefing · App listing',
+      title: 'Strong product. Weak store page. Better screenshots and proof.',
+      score: '71',
+      scoreCopy: 'Composite audit score across listing clarity, review friction, and public proof.',
+      findings: [
+        ['Screenshots bury the value', 'Users need the promise faster.', 'Listing'],
+        ['Reviews reveal objections', 'Common complaints are not answered in the page.', 'Trust'],
+        ['Fix order included', 'Copy, visuals, proof, then experiments.', 'Action']
+      ]
+    }
+  ];
+
+  const card = document.getElementById('rotating-brief-card');
+  if (!card) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const fields = {
+    label: document.getElementById('brief-label'),
+    title: document.getElementById('brief-title'),
+    score: document.getElementById('brief-score'),
+    scoreCopy: document.getElementById('brief-score-copy'),
+    dots: Array.from(document.querySelectorAll('.brief-dot'))
+  };
+  const findingFields = [1, 2, 3].map((n) => ({
+    title: document.getElementById(`brief-finding-${n}-title`),
+    sub: document.getElementById(`brief-finding-${n}-sub`),
+    tag: document.getElementById(`brief-finding-${n}-tag`)
+  }));
+
+  let index = 0;
+  let paused = false;
+
+  function applyExample(nextIndex) {
+    const example = examples[nextIndex];
+    fields.label.textContent = example.label;
+    fields.title.textContent = example.title;
+    fields.score.textContent = example.score;
+    fields.scoreCopy.textContent = example.scoreCopy;
+    example.findings.forEach((finding, i) => {
+      findingFields[i].title.textContent = finding[0];
+      findingFields[i].sub.textContent = finding[1];
+      findingFields[i].tag.textContent = finding[2];
+    });
+    fields.dots.forEach((dot, i) => {
+      const active = i === nextIndex;
+      dot.classList.toggle('is-active', active);
+      dot.setAttribute('aria-current', active ? 'true' : 'false');
+    });
+  }
+
+  function render(nextIndex, instant) {
+    if (nextIndex === index && !instant) return;
+    index = nextIndex;
+    if (instant || reduceMotion) {
+      applyExample(nextIndex);
+      return;
+    }
+    card.classList.add('is-changing');
+    window.setTimeout(() => {
+      applyExample(nextIndex);
+      window.requestAnimationFrame(() => card.classList.remove('is-changing'));
+    }, 285);
+  }
+
+  card.addEventListener('mouseenter', () => { paused = true; });
+  card.addEventListener('mouseleave', () => { paused = false; });
+  card.addEventListener('focusin', () => { paused = true; });
+  card.addEventListener('focusout', () => { paused = false; });
+
+  fields.dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const nextIndex = Number(dot.dataset.briefIndex);
+      if (Number.isNaN(nextIndex)) return;
+      paused = true;
+      render(nextIndex);
+    });
+  });
+
+  window.setInterval(() => {
+    if (paused || document.hidden) return;
+    render((index + 1) % examples.length);
+  }, 6200);
+}());
+</script>
+</body>
+</html>
