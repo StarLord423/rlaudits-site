@@ -83,6 +83,11 @@
   .card-label { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
   .card-title { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
   .card-body { font-size: 13.5px; color: var(--ink2); line-height: 1.6; }
+  .sample-callout { margin-top: 26px; background: #fff; border: 1px solid var(--rule); border-left: 4px solid var(--gold); padding: 24px 26px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+  .sample-callout h3 { font-size: 18px; margin-bottom: 7px; }
+  .sample-callout p { font-size: 13.5px; color: var(--ink2); line-height: 1.6; max-width: 660px; }
+  .sample-link { display: inline-flex; align-items: center; padding: 13px 20px; background: var(--navy); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+  .sample-link:hover { background: var(--navy-deep); }
   .step-num { font-family: var(--serif); font-size: 58px; color: var(--rule); line-height: 1; margin-bottom: 16px; }
 
   .pricing-section { padding: 96px 48px; background: var(--navy); color: #fff; position: relative; overflow: hidden; }
@@ -147,6 +152,7 @@
     .fix { grid-template-columns: 34px 1fr; }
     .fix-tag { grid-column: 2; }
     .site-footer { flex-direction: column; align-items: flex-start; }
+    .sample-callout { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
@@ -171,6 +177,7 @@
       <p class="hero-sub">RLAudits reviews sanitized support tickets, repeat issue lists, and rough internal notes, then delivers a practical IT cleanup plan your team can use in 30 days.</p>
       <div class="hero-actions">
         <a class="btn" href="#intake">Request IT Ops Audit — $497</a>
+        <a class="btn-secondary" href="/it-ops-audit/sample.html">View sample deliverable</a>
         <a class="btn-secondary" href="#deliverables">See deliverables</a>
       </div>
       <div class="hero-note">Sanitized data only · No credentials required · 30-day cleanup plan</div>
@@ -212,6 +219,13 @@
       <div class="card"><div class="card-label">KB roadmap</div><div class="card-title">5-10 article recommendations</div><div class="card-body">A ranked knowledge-base roadmap based on repeat pain, fix variance, and technician time lost — not alphabetical busywork.</div></div>
       <div class="card"><div class="card-label">Worked article</div><div class="card-title">One worked KB article</div><div class="card-body">One priority article written out with audience, scope, owner fields, ordered steps, verification, escalation triggers, and handoff notes.</div></div>
       <div class="card"><div class="card-label">30 days</div><div class="card-title">30-day action plan</div><div class="card-body">A week-by-week plan for assigning owners, publishing the first KB wave, reducing handoff waste, and closing the documentation loop.</div></div>
+    </div>
+    <div class="sample-callout">
+      <div>
+        <h3>Want to see the report shape first?</h3>
+        <p>Review the fictional Example Clinic IT Ops Audit sample. It shows the executive summary, findings, prioritized fixes, 30-day plan, and redaction boundaries without using real client data.</p>
+      </div>
+      <a class="sample-link" href="/it-ops-audit/sample.html">View sample deliverable</a>
     </div>
   </div>
 </section>
