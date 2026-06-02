@@ -1,21 +1,22 @@
-# rlaudits-site Tasks
+# RL Audits Site Tasks
 
 ## Critical
 
-- Keep this file current when project priorities change.
+- Keep public site files free of private internal paths, secrets, and workflow plumbing.
 
 ## High
 
-- None recorded yet.
+- Keep public pages aligned with approved RL Audits positioning and branding.
+- Verify `index.html`, `404.html`, `robots.txt`, `sitemap.xml`, and shared assets after public-site changes.
 
 ## Medium
 
-- None recorded yet.
+- Keep this repo aligned with `/root/projects/DELIVERY_MAP.md` and the canonical business repo when relevant.
 
 ## Low
 
-- None recorded yet.
+- Archive stale one-off review notes instead of letting them pile up at root.
 
 ## Waiting on Squatch
 
-- None recorded yet.
+- Approval before public deploys, pushes, pricing/offer changes, or client-facing changes.

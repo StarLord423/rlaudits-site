@@ -1,9 +1,11 @@
-# rlaudits-site Decisions
+# RL Audits Site Decisions
 
 ## Active decisions
 
-- Project-control files are the source of truth for project state.
+- This repo is the public RL Audits site repository.
+- Keep private business operations and Hermes plumbing out of this repo.
+- Human approval required before push/deploy and public offer changes.
 
 ## Superseded decisions
 
-- None recorded yet.
+- None recorded here yet.
