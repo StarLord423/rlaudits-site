@@ -3,8 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact RLAudits</title>
-<meta name="description" content="Contact RLAudits for a private audit report across growth, reputation, app stores, or IT operations.">
+<title>Contact RL Audits</title>
+<meta name="description" content="Contact RL Audits for a private audit report across growth, reputation, app stores, or IT operations.">
+<link rel="canonical" href="https://rlaudits.com/contact/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact RL Audits">
+<meta property="og:description" content="Contact RL Audits for a private audit report across growth, reputation, app stores, or IT operations.">
+<meta property="og:url" content="https://rlaudits.com/contact/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Contact RL Audits">
+<meta name="twitter:description" content="Contact RL Audits for a private audit report across growth, reputation, app stores, or IT operations.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
@@ -49,8 +57,30 @@
   .footer-links a:hover { color:var(--gold-soft); }
   @media (max-width:900px) { .site-nav { padding:16px 24px; flex-direction:column; align-items:flex-start; } .nav-links { flex-wrap:wrap; gap:14px; } .hero { padding:56px 24px; } .hero-inner { grid-template-columns:1fr; } .site-footer { padding:24px; flex-direction:column; align-items:flex-start; } }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": "https://rlaudits.com/contact/#webpage",
+      "name": "Contact RL Audits",
+      "url": "https://rlaudits.com/contact/",
+      "description": "Contact RL Audits about revenue audits, IT operations audits, and app store growth briefs."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rlaudits.com/contact/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rlaudits.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://rlaudits.com/contact/" }
+      ]
+    }
+  ]
+}
+</script>
 </head>
-<body>
+<body data-track-service="Contact">
 <nav class="site-nav">
   <a href="/" class="nav-brand"><div class="nav-gem"></div><span class="nav-name">RLAudits</span></a>
   <div class="nav-links">
@@ -73,7 +103,7 @@
       <div class="panel-title">Email RLAudits</div>
       <p class="panel-copy">Include the business, app, or support mess you want diagnosed. Plain language is preferred. Vague consultant fog will be quietly ignored.</p>
       <div id="form-alert" class="form-alert" role="alert">The form did not go through. Check the required fields and try again, or email seth@rlaudits.com directly.</div>
-      <form action="https://api.rlaudits.com/api/contact" method="POST">
+      <form data-track-form="Contact form" action="https://api.rlaudits.com/api/contact" method="POST">
         <label class="hp-field" aria-hidden="true" tabindex="-1">Website
           <input type="text" name="website" autocomplete="off" tabindex="-1">
         </label>
@@ -119,5 +149,6 @@
   if (subject) document.getElementById('subject').value = subject;
   if (params.has('error')) document.getElementById('form-alert').classList.add('is-visible');
 </script>
+<script defer src="/assets/rlaudits-tracking.js"></script>
 </body>
 </html>

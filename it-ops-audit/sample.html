@@ -1,394 +1,357 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Example Clinic IT Ops Audit Sample — RLAudits</title>
-<meta name="description" content="A sanitized sample IT Ops Audit deliverable showing executive summary, findings, prioritized fixes, 30-day plan, and runbook recommendations.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --navy: #0E1F3A; --navy-deep: #091428;
-    --gold: #B68A3E; --gold-soft: #D4B074;
-    --paper: #FBFAF6; --cream: #F7F4ED; --rule: #DCD6C6;
-    --ink: #0E1F3A; --ink2: #3C4A63; --ink3: #7B8597;
-    --good: #3F7A4B; --warn: #A65E22; --bad: #8D2E2E;
-    --sans: "Manrope", -apple-system, sans-serif;
-    --serif: "Source Serif 4", Georgia, serif;
-    --mono: "JetBrains Mono", monospace;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sample IT Ops Audit Final Report — RLAudits</title>
+  <meta name="description" content="A polished, sanitized sample IT Ops Audit final report from RLAudits with scorecards, runbook review, escalation workflow review, repeat issue patterns, KB roadmap, one worked KB article, and a 30-day plan.">
+  <link rel="canonical" href="https://rlaudits.com/it-ops-audit/sample.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Sample IT Ops Audit Final Report — RLAudits">
+  <meta property="og:description" content="See a client-ready sample IT Ops Audit deliverable with safe-data boundaries, practical documentation findings, and a 30-day cleanup plan.">
+  <meta property="og:url" content="https://rlaudits.com/it-ops-audit/sample.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Sample IT Ops Audit Final Report — RLAudits">
+  <meta name="twitter:description" content="A sanitized sample of the RLAudits IT Ops Audit final report format.">
+  <link rel="stylesheet" href="/assets/report-design-system.css">
+  <style>
+    .sample-nav { position: sticky; top: 0; z-index: 20; display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 14px 28px; background: rgba(9,20,40,.96); border-bottom: 1px solid rgba(212,176,116,.25); color: #fbfaf6; }
+    .sample-nav a { color: rgba(251,250,246,.76); text-decoration: none; font: 700 .72rem var(--rl-mono); letter-spacing: .12em; text-transform: uppercase; }
+    .sample-nav a:hover { color: var(--rl-gold-soft); }
+    .sample-brand { display: inline-flex; align-items: center; gap: 10px; color: #fbfaf6; }
+    .sample-brand__mark { width: 15px; height: 15px; border: 1.5px solid var(--rl-gold); transform: rotate(45deg); position: relative; }
+    .sample-brand__mark::after { content: ''; position: absolute; inset: 3px; background: var(--rl-gold); }
+    .sample-nav__links { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: flex-end; }
+    .sample-nav__cta { color: var(--rl-navy) !important; background: var(--rl-gold); padding: 9px 14px; }
+    .sample-report-note { max-width: 960px; margin: 24px auto 0; padding: 0 16px; }
+    .sample-footer { background: var(--rl-navy-deep); color: rgba(251,250,246,.62); padding: 26px; text-align: center; font: 700 .72rem var(--rl-mono); letter-spacing: .12em; text-transform: uppercase; }
+    .report-title { max-width: 760px; }
+    .report-subtitle { max-width: 680px; }
+    .report-page--compact { min-height: auto; }
+    .scorecard__score small { font-size: 1rem; color: var(--rl-muted); }
+    .kb-article { background: #fff; border: 1px solid var(--rl-rule); padding: 18px; }
+    .kb-article h3 { font-size: 1.2rem; margin-top: 18px; }
+    .kb-article h3:first-child { margin-top: 0; }
+    .kb-article ul, .kb-article ol { margin: 10px 0 0 22px; }
+    .kb-article li { margin-bottom: 7px; }
+    .two-column-list { columns: 2; column-gap: 28px; }
+    @media (max-width: 760px) { .sample-nav { align-items: flex-start; flex-direction: column; } .sample-nav__links { justify-content: flex-start; } .two-column-list { columns: 1; } }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Report",
+    "name": "Sample IT Ops Audit Final Report",
+    "url": "https://rlaudits.com/it-ops-audit/sample.html",
+    "publisher": { "@type": "Organization", "name": "RLAudits", "url": "https://rlaudits.com/" },
+    "about": "Sanitized sample IT operations documentation audit deliverable",
+    "isAccessibleForFree": true
   }
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--sans); background: var(--paper); color: var(--ink); }
-  a { color: inherit; text-decoration: none; }
-  p { line-height: 1.65; }
-
-  .site-nav { position: sticky; top: 0; z-index: 100; background: rgba(14,31,58,.96); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,.08); padding: 0 48px; min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-  .nav-brand { display: flex; align-items: center; gap: 10px; }
-  .nav-gem { width: 18px; height: 18px; border: 1.5px solid var(--gold); transform: rotate(45deg); position: relative; flex-shrink: 0; }
-  .nav-gem::after { content: ''; position: absolute; inset: 4px; background: var(--gold); }
-  .nav-name { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.85); }
-  .nav-links { display: flex; align-items: center; gap: 22px; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.58); }
-  .nav-links a:hover, .nav-links a.active { color: var(--gold-soft); }
-  .nav-cta { display: inline-flex; align-items: center; padding: 9px 18px; background: var(--gold); color: var(--navy); font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
-
-  .hero { background: var(--navy); color: #fff; padding: 92px 48px 76px; position: relative; overflow: hidden; }
-  .hero-texture { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px); background-size: 48px 48px; opacity: .04; }
-  .hero-inner { position: relative; max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 360px; gap: 56px; align-items: end; }
-  .eyebrow, .sec-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 18px; }
-  .hero-h1 { font-family: var(--serif); font-size: clamp(40px, 6vw, 68px); line-height: 1.03; font-weight: 500; letter-spacing: -.03em; margin-bottom: 22px; }
-  .hero-sub { font-size: 17px; line-height: 1.65; color: rgba(255,255,255,.74); max-width: 720px; margin-bottom: 30px; }
-  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-  .btn, .btn-secondary { display: inline-flex; align-items: center; padding: 15px 24px; font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; transition: transform .15s, background .15s; }
-  .btn { background: var(--gold); color: var(--navy); }
-  .btn-secondary { border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.82); }
-  .btn:hover, .btn-secondary:hover { transform: translateY(-1px); }
-  .report-meta { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); padding: 24px; }
-  .meta-label { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 8px; }
-  .meta-title { font-family: var(--serif); font-size: 28px; line-height: 1.1; margin-bottom: 18px; }
-  .meta-list { list-style: none; display: grid; gap: 12px; }
-  .meta-list li { display: grid; gap: 3px; color: rgba(255,255,255,.78); font-size: 13px; line-height: 1.35; }
-  .meta-list strong { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.42); }
-
-  .stats-strip { background: var(--navy-deep); display: grid; grid-template-columns: repeat(4,1fr); }
-  .stat-cell { padding: 30px 32px; border-right: 1px solid rgba(255,255,255,.08); }
-  .stat-cell:last-child { border-right: 0; }
-  .stat-val { font-family: var(--serif); font-size: 38px; color: var(--gold); line-height: 1; margin-bottom: 6px; }
-  .stat-lbl { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45); }
-
-  .section { padding: 86px 48px; }
-  .cream { background: var(--cream); }
-  .paper { background: var(--paper); }
-  .navy-band { background: var(--navy); color: #fff; }
-  .sec-inner { max-width: 1120px; margin: 0 auto; }
-  .sec-eyebrow { color: var(--gold); }
-  .navy-band .sec-eyebrow { color: var(--gold-soft); }
-  .sec-h2 { font-family: var(--serif); font-size: clamp(34px,4vw,48px); line-height: 1.08; font-weight: 500; letter-spacing: -.02em; margin-bottom: 14px; }
-  .sec-sub { font-size: 15px; color: var(--ink2); line-height: 1.65; max-width: 760px; margin-bottom: 38px; }
-  .navy-band .sec-sub { color: rgba(255,255,255,.68); }
-  .grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
-  .grid.two { grid-template-columns: repeat(2,1fr); }
-  .card { background: #fff; border: 1px solid var(--rule); border-top: 4px solid var(--gold); padding: 28px 26px; }
-  .card-label { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-  .card-title { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
-  .card-body, .card li { font-size: 13.5px; color: var(--ink2); line-height: 1.6; }
-  .card ul { margin-left: 18px; display: grid; gap: 7px; }
-  .finding-card { display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: start; }
-  .priority { width: 42px; height: 42px; border-radius: 50%; background: var(--navy); color: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 800; font-size: 11px; }
-  .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
-  .tag { display: inline-flex; align-items: center; padding: 6px 8px; border: 1px solid var(--rule); background: var(--cream); color: var(--ink2); font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; }
-  .tag.high { color: var(--bad); }
-  .tag.medium { color: var(--warn); }
-  .tag.quick { color: var(--good); }
-
-  .summary-box { background: #fff; border: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 280px; }
-  .summary-copy { padding: 34px 32px; }
-  .summary-copy p { color: var(--ink2); font-size: 15px; margin-bottom: 16px; }
-  .score-box { background: var(--navy); color: #fff; padding: 34px 32px; display: grid; align-content: center; }
-  .score { font-family: var(--serif); font-size: 76px; color: var(--gold); line-height: .9; }
-  .score-label { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-top: 10px; }
-
-  .plan { display: grid; gap: 14px; }
-  .plan-row { display: grid; grid-template-columns: 130px 1fr 220px; gap: 18px; background: #fff; border: 1px solid var(--rule); padding: 18px; align-items: start; }
-  .week { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 800; }
-  .plan-row h3 { font-size: 16px; margin-bottom: 6px; }
-  .plan-row p { color: var(--ink2); font-size: 13.5px; }
-  .owner { font-family: var(--mono); font-size: 9px; letter-spacing: .11em; text-transform: uppercase; color: var(--ink3); }
-
-  .runbook { background: #fff; border: 1px solid var(--rule); overflow: hidden; }
-  .runbook-head { background: var(--navy-deep); color: #fff; padding: 22px 24px; }
-  .runbook-title { font-family: var(--serif); font-size: 28px; line-height: 1.1; margin-top: 6px; }
-  .runbook-body { padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-  .runbook-body h3 { font-size: 15px; margin-bottom: 8px; }
-  .runbook-body ul, .runbook-body ol { margin-left: 19px; color: var(--ink2); font-size: 13.5px; line-height: 1.58; }
-  .runbook-body li { margin-bottom: 7px; }
-
-  .notice { border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.04); padding: 24px; }
-  .notice p { color: rgba(255,255,255,.72); font-size: 14px; }
-  .cta-panel { background: #fff; border: 1px solid var(--rule); border-top: 4px solid var(--gold); padding: 34px 32px; display: flex; justify-content: space-between; align-items: center; gap: 28px; }
-  .cta-panel p { color: var(--ink2); margin-top: 8px; }
-  .cta-panel .btn-secondary { border-color: var(--rule); color: var(--ink); }
-
-  .site-footer { background: var(--navy-deep); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,.06); gap: 24px; }
-  .footer-brand { display: flex; align-items: center; gap: 8px; }
-  .footer-gem { width: 12px; height: 12px; border: 1px solid var(--gold); transform: rotate(45deg); position: relative; flex-shrink: 0; }
-  .footer-gem::after { content: ''; position: absolute; inset: 3px; background: var(--gold); }
-  .footer-name { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.5); }
-  .footer-links { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: flex-end; font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
-  .footer-links a { color: rgba(255,255,255,.4); }
-  .footer-links a:hover { color: var(--gold-soft); }
-
-  @media (max-width: 980px) {
-    .site-nav { position: static; padding: 16px 24px; flex-direction: column; align-items: flex-start; }
-    .nav-links { flex-wrap: wrap; gap: 14px; }
-    .hero-inner, .summary-box, .runbook-body, .cta-panel { grid-template-columns: 1fr; }
-    .grid, .grid.two, .stats-strip { grid-template-columns: 1fr; }
-    .plan-row { grid-template-columns: 1fr; }
-    .hero, .section, .site-footer { padding-left: 24px; padding-right: 24px; }
-    .site-footer, .cta-panel { flex-direction: column; align-items: flex-start; }
-  }
-</style>
+  </script>
 </head>
-<body>
-<nav class="site-nav">
-  <a href="/" class="nav-brand"><div class="nav-gem"></div><span class="nav-name">RLAudits</span></a>
-  <div class="nav-links">
-    <a href="/">Home</a>
-    <a href="/revenue-audit/">Revenue Audit</a>
-    <a class="active" href="/it-ops-audit/">IT Ops Audit</a>
-    <a href="/app-store-growth-brief/">App Store Brief</a>
+<body class="report-body">
+  <nav class="sample-nav" aria-label="Sample report navigation">
+    <a class="sample-brand" href="/"><span class="sample-brand__mark" aria-hidden="true"></span><span>RLAudits</span></a>
+    <div class="sample-nav__links">
+      <a href="/it-ops-audit/">IT Ops Audit</a>
+      <a href="#scorecard">Scorecard</a>
+      <a href="#kb-roadmap">KB roadmap</a>
+      <a href="#action-plan">30-day plan</a>
+      <a class="sample-nav__cta" href="/it-ops-audit/#intake">Start intake</a>
+    </div>
+  </nav>
+
+  <div class="sample-report-note">
+    <div class="review-banner"><strong>Sanitized public sample.</strong> Fictional organization, mock support patterns, and sample-only scores. No customer, patient, employee, credential, ticket, device, network, or private system data is used. Status: Needs Squatch review before customer use.</div>
   </div>
-  <a href="/it-ops-audit/#intake" class="nav-cta">Request audit</a>
-</nav>
 
-<header class="hero">
-  <div class="hero-texture"></div>
-  <div class="hero-inner">
-    <div>
-      <div class="eyebrow">Sanitized sample deliverable</div>
-      <h1 class="hero-h1">Example Clinic IT Ops Audit</h1>
-      <p class="hero-sub">This fictional sample shows the kind of lightweight final deliverable RLAudits prepares from sanitized support tickets, rough notes, repeat issue lists, and existing procedures.</p>
-      <div class="hero-actions">
-        <a class="btn" href="/it-ops-audit/#intake">Request your IT Ops Audit</a>
-        <a class="btn-secondary" href="#findings">Review sample findings</a>
+  <main class="report-shell">
+    <section class="report-page report-page--cover" aria-labelledby="cover-title">
+      <div>
+        <p class="report-kicker">IT Ops Audit / Final report sample</p>
+        <h1 id="cover-title" class="report-title">Example Clinic IT Operations Cleanup Audit</h1>
+        <p class="report-subtitle">A client-ready sample showing how RLAudits turns sanitized ticket themes, rough runbooks, escalation notes, and repeat issue patterns into a practical documentation cleanup plan.</p>
       </div>
-    </div>
-    <aside class="report-meta" aria-label="Sample report details">
-      <div class="meta-label">Demo report</div>
-      <div class="meta-title">Not a real client case study.</div>
-      <ul class="meta-list">
-        <li><strong>Organization</strong> Example Clinic, fictional small healthcare office</li>
-        <li><strong>Inputs</strong> Mock sanitized ticket themes, runbook snippets, and process notes</li>
-        <li><strong>Purpose</strong> Show report structure, tone, and actionability</li>
-      </ul>
-    </aside>
-  </div>
-</header>
-
-<div class="stats-strip" aria-label="Sample audit score summary">
-  <div class="stat-cell"><div class="stat-val">68</div><div class="stat-lbl">Documentation score</div></div>
-  <div class="stat-cell"><div class="stat-val">4</div><div class="stat-lbl">High-priority fixes</div></div>
-  <div class="stat-cell"><div class="stat-val">7</div><div class="stat-lbl">KB article candidates</div></div>
-  <div class="stat-cell"><div class="stat-val">30d</div><div class="stat-lbl">Action plan</div></div>
-</div>
-
-<main>
-  <section class="section cream" id="summary">
-    <div class="sec-inner">
-      <div class="sec-eyebrow">Executive summary</div>
-      <h2 class="sec-h2">The work is getting done, but the process depends too much on memory.</h2>
-      <div class="summary-box">
-        <div class="summary-copy">
-          <p>Example Clinic has a small support environment with recurring password reset, printer, onboarding, and access request issues. The sample evidence suggests technicians usually solve the problem, but tickets lack consistent first-response steps, verification notes, and escalation handoff details.</p>
-          <p>The 30-day priority is not buying more software. It is turning repeat work into a small set of trusted procedures: password reset triage, printer first response, new-hire setup, and access request intake.</p>
-          <p>This sample is intentionally sanitized and fictional. It demonstrates the deliverable format without using private customer data, patient data, credentials, or live operational details.</p>
-        </div>
-        <aside class="score-box">
-          <div class="score">68</div>
-          <div class="score-label">Ops documentation score</div>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  <section class="section paper" id="findings">
-    <div class="sec-inner">
-      <div class="sec-eyebrow">Key findings</div>
-      <h2 class="sec-h2">Four gaps are creating most of the avoidable support drag.</h2>
-      <p class="sec-sub">Findings are ranked by repeat frequency, technician friction, user impact, and how quickly the issue can be cleaned up.</p>
-      <div class="grid two">
-        <article class="card finding-card">
-          <div class="priority">01</div>
-          <div>
-            <div class="card-label">High priority</div>
-            <h3 class="card-title">Password reset tickets lack a clean triage path.</h3>
-            <p class="card-body">Mock tickets show the same reset questions being rediscovered: identity confirmation, lockout checks, MFA status, and when to escalate. A one-page checklist would reduce repeat back-and-forth.</p>
-            <div class="tag-row"><span class="tag high">User impact</span><span class="tag quick">Quick win</span></div>
-          </div>
-        </article>
-        <article class="card finding-card">
-          <div class="priority">02</div>
-          <div>
-            <div class="card-label">High priority</div>
-            <h3 class="card-title">Printer issues bounce between staff before basics are checked.</h3>
-            <p class="card-body">The recurring pattern is not a complex print-server mystery. It is missing first-response discipline: device, queue, network, default printer, and last known working state.</p>
-            <div class="tag-row"><span class="tag high">Ticket volume</span><span class="tag medium">SOP gap</span></div>
-          </div>
-        </article>
-        <article class="card finding-card">
-          <div class="priority">03</div>
-          <div>
-            <div class="card-label">Medium priority</div>
-            <h3 class="card-title">New-hire setup is documented as tasks, not a verified workflow.</h3>
-            <p class="card-body">The checklist names accounts and devices but does not consistently assign owners, due dates, dependencies, or completion evidence. That is how Monday morning surprises are manufactured.</p>
-            <div class="tag-row"><span class="tag medium">Onboarding</span><span class="tag">Checklist</span></div>
-          </div>
-        </article>
-        <article class="card finding-card">
-          <div class="priority">04</div>
-          <div>
-            <div class="card-label">Medium priority</div>
-            <h3 class="card-title">Access requests need a standard intake payload.</h3>
-            <p class="card-body">Requests arrive with inconsistent role, location, application, approval, and timing details. A standard request template would reduce follow-up and make approvals easier to audit.</p>
-            <div class="tag-row"><span class="tag medium">Access</span><span class="tag quick">Template</span></div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section cream" id="priorities">
-    <div class="sec-inner">
-      <div class="sec-eyebrow">Prioritized fixes</div>
-      <h2 class="sec-h2">Fix the repeat work before polishing the edge cases.</h2>
-      <div class="grid">
-        <div class="card">
-          <div class="card-label">Fix 1</div>
-          <h3 class="card-title">Publish a password reset runbook.</h3>
-          <p class="card-body">Include identity check, MFA branch, lockout branch, escalation triggers, closure note, and user confirmation step.</p>
-        </div>
-        <div class="card">
-          <div class="card-label">Fix 2</div>
-          <h3 class="card-title">Create printer first-response SOP.</h3>
-          <p class="card-body">Define the first five checks before escalation. Include what screenshots, queue details, and device context must be captured.</p>
-        </div>
-        <div class="card">
-          <div class="card-label">Fix 3</div>
-          <h3 class="card-title">Rebuild new-hire setup as a workflow.</h3>
-          <p class="card-body">Convert the checklist into owner, deadline, dependency, verification, and handoff fields. A checklist without ownership is just decoration.</p>
-        </div>
-        <div class="card">
-          <div class="card-label">Fix 4</div>
-          <h3 class="card-title">Standardize access request intake.</h3>
-          <p class="card-body">Use one request template for role, system, approver, urgency, location, and expected start date.</p>
-        </div>
-        <div class="card">
-          <div class="card-label">Fix 5</div>
-          <h3 class="card-title">Add KB ownership and review dates.</h3>
-          <p class="card-body">Every trusted article needs an owner, last-reviewed date, and escalation contact. Otherwise it becomes museum content.</p>
-        </div>
-        <div class="card">
-          <div class="card-label">Fix 6</div>
-          <h3 class="card-title">Use ticket closure notes as documentation fuel.</h3>
-          <p class="card-body">Require resolved tickets to capture cause, fix, verification, and reusable notes when the issue repeats.</p>
+      <div>
+        <div class="review-banner"><strong>Status:</strong> Needs Squatch review before customer use. This is not a security audit, compliance audit, HIPAA certification, MSP assessment, or guarantee that risks are eliminated.</div>
+        <div class="report-meta-grid" aria-label="Report metadata">
+          <div><span class="meta-label">Prepared by</span><span class="meta-value">RLAudits</span></div>
+          <div><span class="meta-label">Sample client</span><span class="meta-value">Example Clinic Operations Team</span></div>
+          <div><span class="meta-label">Evidence window</span><span class="meta-value">Mock 60-day support-pattern review</span></div>
+          <div><span class="meta-label">Scope</span><span class="meta-value">Tickets, runbooks, escalation workflow, KB roadmap, 30-day plan</span></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section paper" id="plan">
-    <div class="sec-inner">
-      <div class="sec-eyebrow">30-day action plan</div>
-      <h2 class="sec-h2">A practical cleanup sequence.</h2>
-      <p class="sec-sub">The sample plan assumes a small team with limited time. It focuses on usable documents, not a heroic documentation crusade.</p>
-      <div class="plan">
-        <article class="plan-row">
-          <div class="week">Week 1</div>
-          <div><h3>Confirm top repeat categories and owners.</h3><p>Pull the last 30-60 days of sanitized ticket categories, confirm the top four repeat issues, and assign one owner per runbook.</p></div>
-          <div class="owner">Output: owner list + article backlog</div>
-        </article>
-        <article class="plan-row">
-          <div class="week">Week 2</div>
-          <div><h3>Draft password reset and printer procedures.</h3><p>Write technician-ready steps with prerequisites, decision branches, screenshots to capture, escalation triggers, and closure language.</p></div>
-          <div class="owner">Output: 2 draft runbooks</div>
-        </article>
-        <article class="plan-row">
-          <div class="week">Week 3</div>
-          <div><h3>Clean up onboarding and access request workflows.</h3><p>Convert loose notes into request templates with approval, timing, ownership, and verification requirements.</p></div>
-          <div class="owner">Output: 2 workflow templates</div>
-        </article>
-        <article class="plan-row">
-          <div class="week">Week 4</div>
-          <div><h3>Publish, train, and measure.</h3><p>Publish the first KB wave, walk technicians through the changes, and tag repeat tickets so next month shows whether the cleanup helped.</p></div>
-          <div class="owner">Output: published KB + review cadence</div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section cream" id="runbook">
-    <div class="sec-inner">
-      <div class="sec-eyebrow">Sample runbook recommendation</div>
-      <h2 class="sec-h2">Priority KB article: password reset triage.</h2>
-      <div class="runbook">
-        <div class="runbook-head">
-          <div class="meta-label">Worked example</div>
-          <div class="runbook-title">Password reset or account lockout — first response</div>
-        </div>
-        <div class="runbook-body">
-          <div>
-            <h3>Recommended sections</h3>
-            <ul>
-              <li>Audience: help desk technician or office manager acting as first responder.</li>
-              <li>Prerequisites: approved requester, known username, contact method, and device context.</li>
-              <li>Decision points: forgotten password, locked account, MFA issue, expired password, or suspected compromise.</li>
-              <li>Escalation triggers: repeated lockouts, unknown MFA device, VIP account, or unusual login activity.</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Ticket cleanup language</h3>
-            <ol>
-              <li>Record the reset path used and whether MFA was involved.</li>
-              <li>Confirm the user can sign in on the required device or application.</li>
-              <li>Note whether the root cause was forgotten password, expired password, lockout, or MFA reset.</li>
-              <li>If repeated within 14 days, tag as repeat issue and link to the prior ticket.</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section paper" id="ticket-cleanup">
-    <div class="sec-inner">
-      <div class="sec-eyebrow">Ticket cleanup recommendations</div>
-      <h2 class="sec-h2">Make future tickets easier to learn from.</h2>
-      <div class="grid">
-        <div class="card"><div class="card-label">Required fields</div><h3 class="card-title">Add repeat-issue tags.</h3><p class="card-body">Tag password, printer, onboarding, access, device setup, application support, and escalation so repeat patterns are visible without reading every ticket.</p></div>
-        <div class="card"><div class="card-label">Closure notes</div><h3 class="card-title">Capture cause, fix, and verification.</h3><p class="card-body">A resolved ticket should explain what happened, what fixed it, and how the technician knows it is working. “Done” is not documentation.</p></div>
-        <div class="card"><div class="card-label">KB loop</div><h3 class="card-title">Link repeat fixes to articles.</h3><p class="card-body">When a ticket follows a runbook, link the article. When no article exists and the issue repeats, add it to the KB backlog.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section navy-band" id="safe-material">
-    <div class="sec-inner">
-      <div class="sec-eyebrow">Safe material and redaction note</div>
-      <h2 class="sec-h2">This sample uses fictional sanitized material only.</h2>
-      <div class="notice">
-        <p>For a real IT Ops Audit, RLAudits asks for sanitized/public materials only. Do not send passwords, PHI, credentials, API keys, tokens, private customer data, patient data, secrets, account numbers, private screenshots, or anything that would expose a person or system. Redact names, emails, phone numbers, medical details, customer identifiers, internal URLs, device serials, and access details before review.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section cream" id="request">
-    <div class="sec-inner">
-      <div class="cta-panel">
+    <section class="report-page" aria-labelledby="toc-title">
+      <div class="section-header">
         <div>
-          <div class="sec-eyebrow">Ready for your version?</div>
-          <h2 class="sec-h2">Start with the safe intake form.</h2>
-          <p>Explain your team, tools, repeat pain, and what sanitized materials you can provide. RLAudits will review the request before any files are shared.</p>
+          <p class="section-number">00 / Navigation</p>
+          <h2 id="toc-title">Table of contents</h2>
         </div>
-        <div class="hero-actions">
-          <a class="btn" href="/it-ops-audit/#intake">Request IT Ops Audit</a>
-          <a class="btn-secondary" href="/it-ops-audit/">Back to offer page</a>
+        <span class="eyebrow">Client deliverable</span>
+      </div>
+      <ol class="toc-list">
+        <li><span>Executive summary</span><span class="toc-page">03</span></li>
+        <li><span>Ticket and process risk scorecard</span><span class="toc-page">04</span></li>
+        <li><span>Safe evidence reviewed and boundaries</span><span class="toc-page">05</span></li>
+        <li><span>Runbook review</span><span class="toc-page">06</span></li>
+        <li><span>Escalation workflow review</span><span class="toc-page">07</span></li>
+        <li><span>Repeat issue patterns</span><span class="toc-page">08</span></li>
+        <li><span>KB roadmap</span><span class="toc-page">09</span></li>
+        <li><span>Worked sample KB article</span><span class="toc-page">10</span></li>
+        <li><span>30-day action plan and no-guarantee note</span><span class="toc-page">12</span></li>
+      </ol>
+      <div class="scope-footer"><strong>Sample note:</strong> This report demonstrates structure and tone only. A real report would replace every placeholder with customer-approved, sanitized evidence and reviewed capture dates.</div>
+    </section>
+
+    <section class="report-page" aria-labelledby="summary-title">
+      <div class="section-header">
+        <div>
+          <p class="section-number">01 / Executive summary</p>
+          <h2 id="summary-title">The team is solving tickets, but the process depends too much on memory.</h2>
+        </div>
+        <span class="eyebrow">Owner-ready summary</span>
+      </div>
+      <p>Example Clinic’s support team appears capable and responsive. The problem is not effort. The problem is repeat work being solved from memory, Slack-style side conversations, and partial ticket notes instead of trusted runbooks.</p>
+      <p>The strongest 30-day move is to standardize four repeat areas: password reset and lockout triage, printer first response, new-hire setup, and access request intake. These issues are ordinary. Ordinary issues are exactly where clear documentation earns its keep.</p>
+      <p>The report recommends a small documentation operating loop: require better closure notes, assign owners to the first KB wave, define escalation handoff payloads, and review article freshness every quarter.</p>
+      <div class="evidence-callout"><strong>Safe-data boundary:</strong> This sample uses fictional ticket patterns only. A real IT Ops Audit does not require passwords, credentials, PHI, patient data, customer records, private exports, secrets, remote access, or regulated material.</div>
+      <div class="scorecard-grid" aria-label="Executive summary scorecards">
+        <article class="scorecard"><div class="scorecard__label">Overall documentation readiness</div><div class="scorecard__score">2.4 <small>/ 4</small></div><p class="scorecard__note">Useful tribal knowledge exists, but ownership, review dates, and verification steps are inconsistent.</p></article>
+        <article class="scorecard"><div class="scorecard__label">Fix first</div><div class="scorecard__score">KB</div><p class="scorecard__note">Publish the password reset and printer first-response articles before polishing edge cases.</p></article>
+        <article class="scorecard"><div class="scorecard__label">Fastest practical win</div><div class="scorecard__score">Closure</div><p class="scorecard__note">Require cause, fix, verification, and escalation tags on repeat tickets.</p></article>
+      </div>
+    </section>
+
+    <section class="report-page" id="scorecard" aria-labelledby="scorecard-title">
+      <div class="section-header">
+        <div>
+          <p class="section-number">02 / Ticket and process risk scorecard</p>
+          <h2 id="scorecard-title">What is controlled, fragile, or unclear.</h2>
         </div>
       </div>
-    </div>
-  </section>
-</main>
+      <table class="report-table">
+        <thead><tr><th>Area</th><th>Sample rating</th><th>Observed pattern</th><th>Recommended action</th></tr></thead>
+        <tbody>
+          <tr><td>Password reset / lockout triage</td><td>High risk</td><td>Repeated tickets show inconsistent identity check, MFA branch, and lockout notes.</td><td>Publish one technician checklist with decision points and escalation triggers.</td></tr>
+          <tr><td>Printer first response</td><td>Medium-high risk</td><td>Tickets bounce before basic queue, device, network, and default-printer checks are recorded.</td><td>Define first five checks and required handoff fields before escalation.</td></tr>
+          <tr><td>New-hire setup</td><td>Medium risk</td><td>Checklist exists, but ownership, dependencies, due dates, and verification evidence are uneven.</td><td>Convert the checklist into a workflow with owner, deadline, dependency, and done criteria.</td></tr>
+          <tr><td>Access requests</td><td>Medium risk</td><td>Role, application, approval, location, and timing details arrive inconsistently.</td><td>Use one request template and require approval source before fulfillment.</td></tr>
+          <tr><td>KB governance</td><td>Weak</td><td>Some procedures are useful but lack article owners, last-reviewed dates, and stale-content handling.</td><td>Add owner, review date, escalation contact, and retirement rules to every trusted article.</td></tr>
+          <tr><td>Ticket learning loop</td><td>Weak</td><td>Resolved tickets often close without root cause, reusable notes, or KB linkage.</td><td>Update closure fields so repeat tickets feed the KB backlog instead of vanishing.</td></tr>
+        </tbody>
+      </table>
+      <div class="scope-footer"><strong>Scoring rule:</strong> This is operational risk scoring, not security certification. Unknowns stay unknown. No compliance, legal, security, uptime, or incident-prevention guarantee is implied.</div>
+    </section>
 
-<footer class="site-footer">
-  <div class="footer-brand"><div class="footer-gem"></div><span class="footer-name">RLAudits</span></div>
-  <div class="footer-links">
-    <a href="/">Home</a>
-    <a href="/revenue-audit/">Revenue Audit</a>
-    <a href="/app-store-growth-brief/">App Store Brief</a>
-    <a href="/it-ops-audit/">IT Ops Audit</a>
-    <a href="/it-ops-audit/#intake">IT Ops Intake</a>
-  </div>
-</footer>
+    <section class="report-page" aria-labelledby="evidence-title">
+      <div class="section-header">
+        <div>
+          <p class="section-number">03 / Evidence reviewed and limits</p>
+          <h2 id="evidence-title">Only safe, sanitized material belongs in this audit.</h2>
+        </div>
+      </div>
+      <table class="report-table">
+        <thead><tr><th>Material</th><th>Status</th><th>Evidence label</th><th>Use in this report</th></tr></thead>
+        <tbody>
+          <tr><td>Sanitized ticket themes</td><td>Reviewed in sample format</td><td>Customer-provided / sanitized</td><td>Repeat issue categories, process drag, closure-note gaps, KB candidates.</td></tr>
+          <tr><td>Runbook snippets</td><td>Reviewed in sample format</td><td>Customer-provided / sanitized</td><td>Step order, owner fields, prerequisites, verification, escalation triggers.</td></tr>
+          <tr><td>Escalation notes</td><td>Reviewed in sample format</td><td>Customer-provided / sanitized</td><td>Handoff payload quality, decision points, role clarity, waiting states.</td></tr>
+          <tr><td>Public business context</td><td>Optional</td><td>Public evidence</td><td>Industry context and service environment only; not used for private claims.</td></tr>
+          <tr><td>Private credentials, PHI, regulated data, secrets</td><td>Not reviewed</td><td>Out of scope</td><td>Do not send. Redact before review. Use a safer process if sensitive review is ever required.</td></tr>
+        </tbody>
+      </table>
+      <div class="evidence-callout"><strong>Redaction rule:</strong> Remove names, usernames, emails, phone numbers, patient/customer details, addresses, account IDs, IPs, hostnames, serials, internal URLs, screenshots with records, tokens, keys, and anything that identifies a person or system.</div>
+    </section>
+
+    <section class="report-page" aria-labelledby="runbook-title">
+      <div class="section-header">
+        <div>
+          <p class="section-number">04 / Runbook review</p>
+          <h2 id="runbook-title">Good runbooks remove guesswork at the moment work happens.</h2>
+        </div>
+      </div>
+      <table class="report-table">
+        <thead><tr><th>Runbook area</th><th>Current sample state</th><th>Gap</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr><td>Password reset / lockout</td><td>Technicians know the fix, but steps vary.</td><td>No single decision tree for identity check, MFA, lockout, expired password, and suspected compromise.</td><td>Create a one-page triage runbook with branches and closure language.</td></tr>
+          <tr><td>Printer issue first response</td><td>Common fixes are known informally.</td><td>Tickets escalate without minimum checks or screenshots.</td><td>Require queue, device, network, default-printer, and last-known-working-state checks.</td></tr>
+          <tr><td>New-hire setup</td><td>Task list exists.</td><td>Task owner, due date, dependency, and verification evidence are not explicit.</td><td>Turn the list into a workflow with done criteria and day-one confirmation.</td></tr>
+          <tr><td>Access request intake</td><td>Requests arrive through mixed channels.</td><td>Approval source, role, location, application, and urgency are inconsistent.</td><td>Standardize the request form and route exceptions to a named owner.</td></tr>
+        </tbody>
+      </table>
+      <figure class="screenshot-frame">
+        <div class="screenshot-frame__placeholder">Runbook screenshot placeholder<br>Article owner, prerequisites, step order, decision branches, escalation triggers, closure note</div>
+        <figcaption><strong>Figure 1.</strong> A real report would include sanitized screenshots or excerpt blocks only after customer approval.</figcaption>
+      </figure>
+    </section>
+
+    <section class="report-page" aria-labelledby="escalation-title">
+      <div class="section-header">
+        <div>
+          <p class="section-number">05 / Escalation workflow review</p>
+          <h2 id="escalation-title">Escalations should carry context, not a mystery box.</h2>
+        </div>
+      </div>
+      <p>The sample escalation workflow has the usual small-team problem: people know who to ask, but tickets do not always show what was checked, what changed, and what the next owner needs. That creates rework and slow handoffs.</p>
+      <div class="scorecard-grid">
+        <article class="scorecard"><div class="scorecard__label">Trigger clarity</div><div class="scorecard__score">Partial</div><p class="scorecard__note">Some issues escalate by judgment. Define explicit triggers for repeated lockout, unknown MFA device, VIP/user-impact, and application outage.</p></article>
+        <article class="scorecard"><div class="scorecard__label">Handoff payload</div><div class="scorecard__score">Weak</div><p class="scorecard__note">Escalated tickets need user impact, device/app context, checks completed, screenshots/log references, and requested decision.</p></article>
+        <article class="scorecard"><div class="scorecard__label">Closure loop</div><div class="scorecard__score">Weak</div><p class="scorecard__note">Resolved escalations should feed the KB backlog when the same issue appears again.</p></article>
+      </div>
+      <table class="report-table">
+        <thead><tr><th>Escalation point</th><th>Minimum handoff fields</th><th>Owner decision</th></tr></thead>
+        <tbody>
+          <tr><td>Password / MFA issue after first-response checklist</td><td>User, app, identity check result, MFA state, lockout state, error text, business impact.</td><td>Reset, unlock, MFA recovery, security review, or manager approval needed.</td></tr>
+          <tr><td>Printer issue after first five checks</td><td>Device, queue, location, affected users, test page result, network state, screenshot or error code.</td><td>Local fix, print server/admin review, vendor dispatch, or device replacement path.</td></tr>
+          <tr><td>Access request exception</td><td>Requester, role, system, approval source, needed date, exception reason, least-privilege concern.</td><td>Approve, deny, ask manager, defer, or split into separate requests.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="report-page" aria-labelledby="patterns-title">
+      <div class="section-header">
+        <div>
+          <p class="section-number">06 / Repeat issue patterns</p>
+          <h2 id="patterns-title">The repeat work is visible enough to turn into a roadmap.</h2>
+        </div>
+        <span class="eyebrow">Priority order</span>
+      </div>
+      <article class="finding-card">
+        <div class="finding-card__topline"><h3>Pattern 1: Password and lockout tickets lack a shared triage path.</h3><span class="priority-badge priority-badge--first">Fix first</span></div>
+        <div class="finding-meta"><div><strong>Evidence</strong> Mock repeat ticket themes</div><div><strong>Impact</strong> User downtime and technician rework</div><div><strong>Effort</strong> Low</div></div>
+        <p><strong>Recommended fix:</strong> Publish the password reset / lockout KB article in this report and require technicians to link it on matching tickets.</p>
+      </article>
+      <article class="finding-card">
+        <div class="finding-card__topline"><h3>Pattern 2: Printer tickets escalate before first-response basics are captured.</h3><span class="priority-badge priority-badge--first">Fix first</span></div>
+        <div class="finding-meta"><div><strong>Evidence</strong> Mock printer issue cluster</div><div><strong>Impact</strong> Avoidable back-and-forth</div><div><strong>Effort</strong> Low to medium</div></div>
+        <p><strong>Recommended fix:</strong> Create a printer first-response SOP with required queue/device/network checks and handoff fields.</p>
+      </article>
+      <article class="finding-card">
+        <div class="finding-card__topline"><h3>Pattern 3: Onboarding misses come from ownership and dependency gaps.</h3><span class="priority-badge priority-badge--next">Fix next</span></div>
+        <div class="finding-meta"><div><strong>Evidence</strong> Mock new-hire setup notes</div><div><strong>Impact</strong> Day-one friction</div><div><strong>Effort</strong> Medium</div></div>
+        <p><strong>Recommended fix:</strong> Convert the task list into a workflow that names owner, timing, prerequisite, evidence, and completion check.</p>
+      </article>
+      <article class="finding-card">
+        <div class="finding-card__topline"><h3>Pattern 4: Access request exceptions need one intake payload.</h3><span class="priority-badge priority-badge--next">Fix next</span></div>
+        <div class="finding-meta"><div><strong>Evidence</strong> Mock access request examples</div><div><strong>Impact</strong> Approval delay and rework</div><div><strong>Effort</strong> Low</div></div>
+        <p><strong>Recommended fix:</strong> Standardize role, application, approver, reason, location, urgency, and expiration fields.</p>
+      </article>
+    </section>
+
+    <section class="report-page" id="kb-roadmap" aria-labelledby="kb-roadmap-title">
+      <div class="section-header">
+        <div>
+          <p class="section-number">07 / KB roadmap</p>
+          <h2 id="kb-roadmap-title">Write the articles that cut repeat work first.</h2>
+        </div>
+      </div>
+      <table class="report-table">
+        <thead><tr><th>Priority</th><th>Article</th><th>Why it matters</th><th>Owner / review cadence</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Password reset or account lockout — first response</td><td>Highest repeat pattern; fast to standardize; reduces back-and-forth.</td><td>Help desk lead / quarterly</td></tr>
+          <tr><td>2</td><td>Printer issue first response before escalation</td><td>Prevents tickets from bouncing without basic context.</td><td>Endpoint owner / quarterly</td></tr>
+          <tr><td>3</td><td>New-hire setup day-one checklist</td><td>Protects onboarding from dependency misses and unclear ownership.</td><td>IT operations owner / quarterly</td></tr>
+          <tr><td>4</td><td>Access request intake and approval checklist</td><td>Reduces missing approval, role, location, and timing details.</td><td>Systems owner / quarterly</td></tr>
+          <tr><td>5</td><td>Application outage intake template</td><td>Improves triage during business-impacting issues.</td><td>Application owner / quarterly</td></tr>
+          <tr><td>6</td><td>Device replacement or loaner workflow</td><td>Sets expectations for downtime, approval, data handling, and return process.</td><td>Endpoint owner / semiannual</td></tr>
+          <tr><td>7</td><td>Ticket closure note standard</td><td>Turns resolved tickets into reusable documentation fuel.</td><td>Service desk lead / quarterly</td></tr>
+        </tbody>
+      </table>
+      <div class="scope-footer"><strong>Roadmap rule:</strong> Article order is based on repeat pain and reuse value, not what happens to be easiest to write while drinking coffee.</div>
+    </section>
+
+    <section class="report-page" aria-labelledby="kb-title">
+      <div class="section-header">
+        <div>
+          <p class="section-number">08 / Worked sample KB article</p>
+          <h2 id="kb-title">Password reset or account lockout — first response.</h2>
+        </div>
+        <span class="eyebrow">Fully written sample</span>
+      </div>
+      <article class="kb-article">
+        <h3>Article purpose</h3>
+        <p>Use this article when a user reports a forgotten password, expired password, account lockout, or sign-in failure that appears related to password or MFA state. The goal is to verify the requester, identify the branch, restore access safely, and leave a useful ticket trail.</p>
+
+        <h3>Audience and prerequisites</h3>
+        <ul>
+          <li><strong>Audience:</strong> Help desk technician, office manager first responder, or authorized IT support contact.</li>
+          <li><strong>Prerequisites:</strong> Approved requester identity, username or work email, affected application, contact method, device context, and business impact.</li>
+          <li><strong>Do not collect:</strong> Passwords, MFA codes, private medical/customer records, secret answers, or screenshots containing sensitive data.</li>
+        </ul>
+
+        <h3>First-response steps</h3>
+        <ol>
+          <li>Confirm requester identity using the organization’s approved method. If identity cannot be confirmed, stop and escalate.</li>
+          <li>Identify the affected system: workstation login, email, EHR/business application, VPN, SSO portal, or other named application.</li>
+          <li>Ask for the exact error message and timing. Record whether the user is locked out, seeing expired password, failing MFA, or reporting a forgotten password.</li>
+          <li>Check whether the issue affects one user, multiple users, one device, or one application. If multiple users are affected, escalate as possible service issue.</li>
+          <li>If policy permits reset/unlock, perform the approved action and require the user to set their own password through the normal process.</li>
+          <li>If MFA is involved, verify whether the known device is available. Unknown or changed MFA devices require escalation.</li>
+          <li>Have the user test sign-in to the required application or device. Do not close on “try it later.” That is not verification. That is a shrug.</li>
+          <li>Record cause category, fix performed, verification result, and whether this was a repeat within 14 days.</li>
+        </ol>
+
+        <h3>Escalate when</h3>
+        <ul class="two-column-list">
+          <li>Identity cannot be confirmed.</li>
+          <li>MFA device is unknown, lost, or newly changed.</li>
+          <li>The account shows suspicious or unusual login behavior.</li>
+          <li>The user is a VIP, provider, executive, or high-impact role.</li>
+          <li>Multiple users report the same sign-in issue.</li>
+          <li>The same account locks repeatedly within 14 days.</li>
+          <li>The request involves privileged access.</li>
+          <li>The system owner requires manager approval.</li>
+        </ul>
+
+        <h3>Required ticket closure note</h3>
+        <div class="evidence-callout"><strong>Closure template:</strong> Requester identity confirmed by [approved method]. Affected system: [system]. Issue branch: [forgotten password / expired password / lockout / MFA / other]. Action taken: [reset/unlock/MFA recovery/escalated]. User verified sign-in to [system/device] at [time]. Repeat within 14 days: [yes/no]. KB used: Password reset or account lockout — first response.</div>
+
+        <h3>Owner and review</h3>
+        <p><strong>Owner:</strong> Help desk lead. <strong>Review cadence:</strong> Quarterly or after major identity/MFA policy changes. <strong>Escalation contact:</strong> Identity/system owner named by the client before publication.</p>
+      </article>
+    </section>
+
+    <section class="report-page" id="action-plan" aria-labelledby="action-plan-title">
+      <div class="section-header">
+        <div>
+          <p class="section-number">09 / 30-day action plan</p>
+          <h2 id="action-plan-title">A practical cleanup sequence.</h2>
+        </div>
+      </div>
+      <table class="action-plan-table">
+        <thead><tr><th>Timing</th><th>Action</th><th>Owner</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr><td>Days 1-3</td><td>Confirm top repeat issue categories and choose article owners.</td><td>Service desk lead</td><td>Owner list, repeat issue tags, first KB backlog.</td></tr>
+          <tr><td>Days 4-7</td><td>Publish password reset / lockout article and require linked closure notes.</td><td>Help desk lead</td><td>Approved article, closure template, linked-ticket rule.</td></tr>
+          <tr><td>Days 8-14</td><td>Draft printer first-response SOP and escalation handoff fields.</td><td>Endpoint owner</td><td>Printer checklist, required screenshots/error fields, escalation trigger list.</td></tr>
+          <tr><td>Days 15-21</td><td>Rebuild new-hire setup and access request intake as workflows.</td><td>IT operations owner</td><td>Owner/dependency checklist, access request template, approval source field.</td></tr>
+          <tr><td>Days 22-27</td><td>Add KB owner, review date, stale article rule, and escalation contact to the first article wave.</td><td>Service desk lead</td><td>Governance fields added to priority articles.</td></tr>
+          <tr><td>Days 28-30</td><td>Review tagged repeat tickets and decide the next three KB articles.</td><td>Ops owner + technicians</td><td>30-day review notes, next KB wave, unresolved blockers.</td></tr>
+        </tbody>
+      </table>
+      <div class="evidence-callout"><strong>Measurement:</strong> Track repeat tickets by category, tickets linked to KB articles, escalations missing handoff fields, and articles reviewed on schedule. This measures documentation discipline; it does not promise fewer incidents, guaranteed uptime, compliance readiness, or security risk reduction.</div>
+    </section>
+
+    <section class="report-page report-page--compact" aria-labelledby="limits-title">
+      <div class="section-header">
+        <div>
+          <p class="section-number">10 / Scope and limits</p>
+          <h2 id="limits-title">What this audit does and does not claim.</h2>
+        </div>
+      </div>
+      <table class="report-table">
+        <thead><tr><th>Included</th><th>Not included</th></tr></thead>
+        <tbody>
+          <tr><td>Sanitized ticket pattern review, documentation gap scoring, runbook review, escalation workflow review, KB roadmap, one worked article, and 30-day cleanup plan.</td><td>Security testing, penetration testing, compliance certification, legal advice, incident response, managed IT services, system administration, live access, credential handling, or guaranteed operational outcomes.</td></tr>
+        </tbody>
+      </table>
+      <div class="scope-footer"><strong>Final customer-delivery rule:</strong> Before using this with a real customer, replace sample labels with approved evidence, remove any internal identifiers, confirm the no-guarantee language, and get Squatch review. Bureaucracy is annoying. Accidentally promising compliance is worse.</div>
+    </section>
+  </main>
+
+  <footer class="sample-footer">RLAudits · Sample IT Ops Audit · Needs Squatch review before customer use</footer>
+  <script defer src="/assets/rlaudits-tracking.js"></script>
 </body>
 </html>

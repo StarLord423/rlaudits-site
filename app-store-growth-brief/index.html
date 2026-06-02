@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>App Store Growth Brief — RL Audits</title>
 <meta name="description" content="A public-evidence App Store Growth Brief for agencies and small app teams: listing fixes, review themes, competitor gaps, and a 30-day update sequence.">
+<link rel="canonical" href="https://rlaudits.com/app-store-growth-brief/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="App Store Growth Brief — RL Audits">
+<meta property="og:description" content="A public-evidence App Store Growth Brief for agencies and small app teams: listing fixes, review themes, competitor gaps, and a 30-day update sequence.">
+<meta property="og:url" content="https://rlaudits.com/app-store-growth-brief/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="App Store Growth Brief — RL Audits">
+<meta name="twitter:description" content="A public-evidence App Store Growth Brief for agencies and small app teams: listing fixes, review themes, competitor gaps, and a 30-day update sequence.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
@@ -110,9 +118,13 @@
   .field { display: grid; gap: 6px; }
   .field.wide { grid-column: 1 / -1; }
   label { font-family: var(--mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); }
-  input, textarea { width: 100%; border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.06); color: #fff; padding: 12px 13px; font: 14px var(--sans); outline: none; }
+  input, textarea, select { width: 100%; border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.06); color: #fff; padding: 12px 13px; font: 14px var(--sans); outline: none; }
+  select option { color: var(--ink); }
   textarea { min-height: 92px; resize: vertical; }
-  input:focus, textarea:focus { border-color: var(--gold); }
+  input:focus, textarea:focus, select:focus { border-color: var(--gold); }
+  .checkbox-field { grid-column: 1 / -1; display: grid; grid-template-columns: 18px 1fr; gap: 10px; align-items: start; }
+  .checkbox-field input { width: 18px; height: 18px; margin-top: 2px; }
+  .checkbox-field label { line-height: 1.45; text-transform: none; letter-spacing: 0; font-family: var(--sans); font-size: 12.5px; color: rgba(255,255,255,.7); }
   .form-note { grid-column: 1 / -1; font-size: 12.5px; line-height: 1.5; color: rgba(255,255,255,.55); }
   .submission-status { display: none; grid-column: 1 / -1; padding: 10px 12px; border: 1px solid rgba(212,176,116,.45); color: var(--gold-soft); font-size: 12px; }
   .submission-status.is-visible { display: block; }
@@ -156,8 +168,117 @@
     .site-footer { flex-direction: column; align-items: flex-start; }
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "ProfessionalService"
+      ],
+      "@id": "https://rlaudits.com/#organization",
+      "name": "RL Audits",
+      "url": "https://rlaudits.com/",
+      "email": "seth@rlaudits.com",
+      "areaServed": [
+        "Chattanooga, TN",
+        "United States"
+      ],
+      "description": "RL Audits creates private, evidence-first audit reports for revenue leaks, IT operations cleanup, and app store growth briefs.",
+      "sameAs": []
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rlaudits.com/app-store-growth-brief/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://rlaudits.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "App Store Growth Brief",
+          "item": "https://rlaudits.com/app-store-growth-brief/"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://rlaudits.com/app-store-growth-brief/#service",
+      "name": "App Store Growth Brief",
+      "serviceType": "App store optimization growth brief",
+      "description": "A public-evidence review of one app listing with store-page fixes, review themes, competitor contrasts, and a 30-day update sequence.",
+      "provider": {
+        "@id": "https://rlaudits.com/#organization"
+      },
+      "areaServed": [
+        "United States",
+        "Chattanooga, TN"
+      ],
+      "url": "https://rlaudits.com/app-store-growth-brief/",
+      "offers": {
+        "@type": "Offer",
+        "price": "79",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://rlaudits.com/app-store-growth-brief/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rlaudits.com/app-store-growth-brief/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you need App Store Connect or Play Console access?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No for the initial brief. The first paid report uses public Apple App Store and Google Play evidence when feasible. Private account access is optional later for implementation workflows, not required to order."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if the app is Apple-only or Android-only?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We still inspect cross-store availability. If the other store has no useful public counterpart, too little evidence, or is intentionally out of scope, the brief states that boundary instead of pretending the evidence is complete."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the delivery promise?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RLAudits first reviews whether the public listing has enough evidence for a useful brief. If accepted and paid, standard delivery target is three business days after clean intake and payment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is refundable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Payment is requested only after fit review. If RLAudits cannot produce a useful source-backed brief after accepting payment because public evidence is unavailable or too thin, the order is refunded or converted into a different target before work starts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the brief guarantee better rankings or installs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The brief gives evidence-backed listing, review, positioning, and release-note recommendations. Store rankings, installs, revenue, ratings, and policy outcomes are not guaranteed."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
-<body>
+<body data-track-service="App Store Growth Brief">
 <nav class="site-nav">
   <a href="/" class="nav-brand"><div class="nav-gem"></div><span class="nav-name">RL Audits</span></a>
   <div class="nav-links">
@@ -166,7 +287,7 @@
     <a href="/it-ops-audit/">IT Ops Audit</a>
     <a class="active" href="/app-store-growth-brief/">App Store Brief</a>
   </div>
-  <a href="#order" class="nav-cta">Start order</a>
+  <a href="#order" class="nav-cta">Start intake</a>
 </nav>
 
 <section class="hero">
@@ -177,8 +298,8 @@
       <h1 class="hero-h1">App Store Growth Brief for agencies and <em>small app teams.</em></h1>
       <p class="hero-sub">A public-evidence report for one app: store-page facts, review themes, competitor contrasts, exact fixes, and a 30-day update sequence when the evidence supports it.</p>
       <div class="hero-actions">
-        <a class="btn" href="#order" data-start-mode="standard">Start $79 intake</a>
-        <a class="btn-secondary" href="#order" data-start-mode="pilot">Request $49 pilot slot</a>
+        <a class="btn" href="#order" data-start-mode="standard">Submit app for fit review</a>
+        <a class="btn-secondary" href="#deliverables">See what you get</a>
       </div>
       <div class="hero-note">No console access required · Public evidence only · Clear source boundaries</div>
     </div>
@@ -202,12 +323,21 @@
 </section>
 
 <div class="stats-strip">
-  <div class="stat-cell"><div class="stat-val">$79</div><div class="stat-lbl">Standard one-off brief</div></div>
-  <div class="stat-cell"><div class="stat-val">$49</div><div class="stat-lbl">Pilot validation slot</div></div>
+  <div class="stat-cell"><div class="stat-val">$79</div><div class="stat-lbl">Standard one-off brief after fit review</div></div>
+  <div class="stat-cell"><div class="stat-val">Fit</div><div class="stat-lbl">Review before payment request</div></div>
   <div class="stat-cell"><div class="stat-val">3d</div><div class="stat-lbl">Standard delivery target</div></div>
 </div>
 
+<section class="section paper" id="quick-answer">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">Quick answer</div>
+    <h2 class="sec-h2">What is an App Store Growth Brief?</h2>
+    <p class="sec-sub">An App Store Growth Brief is a public-evidence review of one app listing that turns store-page copy, review themes, competitor contrast, and release-note signals into prioritized listing and trust fixes.</p>
+  </div>
+</section>
+
 <section id="deliverables" class="section cream">
+
   <div class="sec-inner">
     <div class="sec-eyebrow">The deliverable</div>
     <h2 class="sec-h2">What comes in the brief.</h2>
@@ -229,8 +359,8 @@
     <h2 class="sec-h2">See the brief before ordering.</h2>
     <p class="sec-sub">Anonymized public-evidence samples show scorecards, source boundaries, exact fixes, and no-guarantee ASO diagnostics.</p>
     <div class="grid two">
-      <div class="card"><div class="card-label">Sample</div><div class="card-title">Anonymized grocery app brief</div><div class="card-body">Apple public rating, rating count, and review-theme clusters expose metadata, release-note, screenshot-order, and support-reply fixes.</div><div class="sample-links"><a class="sample-link" href="/app-store-growth-brief/samples/grocery-app-growth-brief-sample.pdf">View PDF sample</a></div></div>
-      <div class="card"><div class="card-label">Sample</div><div class="card-title">Anonymized planner app brief</div><div class="card-body">Apple trust signals plus Google Play review themes expose Pro-clarity, sync-support, snippet, and release-note priorities.</div><div class="sample-links"><a class="sample-link" href="/app-store-growth-brief/samples/planner-app-growth-brief-sample.pdf">View PDF sample</a></div></div>
+      <div class="card"><div class="card-label">Final sample</div><div class="card-title">Polished App Store Growth Brief</div><div class="card-body">A professional final-report sample with listing scorecards, screenshot-by-screenshot recommendations, copy rewrites, competitor contrast, trust notes, and a 30-day plan. Sanitized and marked Needs Squatch review.</div><div class="sample-links"><a class="sample-link" href="/app-store-growth-brief/sample.html">View sample App Store Growth Brief</a></div></div>
+      <div class="card"><div class="card-label">Older PDF examples</div><div class="card-title">Anonymized public-evidence briefs</div><div class="card-body">Archived grocery and planner examples show earlier ASO diagnostic formats. Use the polished final sample above as the current buyer-facing model.</div><div class="sample-links"><a class="sample-link" href="/app-store-growth-brief/samples/grocery-app-growth-brief-sample.pdf">Grocery PDF</a><a class="sample-link" href="/app-store-growth-brief/samples/planner-app-growth-brief-sample.pdf">Planner PDF</a></div></div>
     </div>
   </div>
 </section>
@@ -242,6 +372,37 @@
     <div class="grid two">
       <div class="card"><div class="card-label">Agency</div><div class="card-title">Give clients proof-backed store fixes</div><div class="card-body">Show which store-page claims, review replies, screenshot priorities, and competitor gaps should change first.</div></div>
       <div class="card"><div class="card-label">Small app team</div><div class="card-title">Ship the next store update with evidence</div><div class="card-body">Get a concrete checklist for listing copy, screenshot order, release notes, support replies, trust gaps, and positioning.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section cream" id="workflow">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">How it works</div>
+    <h2 class="sec-h2">Submit the app first. Pay only after fit review.</h2>
+    <p class="sec-sub">RLAudits checks whether the public listing has enough evidence for a useful brief before requesting payment. No App Store Connect, Play Console, analytics, or private account access is needed for the initial review.</p>
+    <div class="grid">
+      <div class="card"><div class="step-num">01</div><div class="card-title">Send public listing links</div><div class="card-body">Submit your name, email, app team, App Store or Google Play URL, main growth concern, and any public competitor links.</div></div>
+      <div class="card"><div class="step-num">02</div><div class="card-title">RLAudits reviews fit</div><div class="card-body">If the listing has enough public evidence, RLAudits replies with the payment link and any cleanup questions. If not, the work is declined before money changes hands.</div></div>
+      <div class="card"><div class="step-num">03</div><div class="card-title">Brief is delivered</div><div class="card-body">After payment and clean intake, the standard delivery target is three business days for the PDF/HTML brief.</div></div>
+    </div>
+    <div class="grid two" style="margin-top:28px;">
+      <div class="card"><div class="card-label">What to send</div><div class="card-title">Public store links and context</div><div class="card-body">Send the App Store or Google Play URL, main growth concern, public competitor links if useful, target market, and any deadline RLAudits should know about.</div></div>
+      <div class="card"><div class="card-label">What not to send</div><div class="card-title">No private app or customer data</div><div class="card-body">Please do not send passwords, credentials, API keys, tokens, payment data, patient/medical records, regulated private data, or sensitive internal exports through this form. Send only public links, business context, and sanitized examples. If deeper access or sensitive material is ever needed, RLAudits will request it separately through a safer process. Do not send app-console exports, private analytics, user data, crash logs with private data, or sensitive screenshots.</div></div>
+      <div class="card"><div class="card-label">What you receive</div><div class="card-title">A source-backed growth brief</div><div class="card-body">If the brief is accepted and paid, RLAudits delivers listing fixes, review themes, competitor context when inspectable, source-confidence labels, and a 30-day update sequence.</div></div>
+      <div class="card"><div class="card-label">Payment timing</div><div class="card-title">Fit review comes first</div><div class="card-body">RLAudits requests payment only after confirming the public evidence is strong enough for a useful brief.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section paper" id="after-submit">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">After you submit</div>
+    <h2 class="sec-h2">Fit review prevents bad briefs.</h2>
+    <div class="grid">
+      <div class="card"><div class="step-num">01</div><div class="card-title">Public listing checked</div><div class="card-body">RLAudits verifies the App Store or Google Play page has enough public evidence for a useful brief.</div></div>
+      <div class="card"><div class="step-num">02</div><div class="card-title">Payment only if accepted</div><div class="card-body">If the listing is a fit, RLAudits replies with payment instructions and any evidence questions. If not, the work is declined before money changes hands.</div></div>
+      <div class="card"><div class="step-num">03</div><div class="card-title">Brief delivered</div><div class="card-body">The final brief gives listing copy fixes, review themes, competitor context when inspectable, and a 30-day update sequence.</div></div>
     </div>
   </div>
 </section>
@@ -261,35 +422,39 @@
         <li><span>✓</span><span>30-day update sequence</span></li>
         <li><span>✓</span><span>Source notes, limits, and no-guarantee labels</span></li>
       </ul>
-      <p class="pricing-sub">$49 pilot slots are for first validation customers who agree to a short feedback call after delivery.</p>
+      <p class="pricing-sub">Intake is free. RLAudits reviews fit first and sends a payment link only if the brief is appropriate to take on.</p>
     </aside>
 
     <div class="pricing-card form-panel" id="intake-panel">
-      <div class="pricing-intro">Order intake</div>
-      <h2 class="pricing-h2">Send the app. Then checkout.</h2>
-      <form class="intake-form" id="order-intake" action="https://formsubmit.co/orders@rlaudits.com" method="POST">
-        <input type="hidden" name="_subject" id="form-subject" value="App Store Growth Brief intake">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" id="next-url" value="https://buy.stripe.com/00w4gAc0P29C2Pg8zO5AQ00">
-        <input type="hidden" name="_autoresponse" id="customer-autoresponse" value="">
-        <input type="hidden" name="_replyto" id="customer-reply-to" value="">
-        <input type="hidden" name="email" id="customer-email-field" value="">
-        <input type="hidden" name="Confirmation" value="Your RL Audits App Store Growth Brief intake form has been submitted.">
-        <input type="hidden" name="Selected offer" id="selected-offer" value="Standard App Store Growth Brief order ($79)">
-        <input type="hidden" name="Submitted at" id="submitted-at" value="">
-        <div class="field"><label for="work-email">Work email</label><input id="work-email" name="Work email" type="email" autocomplete="email" required></div>
-        <div class="field"><label for="team-type">Agency or app team</label><input id="team-type" name="Agency or app team" type="text" autocomplete="organization"></div>
-        <div class="field wide"><label for="apple-url">Apple App Store URL</label><input id="apple-url" name="Apple App Store URL" type="text" inputmode="url" required></div>
-        <div class="field wide"><label for="google-url">Google Play URL or package name, if available</label><input id="google-url" name="Google Play URL or package name" type="text" inputmode="url"></div>
-        <div class="field"><label for="target-country">Target country</label><input id="target-country" name="Target country" type="text" value="United States"></div>
-        <div class="field"><label for="release-window">Next release window</label><input id="release-window" name="Next release window" type="text" placeholder="Example: next 30 days"></div>
-        <div class="field wide"><label for="main-concern">Main concern</label><textarea id="main-concern" name="Main concern" placeholder="Listing clarity, review friction, Pro conversion, support trust, competitor positioning, or other"></textarea></div>
-        <p class="form-note">Submit the intake to send your app details to RL Audits. You should receive a short confirmation email at the address you enter. If the form fails, email <a href="/contact/?subject=App%20Store%20Growth%20Brief%20intake">orders@rlaudits.com</a>.</p>
+      <div class="pricing-intro">Fit review intake</div>
+      <h2 class="pricing-h2">Send the app. We review fit before payment.</h2>
+      <form data-track-form="App Store Growth Brief intake" class="intake-form" id="order-intake" action="https://api.rlaudits.com/api/app-store-growth-intake" method="POST">
+        <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field wide"><label for="company">Company / app team</label><input id="company" name="company" type="text" autocomplete="organization" required></div>
+        <div class="field wide"><label for="app-url">App Store or Google Play listing URL</label><input id="app-url" name="app_url" type="url" inputmode="url" placeholder="https://apps.apple.com/us/app/name/id123456789 or https://play.google.com/store/apps/details?id=com.example.app" required><p class="form-note">Use the public Apple App Store or Google Play listing URL, not a company website, landing page, search results page, or private console link.</p></div>
+        <div class="field wide"><label for="growth-concern">Main growth concern</label><select id="growth-concern" name="growth_concern" required>
+          <option value="">Choose one</option>
+          <option value="conversion">Conversion from listing views</option>
+          <option value="screenshots">Screenshots / creative</option>
+          <option value="reviews">Reviews / trust</option>
+          <option value="positioning">Positioning / messaging</option>
+          <option value="keywords">Keywords / discoverability</option>
+          <option value="competitor_comparison">Competitor comparison</option>
+          <option value="other">Other</option>
+        </select></div>
+        <div class="field wide"><label for="competitor-urls">Competitor app URLs (optional)</label><textarea id="competitor-urls" name="competitor_urls" placeholder="Public App Store or Google Play competitor links"></textarea></div>
+        <div class="field"><label for="target-market">Target market (optional)</label><input id="target-market" name="target_market" type="text" placeholder="Example: US productivity teams"></div>
+        <div class="field"><label for="deadline">Notes / deadline needed-by (optional)</label><input id="deadline" name="deadline" type="text" placeholder="Example: before June launch"></div>
+        <div class="checkbox-field">
+          <input id="safe-material" name="sanitization_confirmation" type="checkbox" value="I confirm I will not send passwords, credentials, API keys, tokens, payment data, patient/medical records, regulated private data, sensitive internal exports, or screenshots containing private records through this form." required>
+          <label for="safe-material">I confirm I will not send passwords, credentials, API keys, tokens, payment data, patient/medical records, regulated private data, sensitive internal exports, app-console exports, private analytics, user data, crash logs with private data, or sensitive screenshots through this form.</label>
+        </div>
+        <div class="field wide" aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;"><label for="website">Website</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <p class="form-note">Submit the intake for fit review. RLAudits replies before requesting payment and declines poor-fit briefs before money changes hands. If the form fails, email <a href="mailto:orders@rlaudits.com">orders@rlaudits.com</a>.</p>
         <div class="submission-status" id="submission-status" role="status" aria-live="polite">Sending intake...</div>
         <div class="form-buttons">
-          <button class="pricing-cta" type="submit" data-intake-action="standard">Order the $79 brief</button>
-          <button class="pricing-cta secondary-submit" type="submit" data-intake-action="pilot">Request pilot slot</button>
+          <button class="pricing-cta" type="submit">Submit intake for fit review</button>
         </div>
       </form>
       <div class="pricing-note">No ranking, install, revenue, rating, conversion, policy, or sentiment guarantee.</div>
@@ -300,8 +465,8 @@
         <div class="intake-modal-kicker">Intake submitted</div>
         <h2 class="intake-modal-title" id="intake-modal-title">Your form has been submitted.</h2>
         <div class="intake-modal-body">
-          <p>Your information was sent to RL Audits. You should receive a short email confirmation using the address you entered.</p>
-          <p>A representative of RL Audits will follow up by email or call using the details you entered.</p>
+          <p>Your information was sent to RLAudits. You should receive a short email confirmation using the address you entered.</p>
+          <p>RLAudits will review the public app listing and reply if the brief is appropriate to take on. Payment happens after that fit review, not before.</p>
           <p>If that still does not work, email <a href="mailto:orders@rlaudits.com">orders@rlaudits.com</a> for assistance.</p>
         </div>
         <div class="intake-modal-timer" id="intake-modal-timer">This message will reset in 30 seconds.</div>
@@ -317,8 +482,9 @@
     <div class="faq">
       <details open><summary>Do you need App Store Connect or Play Console access?</summary><p>No for the initial brief. The first paid report uses public Apple App Store and Google Play evidence when feasible. Private account access is optional later for implementation workflows, not required to order.</p></details>
       <details><summary>What if the app is Apple-only or Android-only?</summary><p>We still inspect cross-store availability. If the other store has no useful public counterpart, too little evidence, or is intentionally out of scope, the brief states that boundary instead of pretending the evidence is complete.</p></details>
-      <details><summary>What is the delivery promise?</summary><p>Standard delivery target is three business days after clean intake and payment. Pilot delivery target is five business days if feedback-call scheduling is included.</p></details>
-      <details><summary>What is refundable?</summary><p>If RL Audits cannot produce a useful source-backed brief because public evidence is unavailable or too thin, the order is refunded or converted into a different target before work starts.</p></details>
+      <details><summary>What is the delivery promise?</summary><p>RLAudits first reviews whether the public listing has enough evidence for a useful brief. If accepted and paid, standard delivery target is three business days after clean intake and payment.</p></details>
+      <details><summary>What is refundable?</summary><p>Payment is requested only after fit review. If RLAudits cannot produce a useful source-backed brief after accepting payment because public evidence is unavailable or too thin, the order is refunded or converted into a different target before work starts.</p></details>
+      <details><summary>Does the brief guarantee better rankings or installs?</summary><p>No. The brief gives evidence-backed listing, review, positioning, and release-note recommendations. Store rankings, installs, revenue, ratings, and policy outcomes are not guaranteed.</p></details>
     </div>
   </div>
 </section>
@@ -329,7 +495,8 @@
     <a href="/">Home</a>
     <a href="/revenue-audit/">Revenue Audit</a>
     <a href="/it-ops-audit/">IT Ops Audit</a>
-    <a href="/contact/">seth@rlaudits.com</a>
+    <a href="/app-store-growth-brief/">App Store Brief</a>
+    <a href="/contact/">Contact</a>
   </div>
 </footer>
 <script>
@@ -339,30 +506,9 @@
     const modal = document.getElementById('intake-modal');
     const modalClose = document.getElementById('intake-modal-close');
     const modalTimer = document.getElementById('intake-modal-timer');
-    const subject = document.getElementById('form-subject');
-    const selectedOffer = document.getElementById('selected-offer');
-    const nextUrl = document.getElementById('next-url');
     const status = document.getElementById('submission-status');
-    const workEmail = document.getElementById('work-email');
-    const customerAutoresponse = document.getElementById('customer-autoresponse');
-    const customerReplyTo = document.getElementById('customer-reply-to');
-    const customerEmailField = document.getElementById('customer-email-field');
-    const submittedAt = document.getElementById('submitted-at');
-    const stripeCheckoutUrl = 'https://buy.stripe.com/00w4gAc0P29C2Pg8zO5AQ00';
-    let action = 'standard';
     let resetTimer = null;
     let countdownTimer = null;
-
-    function setAction(mode) {
-      action = mode || 'standard';
-    }
-
-    document.querySelectorAll('[data-intake-action]').forEach((button) => {
-      button.addEventListener('click', () => { setAction(button.dataset.intakeAction); });
-    });
-    document.querySelectorAll('[data-start-mode]').forEach((link) => {
-      link.addEventListener('click', () => { setAction(link.dataset.startMode); });
-    });
 
     function setButtonsDisabled(disabled) {
       form.querySelectorAll('button[type="submit"]').forEach((button) => { button.disabled = disabled; });
@@ -384,35 +530,6 @@
       status.textContent = 'Sending intake...';
       setButtonsDisabled(false);
       form.reset();
-      nextUrl.value = stripeCheckoutUrl;
-      selectedOffer.value = 'Standard App Store Growth Brief order ($79)';
-      submittedAt.value = '';
-      customerAutoresponse.value = '';
-      setAction('standard');
-    }
-
-    function fieldValue(id) {
-      const field = document.getElementById(id);
-      return field && field.value ? field.value.trim() : 'Not provided';
-    }
-
-    function buildCustomerAutoresponse(offer, timestamp) {
-      return [
-        'Your RL Audits App Store Growth Brief intake form has been submitted.',
-        '',
-        'Submission recap:',
-        `Submitted at: ${timestamp}`,
-        `Selected offer: ${offer}`,
-        `Work email: ${fieldValue('work-email')}`,
-        `Agency or app team: ${fieldValue('team-type')}`,
-        `Apple App Store URL: ${fieldValue('apple-url')}`,
-        `Google Play URL or package name: ${fieldValue('google-url')}`,
-        `Target country: ${fieldValue('target-country')}`,
-        `Next release window: ${fieldValue('release-window')}`,
-        `Main concern: ${fieldValue('main-concern')}`,
-        '',
-        'RL Audits will follow up by email or call. If this confirmation looks wrong, contact orders@rlaudits.com.'
-      ].join('\n');
     }
 
     function showSuccessModal() {
@@ -436,43 +553,18 @@
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      const mode = action;
-      const submitter = event.submitter;
-      const customerEmail = (workEmail.value || '').trim();
-      const subjectLine = mode === 'pilot' ? 'Pilot slot request' : 'App Store Growth Brief intake';
-      const checkoutWindow = mode === 'standard' ? window.open(stripeCheckoutUrl, '_blank', 'noopener') : null;
-
-      subject.value = subjectLine;
-      selectedOffer.value = mode === 'pilot' ? 'Pilot slot request ($49, approval required)' : 'Standard App Store Growth Brief order ($79)';
-      nextUrl.value = 'https://rlaudits.com/app-store-growth-brief/thank-you.html';
-      submittedAt.value = new Date().toLocaleString('en-US', {
-        timeZoneName: 'short',
-        year: 'numeric',
-        month: 'short',
-        day: '2-digit',
-        hour: 'numeric',
-        minute: '2-digit'
-      });
-      customerAutoresponse.value = buildCustomerAutoresponse(selectedOffer.value, submittedAt.value);
-      customerReplyTo.value = customerEmail;
-      customerEmailField.value = customerEmail;
-
       status.classList.add('is-visible');
-      status.textContent = mode === 'pilot'
-        ? 'Sending pilot request. RL Audits will review it before payment.'
-        : checkoutWindow
-          ? 'Sending intake. Secure payment is ready.'
-          : 'Sending intake. If the payment page did not open, allow popups and submit again.';
+      status.textContent = 'Sending intake for fit review...';
       setButtonsDisabled(true);
 
       try {
         const formData = new FormData(form);
-        const response = await fetch('https://formsubmit.co/ajax/orders@rlaudits.com', {
+        const response = await fetch(form.action, {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
-          body: formData
+          body: new URLSearchParams(formData)
         });
-        if (!response.ok) throw new Error('FormSubmit did not accept the intake.');
+        if (!response.ok) throw new Error('RLAudits intake endpoint did not accept the form.');
         showSuccessModal();
       } catch (error) {
         status.classList.add('is-visible');
@@ -482,5 +574,6 @@
     });
   })();
 </script>
+<script defer src="/assets/rlaudits-tracking.js"></script>
 </body>
 </html>

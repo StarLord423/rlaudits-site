@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Local Business Revenue Audit — RL Audits</title>
 <meta name="description" content="A private revenue audit for small local businesses. Find review, reputation, website, booking, and competitor gaps that cost trust and sales.">
+<link rel="canonical" href="https://rlaudits.com/revenue-audit/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Local Business Revenue Audit — RL Audits">
+<meta property="og:description" content="A private revenue audit for small local businesses. Find review, reputation, website, booking, and competitor gaps that cost trust and sales.">
+<meta property="og:url" content="https://rlaudits.com/revenue-audit/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Local Business Revenue Audit — RL Audits">
+<meta name="twitter:description" content="A private revenue audit for small local businesses. Find review, reputation, website, booking, and competitor gaps that cost trust and sales.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
@@ -144,6 +152,29 @@
   .pricing-cta:hover { background: var(--gold-soft); }
   .pricing-note { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.28); text-align: center; margin-top: 10px; }
 
+
+  .intake-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
+  .intake-panel { background: #fff; border: 1px solid var(--rule); border-top: 4px solid var(--gold); padding: 28px 26px; }
+  .intake-panel h3 { font-size: 18px; margin-bottom: 10px; }
+  .intake-panel p, .intake-panel li { font-size: 13.5px; color: var(--ink2); line-height: 1.6; }
+  .intake-list { margin: 14px 0 0 18px; padding-left: 0; }
+  .intake-form { display: grid; gap: 13px; }
+  .intake-form label { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3); }
+  .intake-form input, .intake-form textarea, .intake-form select { width: 100%; margin-top: 6px; padding: 12px; border: 1px solid var(--rule); background: #fff; color: var(--ink); font: 14px var(--sans); }
+  .intake-form textarea { min-height: 104px; resize: vertical; }
+  .boundary-box { margin-top: 16px; padding: 16px; background: var(--cream); border: 1px solid var(--rule); }
+  .boundary-box strong { color: var(--ink); }
+  .form-note { font-size: 12.5px; color: var(--ink2); line-height: 1.55; }
+  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .form-alert { display: none; padding: 12px 14px; background: #FFF4E1; border: 1px solid var(--gold-soft); color: var(--ink); font-size: 13px; line-height: 1.5; }
+  .form-alert.is-visible { display: block; }
+  .form-submit { border: 0; padding: 15px 24px; background: var(--gold); color: var(--navy); font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
+  .form-submit:hover { background: var(--gold-soft); }
+  .faq { display: grid; gap: 12px; }
+  details { background: #fff; border: 1px solid var(--rule); padding: 20px 22px; }
+  summary { cursor: pointer; font-weight: 800; font-size: 15px; }
+  details p { margin-top: 12px; color: var(--ink2); line-height: 1.55; font-size: 14px; }
+
   /* FOOTER */
   .site-footer { background: var(--navy-deep); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); }
   .footer-brand { display: flex; align-items: center; gap: 8px; }
@@ -158,7 +189,7 @@
   @media (max-width: 900px) {
     .hero-inner, .pricing-inner { grid-template-columns: 1fr; }
     .dash-mockup-wrap { display: none; }
-    .what-grid, .steps-grid { grid-template-columns: 1fr; }
+    .what-grid, .steps-grid, .intake-wrap { grid-template-columns: 1fr; }
     .stats-strip { grid-template-columns: 1fr; }
     .stat-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
     .site-nav, .hero, .what-section, .how-section, .pricing-section, .site-footer { padding-left: 24px; padding-right: 24px; }
@@ -166,8 +197,117 @@
     .hero-h1 { font-size: 36px; }
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "ProfessionalService"
+      ],
+      "@id": "https://rlaudits.com/#organization",
+      "name": "RL Audits",
+      "url": "https://rlaudits.com/",
+      "email": "seth@rlaudits.com",
+      "areaServed": [
+        "Chattanooga, TN",
+        "United States"
+      ],
+      "description": "RL Audits creates private, evidence-first audit reports for revenue leaks, IT operations cleanup, and app store growth briefs.",
+      "sameAs": []
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rlaudits.com/revenue-audit/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://rlaudits.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Revenue Audit",
+          "item": "https://rlaudits.com/revenue-audit/"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://rlaudits.com/revenue-audit/#service",
+      "name": "Revenue Audit",
+      "serviceType": "Local business revenue audit",
+      "description": "A private review of public sales-path evidence, reputation signals, booking friction, local competitors, and buyer trust gaps.",
+      "provider": {
+        "@id": "https://rlaudits.com/#organization"
+      },
+      "areaServed": [
+        "United States",
+        "Chattanooga, TN"
+      ],
+      "url": "https://rlaudits.com/revenue-audit/",
+      "offers": {
+        "@type": "Offer",
+        "price": "297",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://rlaudits.com/revenue-audit/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rlaudits.com/revenue-audit/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What to send",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Send public links, business context, service area, a public competitor if useful, and a short description of the revenue concern."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What not to send",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Please do not send passwords, credentials, API keys, tokens, payment data, patient/medical records, regulated private data, or sensitive internal exports through this form. Send only public links, business context, and sanitized examples. If deeper access or sensitive material is ever needed, RLAudits will request it separately through a safer process."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you need analytics or ad account access?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The standard Revenue Audit is built from public sales-path evidence and sanitized buyer context. If deeper access is ever useful, RLAudits will discuss a safer process separately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the audit actually fix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It does not fix the business for you. It identifies the visible leaks, ranks them, and gives your team a practical order of operations for the next 30 days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this only for med spas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Med spas and clinics are useful examples, but the audit can fit local service businesses where reviews, local search, website clarity, and booking paths affect buyer trust."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
-<body>
+<body data-track-service="Revenue Audit">
 
 <!-- NAV -->
 <nav class="site-nav">
@@ -181,7 +321,7 @@
     <a href="/it-ops-audit/">IT Ops Audit</a>
     <a href="/app-store-growth-brief/">App Store Brief</a>
   </div>
-  <a href="/contact/?subject=Audit%20Request" class="nav-cta">Get your audit</a>
+  <a href="#intake" class="nav-cta">Get your audit</a>
 </nav>
 
 <!-- HERO -->
@@ -192,8 +332,8 @@
       <div class="hero-eyebrow">Small local business revenue audit</div>
       <h1 class="hero-h1">Find the leaks costing your local business <em>calls, bookings, and trust.</em></h1>
       <p class="hero-sub">A private boardroom-grade audit built from public reviews, competitor positioning, website friction, and customer-facing trust signals. Delivered with a ranked 30-day fix plan.</p>
-      <a href="/contact/?subject=Audit%20Request" class="hero-cta">Get your audit — $297</a>
-      <div class="hero-cta-note">Introductory rate &nbsp;·&nbsp; 5-day delivery &nbsp;·&nbsp; includes debrief call</div>
+      <a href="#intake" class="hero-cta">Start Revenue Audit intake — $297</a>
+      <div class="hero-cta-note">Introductory rate &nbsp;·&nbsp; 5-day delivery &nbsp;·&nbsp; includes debrief call &nbsp;·&nbsp; <a style="color: var(--gold-soft);" href="/revenue-audit/sample.html">View sample Revenue Audit</a></div>
     </div>
     <div class="dash-mockup-wrap">
       <div class="dash-mockup">
@@ -244,7 +384,7 @@
             <div class="dash-fix">
               <div class="dash-fix-rank"><div class="dash-fix-circle">02</div></div>
               <div class="dash-fix-body"><div class="dash-fix-title">Align hours across all profiles</div><div class="dash-fix-sub">Google, Yelp, website, and directories show different Friday hours</div></div>
-              <div class="dash-fix-right"><div class="dash-fix-dollar">+$32K</div><div class="dash-fix-badge">Quick win</div></div>
+              <div class="dash-fix-right"><div class="dash-fix-dollar">High</div><div class="dash-fix-badge">Quick win</div></div>
             </div>
             <div class="dash-fix">
               <div class="dash-fix-rank"><div class="dash-fix-circle">03</div></div>
@@ -275,6 +415,15 @@
 </div>
 
 <!-- WHAT YOU GET -->
+
+<section class="what-section" id="quick-answer">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">Quick answer</div>
+    <h2 class="sec-h2">What is a Revenue Audit?</h2>
+    <p class="sec-sub">A Revenue Audit is a private review of the visible sales path: reviews, trust signals, website clarity, contact friction, local competitors, and the next steps most likely to improve buyer confidence.</p>
+  </div>
+</section>
+
 <section class="what-section" id="what">
   <div class="sec-inner">
     <div class="sec-eyebrow">The deliverable</div>
@@ -311,6 +460,11 @@
         <div class="what-card-title">Walk through it together</div>
         <div class="what-card-body">We review every finding live, answer your questions, and help you prioritize where to put your energy first.</div>
       </div>
+      <div class="what-card">
+        <div class="what-card-lbl">Sample report</div>
+        <div class="what-card-title">See the deliverable before you ask</div>
+        <div class="what-card-body">Review a sanitized fictional sample showing the executive summary, evidence labels, ranked findings, quick wins, and 30-day plan. <a style="color: var(--gold); font-weight: 800;" href="/revenue-audit/sample.html">View sample Revenue Audit</a>.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -320,23 +474,123 @@
   <div class="sec-inner">
     <div class="sec-eyebrow">How it works</div>
     <h2 class="sec-h2">Three steps. Five days.</h2>
-    <p class="sec-sub">No intake forms. No lengthy onboarding. Send us your business name and we handle the rest.</p>
+    <p class="sec-sub">A short intake gives RLAudits the public links and business context needed to start cleanly. No logins. No file uploads. No sensitive exports.</p>
     <div class="steps-grid">
       <div class="step-card">
         <div class="step-num">01</div>
         <div class="step-title">You book the audit</div>
-        <div class="step-body">Email us your business name and city. We confirm within one business day and get to work. No calls required to start.</div>
+        <div class="step-body">Submit the short intake form with your business name, website, main concern, and any public local links you already have. RLAudits confirms fit before starting.</div>
       </div>
       <div class="step-card">
         <div class="step-num">02</div>
         <div class="step-title">We build your report</div>
-        <div class="step-body">We analyze your public reviews, map 3–5 local competitors, and score your booking path. All public sources — no account access needed.</div>
+        <div class="step-body">RLAudits reviews your public website, local presence, reviews, competitor positioning, offer clarity, and contact or booking path. Public evidence only unless a safer process is agreed separately.</div>
       </div>
       <div class="step-card">
         <div class="step-num">03</div>
         <div class="step-title">You get the debrief</div>
-        <div class="step-body">Your private boardroom report lands in your inbox. A 45-minute call walks you through every finding and the 30-day plan.</div>
+        <div class="step-body">Your private boardroom report lands in your inbox with ranked fixes, evidence links, and a 30-day action plan. A 45-minute call walks through the priorities.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTAKE -->
+<section id="intake" class="how-section">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">Request intake</div>
+    <h2 class="sec-h2">Send the safe version of the sales problem.</h2>
+    <p class="sec-sub">Use this form to request the Revenue Audit and point RLAudits at the public evidence. Do not upload private records or send logins. If deeper material is ever needed, it will be requested separately through a safer process.</p>
+    <div class="intake-wrap">
+      <div class="intake-panel">
+        <h3>What to send</h3>
+        <p>Plain answers are enough. The useful intake covers:</p>
+        <ul class="intake-list">
+          <li>Name, email, business name, and website URL.</li>
+          <li>Main revenue concern: calls, bookings, trust, reviews, local SEO, slow site, unclear offer, or other.</li>
+          <li>Optional public links: Google Business Profile, service area, a top competitor, and any deadline or context.</li>
+        </ul>
+        <div class="boundary-box">
+          <p><strong>What not to send:</strong> Please do not send passwords, credentials, API keys, tokens, payment data, patient/medical records, regulated private data, or sensitive internal exports through this form. Send only public links, business context, and sanitized examples. If deeper access or sensitive material is ever needed, RLAudits will request it separately through a safer process.</p>
+        </div>
+      </div>
+      <form data-track-form="Revenue Audit intake" class="intake-panel intake-form" action="https://api.rlaudits.com/api/revenue-audit-intake" method="POST">
+        <div id="form-alert" class="form-alert" role="alert">The intake did not go through. Check the required fields and try again, or email seth@rlaudits.com directly.</div>
+        <label class="hp-field" aria-hidden="true" tabindex="-1">Website
+          <input type="text" name="website" autocomplete="off" tabindex="-1">
+        </label>
+        <label>Your name
+          <input name="name" autocomplete="name" required>
+        </label>
+        <label>Work email
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>Business name
+          <input name="business_name" autocomplete="organization" required>
+        </label>
+        <label>Website URL
+          <input type="url" name="website_url" inputmode="url" placeholder="https://example.com" required>
+        </label>
+        <label>Main revenue concern
+          <select name="main_revenue_concern" required>
+            <option value="">Choose one</option>
+            <option value="calls">Not enough calls</option>
+            <option value="bookings">Not enough bookings / quote requests</option>
+            <option value="trust">Trust or proof feels weak</option>
+            <option value="reviews">Reviews or reputation</option>
+            <option value="local SEO">Local SEO / Google visibility</option>
+            <option value="slow site">Slow or confusing website</option>
+            <option value="unclear offer">Unclear offer or next step</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <label>Google Business Profile URL <span aria-hidden="true">(optional)</span>
+          <input type="url" name="google_business_profile_url" inputmode="url" placeholder="https://maps.google.com/...">
+        </label>
+        <label>Primary service area <span aria-hidden="true">(optional)</span>
+          <input name="primary_service_area" placeholder="Example: Chattanooga, TN and nearby suburbs">
+        </label>
+        <label>Top competitor URL <span aria-hidden="true">(optional)</span>
+          <input type="url" name="top_competitor_url" inputmode="url" placeholder="https://competitor.example">
+        </label>
+        <label>Notes / deadline needed-by <span aria-hidden="true">(optional)</span>
+          <textarea name="notes_deadline" placeholder="Anything specific to check, upcoming deadline, or context RLAudits should know."></textarea>
+        </label>
+        <label>Safe-material acknowledgement
+          <select name="sanitization_confirmation" required>
+            <option value="">Choose one</option>
+            <option>I confirm I will not send passwords, credentials, API keys, tokens, payment data, patient/medical records, regulated private data, sensitive internal exports, or screenshots containing private records through this form.</option>
+          </select>
+        </label>
+        <p class="form-note">This form sends intake details only. RLAudits reviews fit first, then replies with next steps, timing, and any payment/debrief details.</p>
+        <button class="form-submit" type="submit">Send Revenue Audit intake</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="how-section">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">Safe data summary</div>
+    <h2 class="sec-h2">Public evidence first. Sensitive material never goes in the form.</h2>
+    <div class="faq">
+      <details open><summary>What to send</summary><p>Send public links, business context, service area, a public competitor if useful, and a short description of the revenue concern.</p></details>
+      <details><summary>What not to send</summary><p>Please do not send passwords, credentials, API keys, tokens, payment data, patient/medical records, regulated private data, or sensitive internal exports through this form. Send only public links, business context, and sanitized examples. If deeper access or sensitive material is ever needed, RLAudits will request it separately through a safer process.</p></details>
+      <details><summary>Do you need analytics or ad account access?</summary><p>No. The standard Revenue Audit is built from public sales-path evidence and sanitized buyer context. If deeper access is ever useful, RLAudits will discuss a safer process separately.</p></details>
+      <details><summary>What does the audit actually fix?</summary><p>It does not fix the business for you. It identifies the visible leaks, ranks them, and gives your team a practical order of operations for the next 30 days.</p></details>
+      <details><summary>Is this only for med spas?</summary><p>No. Med spas and clinics are useful examples, but the audit can fit local service businesses where reviews, local search, website clarity, and booking paths affect buyer trust.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="how-section" id="after-submit">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">After you submit</div>
+    <h2 class="sec-h2">What happens next is intentionally simple.</h2>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">01</div><div class="step-title">Fit check</div><div class="step-body">RLAudits confirms the public evidence is enough for a useful Revenue Audit and may ask one or two cleanup questions.</div></div>
+      <div class="step-card"><div class="step-num">02</div><div class="step-title">Report build</div><div class="step-body">The audit reviews reviews, website path, trust proof, competitor context, and contact friction, then ranks the fixes.</div></div>
+      <div class="step-card"><div class="step-num">03</div><div class="step-title">Delivery and debrief</div><div class="step-body">You receive the private report, 30-day action plan, and debrief call so the first fixes are obvious.</div></div>
     </div>
   </div>
 </section>
@@ -364,8 +618,8 @@
           <li><span>✓</span><span>30-day action plan</span></li>
           <li><span>✓</span><span>45-minute debrief call</span></li>
         </ul>
-        <a href="/contact/?subject=Audit%20Request%20%E2%80%94%20%24297" class="pricing-cta">Get your audit</a>
-        <div class="pricing-note">Email seth@rlaudits.com to get started</div>
+        <a href="#intake" class="pricing-cta">Start Revenue Audit intake</a>
+        <div class="pricing-note">Fit reviewed before work starts</div>
       </div>
     </div>
   </div>
@@ -379,11 +633,17 @@
   </div>
   <div class="footer-links">
     <a href="/">Home</a>
-    <a href="/app-store-growth-brief/">App Store Growth Brief</a>
+    <a href="/revenue-audit/">Revenue Audit</a>
     <a href="/it-ops-audit/">IT Ops Audit</a>
-    <a href="/contact/">seth@rlaudits.com</a>
+    <a href="/app-store-growth-brief/">App Store Brief</a>
+    <a href="/contact/">Contact</a>
   </div>
 </footer>
 
+<script>
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('error')) document.getElementById('form-alert').classList.add('is-visible');
+</script>
+<script defer src="/assets/rlaudits-tracking.js"></script>
 </body>
 </html>

@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RL Audits — Growth, Reputation, and Operations Audits</title>
 <meta name="description" content="Private audit reports for growth, reputation, and operations. RL Audits turns evidence into ranked fix plans your team can act on in 30 days.">
+<link rel="canonical" href="https://rlaudits.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="RL Audits — Growth, Reputation, and Operations Audits">
+<meta property="og:description" content="Private audit reports for growth, reputation, and operations. RL Audits turns evidence into ranked fix plans your team can act on in 30 days.">
+<meta property="og:url" content="https://rlaudits.com/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RL Audits — Growth, Reputation, and Operations Audits">
+<meta name="twitter:description" content="Private audit reports for growth, reputation, and operations. RL Audits turns evidence into ranked fix plans your team can act on in 30 days.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
@@ -112,6 +120,17 @@
   .service-cta { margin-top: auto; display: inline-flex; width: fit-content; padding: 11px 16px; background: var(--navy); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
   .service-cta:hover { background: var(--navy-deep); }
 
+  .proof-panel { background: #fff; border: 1px solid var(--rule); border-top: 4px solid var(--gold); display: grid; grid-template-columns: 1fr 320px; gap: 28px; align-items: center; padding: 34px 32px; }
+  .proof-copy p { color: var(--ink2); font-size: 15px; line-height: 1.65; margin-top: 8px; }
+  .proof-points { list-style: none; display: grid; gap: 10px; margin-top: 18px; }
+  .proof-points li { display: grid; grid-template-columns: 16px 1fr; gap: 8px; color: var(--ink2); font-size: 13.5px; line-height: 1.45; }
+  .proof-points li span:first-child { color: var(--gold); }
+  .proof-box { background: var(--navy); color: #fff; padding: 26px 24px; }
+  .proof-box-label { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 10px; }
+  .proof-box-title { font-family: var(--serif); font-size: 28px; line-height: 1.1; margin-bottom: 14px; }
+  .proof-box p { color: rgba(255,255,255,.72); font-size: 13.5px; line-height: 1.6; margin-bottom: 18px; }
+  .proof-cta { display: inline-flex; padding: 12px 16px; background: var(--gold); color: var(--navy); font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+
   .process-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
   .step-card { background: #fff; border: 1px solid var(--rule); padding: 30px 28px; }
   .step-num { font-family: var(--serif); font-size: 58px; color: var(--rule); line-height: 1; margin-bottom: 16px; }
@@ -121,11 +140,20 @@
   .pricing-section { padding: 96px 48px; background: var(--navy); color: #fff; position: relative; overflow: hidden; }
   .pricing-texture { position: absolute; inset: 0; background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px); background-size: 48px 48px; opacity: .03; pointer-events: none; }
   .pricing-inner { position: relative; max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; }
+  #start-here .pricing-inner { grid-template-columns: 1fr; }
+  #start-here .contact-card { max-width: 520px; }
   .pricing-h2 { font-family: var(--serif); font-size: clamp(34px, 4vw, 46px); line-height: 1.1; font-weight: 500; margin-bottom: 16px; }
   .pricing-sub { font-size: 15px; color: rgba(255,255,255,.68); line-height: 1.65; max-width: 620px; }
   .contact-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); padding: 34px 32px; }
   .contact-title { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
   .contact-copy { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.72); margin-bottom: 22px; }
+  .route-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 28px; }
+  .route-card { background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.13); padding: 22px 20px; display: flex; flex-direction: column; min-height: 230px; }
+  .route-label { font-family: var(--mono); font-size: 9px; color: var(--gold-soft); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 10px; }
+  .route-title { color: #fff; font-size: 16px; font-weight: 800; line-height: 1.3; margin-bottom: 10px; }
+  .route-copy { color: rgba(255,255,255,.68); font-size: 13.5px; line-height: 1.55; margin-bottom: 18px; }
+  .route-link { margin-top: auto; display: inline-flex; width: fit-content; padding: 10px 13px; border: 1px solid rgba(212,176,116,.45); color: var(--gold-soft); font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+  .route-link:hover { background: rgba(212,176,116,.12); }
   .pricing-cta { display: block; text-align: center; padding: 14px 24px; background: var(--gold); color: var(--navy); font-size: 13.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
   .pricing-note { font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.28); text-align: center; margin-top: 10px; }
 
@@ -138,19 +166,108 @@
   .footer-links a { color: rgba(255,255,255,.4); }
   .footer-links a:hover { color: var(--gold-soft); }
 
+
+  .answer-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+  .answer-card { background: #fff; border: 1px solid var(--rule); border-top: 4px solid var(--gold); padding: 26px 24px; }
+  .answer-card h3 { font-size: 17px; margin-bottom: 8px; }
+  .answer-card p { font-size: 13.5px; color: var(--ink2); line-height: 1.6; }
+  .faq { display: grid; gap: 12px; }
+  details { background: #fff; border: 1px solid var(--rule); padding: 20px 22px; }
+  summary { cursor: pointer; font-weight: 800; font-size: 15px; }
+  details p { margin-top: 12px; color: var(--ink2); line-height: 1.55; font-size: 14px; }
+
   @media (max-width: 980px) {
     .site-nav { position: static; padding: 16px 24px; flex-direction: column; align-items: flex-start; }
     .nav-links { flex-wrap: wrap; gap: 14px; }
-    .hero-inner, .pricing-inner { grid-template-columns: 1fr; }
-    .services-grid, .process-grid, .stats-strip { grid-template-columns: 1fr; }
+    .hero-inner, .pricing-inner, .proof-panel { grid-template-columns: 1fr; }
+    .services-grid, .process-grid, .stats-strip, .answer-grid, .route-grid { grid-template-columns: 1fr; }
     .brief-card { max-width: 520px; }
     .hero, .section, .pricing-section, .site-footer { padding-left: 24px; padding-right: 24px; }
     .hero { padding-top: 72px; min-height: auto; }
     .site-footer { flex-direction: column; align-items: flex-start; }
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "ProfessionalService"
+      ],
+      "@id": "https://rlaudits.com/#organization",
+      "name": "RL Audits",
+      "url": "https://rlaudits.com/",
+      "email": "seth@rlaudits.com",
+      "areaServed": [
+        "Chattanooga, TN",
+        "United States"
+      ],
+      "description": "RL Audits creates private, evidence-first audit reports for revenue leaks, IT operations cleanup, and app store growth briefs.",
+      "sameAs": []
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rlaudits.com/#website",
+      "name": "RL Audits",
+      "url": "https://rlaudits.com/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rlaudits.com/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://rlaudits.com/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rlaudits.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is an RL Audits report?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An RL Audits report is a private, evidence-first briefing that turns public signals or sanitized operational data into ranked fixes and a 30-day action plan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you need passwords, analytics access, or private accounts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No by default. Standard audits use public evidence or sanitized material. If deeper access is ever useful, RLAudits discusses a safer process separately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who are these audits for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They are for small local businesses, small IT teams, MSPs, clinics, agencies, and small app teams that need specific fixes instead of vague consulting advice."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does RL Audits guarantee rankings, revenue, or compliance outcomes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The work identifies evidence-backed issues and practical next steps. Rankings, revenue, ratings, legal compliance, and security outcomes are not guaranteed."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
-<body>
+<body data-track-service="Home">
 <nav class="site-nav">
   <a href="/" class="nav-brand">
     <div class="nav-gem"></div>
@@ -219,6 +336,42 @@
   <div class="stat-cell"><div class="stat-val">0</div><div class="stat-lbl">Credential access required by default</div></div>
 </div>
 
+<section class="section paper" id="answers">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">Quick answers</div>
+    <h2 class="sec-h2">What does RL Audits do?</h2>
+    <p class="sec-sub">RL Audits creates private, evidence-first reports that show where a business is losing trust, time, or conversion momentum, then ranks the fixes to work on first.</p>
+    <div class="answer-grid">
+      <article class="answer-card"><h3>Revenue Audit</h3><p>A Revenue Audit finds visible sales-path leaks in reviews, reputation, local positioning, website clarity, booking friction, and competitor proof.</p></article>
+      <article class="answer-card"><h3>IT Ops Audit</h3><p>An IT Ops Audit turns sanitized support tickets, rough procedures, and repeat issues into documentation gaps, KB recommendations, SOPs, and a cleanup plan.</p></article>
+      <article class="answer-card"><h3>App Store Growth Brief</h3><p>An App Store Growth Brief reviews public app listing evidence, review themes, competitor positioning, and release-note opportunities without requiring console access.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section cream" id="sample-proof">
+  <div class="sec-inner">
+    <div class="proof-panel">
+      <div class="proof-copy">
+        <div class="sec-eyebrow">Public sample</div>
+        <h2 class="sec-h2">See what a Revenue Audit looks like before you ask for one.</h2>
+        <p>The sample is fictional and sanitized, but the structure is real: executive summary, reviewed material, evidence labels, ranked findings, quick wins, and a 30-day action plan.</p>
+        <ul class="proof-points">
+          <li><span>✓</span><span>Shows the buyer deliverable without exposing private client data.</span></li>
+          <li><span>✓</span><span>Separates public evidence, buyer context, and unknowns.</span></li>
+          <li><span>✓</span><span>Demonstrates the practical tone: useful, direct, no agency fog.</span></li>
+        </ul>
+      </div>
+      <aside class="proof-box" aria-label="Revenue Audit sample report">
+        <div class="proof-box-label">Revenue Audit sample</div>
+        <div class="proof-box-title">Sample Local Business Revenue Audit</div>
+        <p>A concrete example of the report shape: sales-path friction, trust proof placement, competitor clarity, and the first fixes to make.</p>
+        <a class="proof-cta" href="/revenue-audit/sample.html">View sample report</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <section class="section cream" id="services">
   <div class="sec-inner">
     <div class="sec-eyebrow">Audit services</div>
@@ -283,18 +436,51 @@
   </div>
 </section>
 
-<section class="pricing-section">
+<section class="section cream" id="faq">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">FAQ</div>
+    <h2 class="sec-h2">Short answers before you ask.</h2>
+    <div class="faq">
+      <details open><summary>What is an RL Audits report?</summary><p>An RL Audits report is a private, evidence-first briefing that turns public signals or sanitized operational data into ranked fixes and a 30-day action plan.</p></details>
+      <details><summary>Do you need passwords, analytics access, or private accounts?</summary><p>No by default. Standard audits use public evidence or sanitized material. If deeper access is ever useful, RLAudits discusses a safer process separately.</p></details>
+      <details><summary>Who are these audits for?</summary><p>They are for small local businesses, small IT teams, MSPs, clinics, agencies, and small app teams that need specific fixes instead of vague consulting advice.</p></details>
+      <details><summary>Does RL Audits guarantee rankings, revenue, or compliance outcomes?</summary><p>No. The work identifies evidence-backed issues and practical next steps. Rankings, revenue, ratings, legal compliance, and security outcomes are not guaranteed.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="pricing-section" id="start-here">
   <div class="pricing-texture"></div>
   <div class="pricing-inner">
     <div>
       <div class="pricing-eyebrow">Start here</div>
-      <h2 class="pricing-h2">Not sure which audit fits? Send the situation.</h2>
-      <p class="pricing-sub">A short email is enough. Tell us what is messy: reviews, website conversion, app listings, support tickets, or internal documentation. We will point you to the right audit or tell you it is not a fit. Both are useful.</p>
+      <h2 class="pricing-h2">Pick the path by the problem, not by the buzzword.</h2>
+      <p class="pricing-sub">Choose the lane that matches the leak. If the situation is odd, send the plain version and RLAudits will tell you which audit fits — or whether it does not. Useful answers beat sales theater.</p>
+      <div class="route-grid" aria-label="Choose the right RLAudits service">
+        <article class="route-card">
+          <div class="route-label">Losing leads or calls</div>
+          <h3 class="route-title">Revenue Audit</h3>
+          <p class="route-copy">For local businesses with weak booking paths, unclear proof, reputation gaps, or competitors making the next step easier.</p>
+          <a class="route-link" href="/revenue-audit/">Go to Revenue Audit</a>
+        </article>
+        <article class="route-card">
+          <div class="route-label">Public IT or ops mess</div>
+          <h3 class="route-title">IT Ops Audit</h3>
+          <p class="route-copy">For small teams with repeat tickets, rough procedures, missing KB articles, messy handoffs, or documentation nobody trusts.</p>
+          <a class="route-link" href="/it-ops-audit/">Go to IT Ops Audit</a>
+        </article>
+        <article class="route-card">
+          <div class="route-label">App listing not converting</div>
+          <h3 class="route-title">App Store Growth Brief</h3>
+          <p class="route-copy">For app teams or agencies that need public App Store / Google Play evidence turned into listing, review, and positioning fixes.</p>
+          <a class="route-link" href="/app-store-growth-brief/">Go to App Store Brief</a>
+        </article>
+      </div>
     </div>
     <div class="contact-card">
-      <div class="contact-title">Contact RL Audits</div>
+      <div class="contact-title">Still not sure?</div>
       <p class="contact-copy">Include the business/app name, city or market, and the main problem you want diagnosed. Keep it plain. Fancy language is how weak ideas hide.</p>
-      <a href="/contact/?subject=RL%20Audits%20Inquiry" class="pricing-cta">Email seth@rlaudits.com</a>
+      <a href="/contact/?subject=RL%20Audits%20Inquiry" class="pricing-cta">Ask which audit fits</a>
       <div class="pricing-note">Private reports · Practical fixes · Clear boundaries</div>
     </div>
   </div>
@@ -420,5 +606,6 @@
   }, 6200);
 }());
 </script>
+<script defer src="/assets/rlaudits-tracking.js"></script>
 </body>
 </html>
